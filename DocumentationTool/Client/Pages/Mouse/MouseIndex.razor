@@ -1,0 +1,73 @@
+﻿@page "/mouse"
+@inject IMouseRepository mouseRepository
+
+<h3>Mouse Index</h3>
+
+<div class="form-group">
+    <a class="btn btn-info" href="mouse/create">New Mouse</a>
+</div>
+
+<Pagination CurrentPage="@paginationDTO.Page" TotalAmountPages="totalAmountPages"
+            SelectedPage="SelectedPage" />
+
+<GenericList List="Mouses">
+    <WholeListTemplate>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Mouses)
+                {
+                    <tr>
+                        <td>
+                            <a class="btn btn-success" href="/mouse/edit/@item.Id">Edit</a>
+                            <button class="btn btn-danger" @onclick="@(() => DeleteMouse(item.Id))">Delete</button>
+                        </td>
+                        <td>@item.Type</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </WholeListTemplate>
+</GenericList>
+
+@code {
+    List<Mouse> Mouses;
+    PaginationDTO paginationDTO = new PaginationDTO() { RecordsPerPage = 1 };
+    private int totalAmountPages;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await LoadMouses();
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    private async Task LoadMouses()
+    {
+        var paginatedResponse = await mouseRepository.GetMouses(paginationDTO);
+        Mouses = paginatedResponse.Response;
+        totalAmountPages = paginatedResponse.TotalAmountPages;
+    }
+
+    private async Task SelectedPage(int page)
+    {
+        paginationDTO.Page = page;
+        await LoadMouses();
+    }
+
+    private async Task DeleteMouse(int id)
+    {
+        await mouseRepository.DeleteMouse(id);
+        await LoadMouses();
+    }
+}

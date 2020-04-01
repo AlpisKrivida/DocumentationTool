@@ -1,0 +1,69 @@
+﻿<h3>CPU Form</h3>
+<EditForm Model="CPU">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label>CPU cores</label>
+        <div>
+            <InputNumber class="form-control" @bind-Value="@CPU.CPUCores" />
+            <ValidationMessage For="@(() => CPU.CPUCores)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Title</label>
+        <div>
+            <InputText @bind-Value="@CPU.Title" />
+            <ValidationMessage For="@(() => CPU.Title)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Manufacturer</label>
+        <div>
+            <InputText @bind-Value="@CPU.Manufacturer" />
+            <ValidationMessage For="@(() => CPU.Manufacturer)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Type</label>
+        <div>
+            <InputText @bind-Value="@CPU.Type" />
+            <ValidationMessage For="@(() => CPU.Type)" />
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <label>Display </label>
+            <InputNumber class="form-control" @bind-Value="@CPU.CPUFrequency" />
+            <ValidationMessage For="@(() => CPU.CPUFrequency)" />
+        </div>
+        <div class="form-group col-md-4">
+            <label>Display measure</label>
+            <InputSelect class="form-control" @bind-Value="@CPU.CPUFrequencyType">
+                <option value="">Select measure...</option>
+                <option>GHz</option>
+                <option>THz</option>
+                <option>MHz</option>
+                <option>KHz</option>
+            </InputSelect>
+            <ValidationMessage For="@(() => CPU.CPUFrequencyType)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Description</label>
+        <div>
+            <InputTextArea class="form-control" @bind-Value="@CPU.Description" />
+            <ValidationMessage For="@(() => CPU.Description)" />
+        </div>
+    </div>
+
+</EditForm>
+
+@code {
+    [Parameter] public CPU CPU { get; set; }
+}
+

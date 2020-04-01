@@ -1,0 +1,50 @@
+﻿<h3>Memory Form</h3>
+<EditForm Model="Memory">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label>Title</label>
+        <div>
+            <InputText class="form-control" @bind-Value="@Memory.Title" />
+            <ValidationMessage For="@(() => Memory.Title)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Manufacturer</label>
+        <div>
+            <InputText @bind-Value="@Memory.Manufacture" />
+            <ValidationMessage For="@(() => Memory.Manufacture)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Type</label>
+        <div>
+            <InputText @bind-Value="@Memory.Type" />
+            <ValidationMessage For="@(() => Memory.Type)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Capacity</label>
+        <div>
+            <InputText @bind-Value="@Memory.Capacity" />
+            <ValidationMessage For="@(() => Memory.Capacity)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Description</label>
+        <div>
+            <InputTextArea class="form-control" @bind-Value="@Memory.Description" />
+            <ValidationMessage For="@(() => Memory.Description)" />
+        </div>
+    </div>
+
+</EditForm>
+
+@code {
+    [Parameter] public Memory Memory { get; set; }
+}
+

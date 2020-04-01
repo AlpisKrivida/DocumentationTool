@@ -1,0 +1,31 @@
+﻿@page "/printer/edit/{PrinterId:int}"
+@inject IPrinterRepository printerRepository
+@inject NavigationManager navigationManager
+
+<h3>MonitorEdit</h3>
+
+@if (Printer != null)
+{
+    <PrinterForm OnValidSubmit="Edit"
+                 Printer="Printer"
+                 Model="Printer.Model" />
+}
+
+@code {
+    [Parameter]
+    public int PrinterId { get; set; }
+
+    public Printer Printer;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Printer = await printerRepository.GetPrinter(PrinterId);
+    }
+
+    private async Task Edit()
+    {
+
+        await printerRepository.UpdatePrinter(Printer);
+        navigationManager.NavigateTo("Monitor");
+    }
+}

@@ -1,0 +1,32 @@
+﻿@page "/printer/create"
+@inject NavigationManager navigationManager
+@inject IPrinterRepository printerRepository
+
+<h3>PrinterCreate</h3>
+
+<PrinterForm OnValidSubmit="SavePrinter"
+             Model="Model"
+             Printer="Printer"
+             />
+
+
+@code {
+    private Printer Printer = new Printer();
+    private Model Model = new Model();
+
+    private async Task SavePrinter()
+    {
+        try
+        {
+
+            Printer.Model = Model;
+
+            var printerId = await printerRepository.CreatePrinter(Printer);
+            navigationManager.NavigateTo("printer");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+}

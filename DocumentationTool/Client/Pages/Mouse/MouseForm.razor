@@ -1,0 +1,18 @@
+﻿<EditForm Model="Mouse" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label>Mouse type:</label>
+        <dv>
+            <InputText class="form-control" @bind-Value="@Mouse.Type" />
+            <ValidationMessage For="@(() => Mouse.Type)" />
+        </dv>
+    </div>
+
+    <button class="btn btn-success" type="submit">Save Changes</button>
+
+</EditForm>
+
+@code {
+    [Parameter] public Mouse Mouse { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}

@@ -1,0 +1,28 @@
+﻿@page "/mouse/create"
+@inject IMouseRepository mouseRepository
+@inject NavigationManager navigationManager
+
+<h3>Mouse genre</h3>
+
+<MouseForm Mouse="mouse" OnValidSubmit="Create" />
+
+@code {
+    private Mouse mouse = new Mouse();
+
+    private async Task Create()
+    {
+        Console.WriteLine("Create method");
+        Console.WriteLine(mouse.Type);
+
+        try
+        {
+            await mouseRepository.CreateMouse(mouse);
+            navigationManager.NavigateTo("mouse");
+        }
+        catch (Exception ex)
+        {
+            // ...
+            Console.WriteLine(ex.Message);
+        }
+    }
+}

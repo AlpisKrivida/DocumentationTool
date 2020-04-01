@@ -1,0 +1,39 @@
+﻿@page "/monitor/create"
+@inject NavigationManager navigationManager
+@inject IMonitorRepository monitorRepository
+
+<h3>MonitorCreate</h3>
+
+<MonitorForm Monitor="Monitor" 
+             Model="Model" 
+             FormFactor="FormFactor"
+             PowerConsumer="PowerConsumer"
+             OnValidSubmit="SaveMonitor" />
+
+@code {
+    private Monitor Monitor = new Monitor();
+    private Model Model = new Model();
+    //private General General = new General();
+    private FormFactor FormFactor = new FormFactor();
+    private PowerConsumer PowerConsumer = new PowerConsumer();
+
+
+    private async Task SaveMonitor()
+    {
+        try
+        {
+            Console.WriteLine(Monitor.DisplayMeasure);
+
+            Monitor.Model = Model;
+            Monitor.FormFactor = FormFactor;
+            Monitor.PowerConsumer = PowerConsumer;
+
+            var monitorId = await monitorRepository.CreateMonitor(Monitor);
+            navigationManager.NavigateTo("monitor");
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+}

@@ -1,0 +1,68 @@
+﻿<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">DocumentationTool</a>
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </li>
+        @*<li class="nav-item px-3">
+            <NavLink class="nav-link" href="mouse">
+                <span class="oi oi-plus" aria-hidden="true"></span> Mouse
+            </NavLink>
+        </li>*@
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="monitor">
+                <span class="oi oi-plus" aria-hidden="true"></span> Monitor
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="printer">
+                <span class="oi oi-plus" aria-hidden="true"></span> Printer
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="router">
+                <span class="oi oi-plus" aria-hidden="true"></span> Router
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="switch">
+                <span class="oi oi-plus" aria-hidden="true"></span> Switch
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="server">
+                <span class="oi oi-plus" aria-hidden="true"></span> Server
+            </NavLink>
+        </li>
+        @*<li class="nav-item px-3">
+            <NavLink class="nav-link" href="contacts">
+                <span class="oi oi-plus" aria-hidden="true"></span> Contacts
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="application">
+                <span class="oi oi-plus" aria-hidden="true"></span> Application
+            </NavLink>
+        </li>*@
+
+    </ul>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

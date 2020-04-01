@@ -1,0 +1,9 @@
+C:\Users\Alpis\source\repos\DocumentationTool\DocumentationTool\Shared\bin\Debug\netstandard2.1\DocumentationTool.Shared.deps.json
+C:\Users\Alpis\source\repos\DocumentationTool\DocumentationTool\Shared\bin\Debug\netstandard2.1\DocumentationTool.Shared.dll
+C:\Users\Alpis\source\repos\DocumentationTool\DocumentationTool\Shared\bin\Debug\netstandard2.1\DocumentationTool.Shared.pdb
+C:\Users\Alpis\source\repos\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.csprojAssemblyReference.cache
+C:\Users\Alpis\source\repos\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.csproj.CoreCompileInputs.cache
+C:\Users\Alpis\source\repos\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.AssemblyInfoInputs.cache
+C:\Users\Alpis\source\repos\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.AssemblyInfo.cs
+C:\Users\Alpis\source\repos\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.dll
+C:\Users\Alpis\source\repos\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.pdb
