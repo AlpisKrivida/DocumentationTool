@@ -1,0 +1,41 @@
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>CPU details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">CPU cores: </label>
+                    <label class="text-right pl-3">@CPU.CPUCores</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Title: </label>
+                    <label class="text-right pl-3">@CPU.CPUCores</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Manufacturer: </label>
+                    <label class="text-right pl-3">@CPU.Manufacturer</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Type: </label>
+                    <label class="text-right pl-3">@CPU.Type</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">CPU frequency: </label>
+                    <label class="text-right pl-3">@CPU.CPUFrequency</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Description: </label>
+                    <label class="text-right pl-3">@CPU.Description</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public CPU CPU { get; set; }
+}

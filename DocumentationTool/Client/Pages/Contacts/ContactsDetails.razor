@@ -1,0 +1,33 @@
+﻿@using DocumentationTool.Client.Shared.GeneralSH
+@using DocumentationTool.Client.Shared.Tabs
+
+@page "/contact/detail/{PersonId:int}"
+@inject IPersonRepostiroy PersonRepository
+@inject NavigationManager navigationManager
+
+<h3>Monitor details</h3>
+
+@if (Person != null)
+{
+    <TabControl>
+        <TabPage Text="General">
+            <GeneralDetails General="Person.General" />
+        </TabPage>
+        <TabPage Text="Person">
+            <ContactsDisplayDetails Person="Person" />
+        </TabPage>
+    </TabControl>
+
+}
+
+@code {
+    [Parameter]
+    public int PersonId { get; set; }
+
+    public Person Person;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Person = await PersonRepository.GetPerson(PersonId);
+    }
+}

@@ -1,0 +1,38 @@
+﻿@using DocumentationTool.Client.Shared.Tabs
+@using DocumentationTool.Client.Shared.GeneralSH
+@using DocumentationTool.Client.Shared.ModelSH
+
+
+@page "/printer/detail/{PrinterId:int}"
+@inject IPrinterRepository printerRepository
+@inject NavigationManager navigationManager
+
+<h3>Printer details</h3>
+
+@if (Printer != null)
+{
+    <TabControl>
+        <TabPage Text="General">
+            <GeneralDetails General="Printer.General" />
+        </TabPage>
+        <TabPage Text="Model">
+            <ModelDetail Model="Printer.Model" />
+        </TabPage>
+        <TabPage Text="Printer">
+            <PrinterDisplayDetails Printer="Printer" />
+        </TabPage>
+    </TabControl>
+
+}
+
+@code {
+    [Parameter]
+    public int PrinterId { get; set; }
+
+    public Printer Printer;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Printer = await printerRepository.GetPrinter(PrinterId);
+    }
+}

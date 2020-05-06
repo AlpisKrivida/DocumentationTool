@@ -1,0 +1,39 @@
+﻿@page "/server/edit/{ServerId:int}"
+@inject IServerRepository serverRepository
+@inject NavigationManager navigationManager
+
+<h3>Server edit</h3>
+
+@if (Server != null)
+{
+    <ServerForm OnValidSubmit="Edit"
+                 General="Server.General"
+                 Model="Server.Model"
+                 Server="Server"
+                 PowerConsumer="Server.PowerConsumer"
+                 FormFactor="Server.FormFactor"
+                 CPU="Server.CPU"
+                 Memory="Server.Memory"
+                 
+                />
+}
+
+@code {
+    [Parameter]
+    public int ServerId { get; set; }
+
+    public ServerDevice Server;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Server = await serverRepository.GetServerDevice(ServerId);
+    }
+
+    private async Task Edit()
+    {
+        Server.General.DateOfChange = DateTime.Now;
+
+        await serverRepository.UpdateServerDevice(Server);
+        navigationManager.NavigateTo("server");
+    }
+}

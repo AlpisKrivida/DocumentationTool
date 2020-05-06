@@ -1,0 +1,33 @@
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>Desktop Details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">Type: </label>
+                    <label class="text-right pl-3">@Desktop.Type</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Keyboard layout: </label>
+                    <label class="text-right pl-3">@Desktop.KeyboardLayout</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Mouse model: </label>
+                    <label class="text-right pl-3">@Desktop.MouseModel</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Description: </label>
+                    <label class="text-right pl-3">@Desktop.Description</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Desktop Desktop { get; set; }
+}

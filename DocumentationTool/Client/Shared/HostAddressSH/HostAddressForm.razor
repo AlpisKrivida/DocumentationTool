@@ -1,0 +1,160 @@
+﻿<h3>HostAddress Form</h3>
+<EditForm Model="HostAddress">
+    <DataAnnotationsValidator />
+
+    <div class="form-group row">
+        <div class="col-md-8">
+            <div class="formInputModel">
+                <div class="form-group">
+                    <label>Type</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="@HostAddress.Type" />
+                        <ValidationMessage For="@(() => HostAddress.Type)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Primary</label>
+                    <div>
+                        <InputCheckbox class="form-control" @bind-Value="@HostAddress.Primary" />
+                        <ValidationMessage For="@(() => HostAddress.Primary)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Active</label>
+                    <div>
+                        <InputCheckbox @bind-Value="@HostAddress.Active" />
+                        <ValidationMessage For="@(() => HostAddress.Active)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Net Assignment</label>
+                    <div>
+                        <InputText @bind-Value="@HostAddress.NetAssignment" />
+                        <ValidationMessage For="@(() => HostAddress.NetAssignment)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Address range start</label>
+                    <div>
+                        <InputText @bind-Value="@HostAddress.AddressStartRange" />
+                        <ValidationMessage For="@(() => HostAddress.AddressStartRange)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Address range end</label>
+                    <div>
+                        <InputText @bind-Value="@HostAddress.AdressEndRange" />
+                        <ValidationMessage For="@(() => HostAddress.AdressEndRange)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Net Zone</label>
+                    <div>
+                        <InputText @bind-Value="@HostAddress.NetZone" />
+                        <ValidationMessage For="@(() => HostAddress.NetZone)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Address allocation</label>
+                    <div>
+                        <InputText @bind-Value="@HostAddress.AddressAllocation" />
+                        <ValidationMessage For="@(() => HostAddress.AddressAllocation)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>IPv4 address</label>
+                    <div>
+                        <InputText @bind-Value="@HostAddress.IPV4Address" />
+                        <ValidationMessage For="@(() => HostAddress.IPV4Address)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Netmask Start</label>
+                    <div>
+                        <InputText @bind-Value="@HostAddress.NetMaskStart" />
+                        <ValidationMessage For="@(() => HostAddress.NetMaskStart)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Netmask End</label>
+                    <div>
+                        <InputText @bind-Value="@HostAddress.NetMaskEnd" />
+                        <ValidationMessage For="@(() => HostAddress.NetMaskEnd)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Default gateway for the net</label>
+                    <div>
+                        <InputCheckbox @bind-Value="@HostAddress.DefaultGatewayForNet" />
+                        <ValidationMessage For="@(() => HostAddress.DefaultGatewayForNet)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Hostname (FQDN)</label>
+                    <div>
+                        <InputText @bind-Value="@HostAddress.HostName" />
+                        <ValidationMessage For="@(() => HostAddress.HostName)" />
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                        <label>Aliases</label>
+                        <div>
+                            <InputText @bind-Value="@HostAddress.Firmware" />
+                            <ValidationMessage For="@(() => HostAddress.Firmware)" />
+                        </div>
+                    </div>*@
+
+                @*<div class="form-group">
+                        <label>DNS server</label>
+                        <div>
+                            <InputText @bind-Value="@HostAddress.Firmware" />
+                            <ValidationMessage For="@(() => HostAddress.Firmware)" />
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    <label>Search domain</label>
+                    <div>
+                        <InputText @bind-Value="@HostAddress.SearchDomain" />
+                        <ValidationMessage For="@(() => HostAddress.SearchDomain)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Assigned port</label>
+                    <div>
+                        <InputText @bind-Value="@HostAddress.AssignedPort" />
+                        <ValidationMessage For="@(() => HostAddress.AssignedPort)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <div>
+                        <InputTextArea class="form-control" @bind-Value="@HostAddress.Description" />
+                        <ValidationMessage For="@(() => HostAddress.Description)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</EditForm>
+
+@code {
+    [Parameter] public HostAddress HostAddress { get; set; }
+}
+

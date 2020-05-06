@@ -1,0 +1,47 @@
+﻿@using DocumentationTool.Client.Shared.Tabs
+@using DocumentationTool.Client.Shared.GeneralSH
+@using DocumentationTool.Client.Shared.ModelSH
+@using DocumentationTool.Client.Shared.DesktopSH
+@using DocumentationTool.Client.Shared.MemorySH
+@using DocumentationTool.Client.Shared.CPUSH
+
+
+@page "/client/detail/{ClientId:int}"
+@inject IClientRepository clientsRepository
+@inject NavigationManager navigationManager
+
+<h3>Client details</h3>
+
+@if (Client != null)
+{
+    <TabControl>
+        <TabPage Text="General">
+            <GeneralDetails General="Client.General" />
+        </TabPage>
+        <TabPage Text="CPU">
+            <CPUDetail CPU="Client.CPU" />
+        </TabPage>
+        <TabPage Text="Memory">
+            <MemoryDetail Memory="Client.Memory" />
+        </TabPage>
+        <TabPage Text="Desktop">
+            <DesktopDetail Desktop="Client.Desktop" />
+        </TabPage>
+        <TabPage Text="Model">
+            <ModelDetail Model="Client.Model" />
+        </TabPage>
+    </TabControl>
+
+}
+
+@code {
+    [Parameter]
+    public int ClientId { get; set; }
+
+    public ClientPC Client;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Client = await clientsRepository.GetClientPC(ClientId);
+    }
+}

@@ -1,0 +1,53 @@
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>Power Consumer Details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">Title: </label>
+                    <label class="text-right pl-3">@PowerConsumer.Title</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Active: </label>
+                    <label class="text-right pl-3">@PowerConsumer.Active</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Manufactureer: </label>
+                    <label class="text-right pl-3">@PowerConsumer.Manufacturer</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Power model: </label>
+                    <label class="text-right pl-3">@PowerConsumer.PowerModel</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Volt: </label>
+                    <label class="text-right pl-3">@PowerConsumer.Volt</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Watt: </label>
+                    <label class="text-right pl-3">@PowerConsumer.Watt</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Ampere: </label>
+                    <label class="text-right pl-3">@PowerConsumer.Ampere</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">BTU: </label>
+                    <label class="text-right pl-3">@PowerConsumer.BTU</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Description: </label>
+                    <label class="text-right pl-3">@PowerConsumer.Description</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public PowerConsumer PowerConsumer { get; set; }
+}

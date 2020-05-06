@@ -2,13 +2,14 @@
 @inject IPrinterRepository printerRepository
 @inject NavigationManager navigationManager
 
-<h3>MonitorEdit</h3>
+<h3>Printer edit</h3>
 
 @if (Printer != null)
 {
     <PrinterForm OnValidSubmit="Edit"
                  Printer="Printer"
-                 Model="Printer.Model" />
+                 Model="Printer.Model" 
+                 General="Printer.General" />
 }
 
 @code {
@@ -26,6 +27,6 @@
     {
 
         await printerRepository.UpdatePrinter(Printer);
-        navigationManager.NavigateTo("Monitor");
+        navigationManager.NavigateTo("printer");
     }
 }

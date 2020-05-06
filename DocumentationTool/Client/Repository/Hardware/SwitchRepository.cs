@@ -11,7 +11,7 @@ namespace DocumentationTool.Client.Repository.Hardware
     public class SwitchRepository : ISwitchRepository
     {
         private readonly IHttpService httpService;
-        private string url = "api/monitor";
+        private string url = "api/switches";
 
         public SwitchRepository(IHttpService httpService)
         {

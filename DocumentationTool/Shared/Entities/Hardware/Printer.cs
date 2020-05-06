@@ -10,10 +10,9 @@ namespace DocumentationTool.Shared.Entities.Hardware
         public int Id { get; set; }
         public General General { get; set; }
         public Model Model { get; set; }
-        public Access Access { get; set; }
         public string Type { get; set; }
-        public string Color { get; set; }
-        public string Duplex { get; set; }
+        public bool Colored { get; set; }
+        public bool Duplex { get; set; }
         public string Emulation { get; set; }
         public string PaperFormat { get; set; }
         public string Description { get; set; }

@@ -1,0 +1,99 @@
+﻿@using DocumentationTool.Client.Shared.GeneralSH
+
+<h3>Contact</h3>
+<EditForm Model="Person" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="form-group row">
+        <div class="col-md-8">
+            <div class="formInputModel">
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">First name</label>
+                    <div class="col-md-4 ">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Person.FirstName" />
+                        <ValidationMessage For="@(() => Person.FirstName)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Last name</label>
+                    <div class="col-md-4 ">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Person.LastName" />
+                        <ValidationMessage For="@(() => Person.LastName)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Function</label>
+                    <div class="col-md-4 ">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Person.Function" />
+                        <ValidationMessage For="@(() => Person.Function)" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">City</label>
+                    <div class="col-md-4 ">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Person.City" />
+                        <ValidationMessage For="@(() => Person.City)" />
+                    </div>
+                </div>
+                @*<div class="form-group row">
+                    <label class="col-md-2 col-form-label">ZIPCode</label>
+                    <div class="col-md-4 ">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Person.ZIPCode" />
+                        <ValidationMessage For="@(() => Person.ZIPCode)" />
+                    </div>
+                </div>*@
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">E-mail address</label>
+                    <div class="col-md-4 ">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Person.EMailAdress" />
+                        <ValidationMessage For="@(() => Person.EMailAdress)" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Telephone company</label>
+                    <div class="col-md-4 ">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Person.TelephoneCompany" />
+                        <ValidationMessage For="@(() => Person.TelephoneCompany)" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Personal number</label>
+                    <div class="col-md-4 ">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Person.PersonalNumber" />
+                        <ValidationMessage For="@(() => Person.PersonalNumber)" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Last name</label>
+                    <div class="col-md-4 ">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Person.LastName" />
+                        <ValidationMessage For="@(() => Person.LastName)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Description</label>
+                    <div class="col-md-7 ">
+                        <InputTextArea class="form-control" @bind-Value="@Person.Description" />
+                        <ValidationMessage For="@(() => Person.Description)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <GeneralForm General="General" />
+
+    <button class="btn btn-primary" type="submit">Save Changes</button>
+</EditForm>
+
+
+
+@code {
+    [Parameter] public Person Person { get; set; }
+    [Parameter] public General General { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}

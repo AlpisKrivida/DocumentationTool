@@ -23,21 +23,22 @@ namespace DocumentationTool.Server.Controllers.Hardware
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Router>>> Get([FromQuery] PaginationDTO paginationDTO)
+        public async Task<ActionResult<List<RouterDevice>>> Get([FromQuery] PaginationDTO paginationDTO)
         {
-            var queryable = context.Routers.AsQueryable();
+            var queryable = context.Routers
+                .Include(x => x.Model)
+                .Include(x => x.General)
+                .AsQueryable();
             await HttpContext.InsertPaginationParametersInResponse(queryable, paginationDTO.RecordsPerPage);
             return await queryable.Paginate(paginationDTO).ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Router>> Get(int id)
+        public async Task<ActionResult<RouterDevice>> Get(int id)
         {
             var router = await context.Routers.Where(x => x.Id == id)
                 .Include(x => x.Model)
-                .Include(x => x.Access)
-                .Include(x => x.HostAddress)
-                .Include(x => x.Model)
+                .Include(x => x.General)
                 .Include(x => x.FormFactor)
                 .Include(x => x.PowerConsumer)
                 .FirstOrDefaultAsync();
@@ -51,7 +52,7 @@ namespace DocumentationTool.Server.Controllers.Hardware
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Post(Router router)
+        public async Task<ActionResult<int>> Post(RouterDevice router)
         {
             context.Add(router);
             await context.SaveChangesAsync();
@@ -59,7 +60,7 @@ namespace DocumentationTool.Server.Controllers.Hardware
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put(Router router)
+        public async Task<ActionResult> Put(RouterDevice router)
         {
             context.Update(router);
 

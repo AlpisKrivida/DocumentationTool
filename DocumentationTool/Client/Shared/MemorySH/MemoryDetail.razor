@@ -1,0 +1,38 @@
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>Memory details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">Title: </label>
+                    <label class="text-right pl-3">@Memory.Title</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Manufacturer: </label>
+                    <label class="text-right pl-3">@Memory.Manufacture</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Type: </label>
+                    <label class="text-right pl-3">@Memory.Type</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Capacity: </label>
+                    <label class="text-right pl-3">@Memory.Capacity</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Description: </label>
+                    <label class="text-right pl-3">@Memory.Description</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Memory Memory { get; set; }
+}
+

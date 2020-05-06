@@ -1,7 +1,140 @@
-﻿@page "/contacts"
+﻿@page "/contact"
+@inject IPersonRepostiroy personRepository
+@inject IJSRuntime iJSRuntime
 
-<h3>ContactsIndex</h3>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h3>Contacts</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="form-group row">
+                    <a class="btn btn-info" href="contact/create"><span class="ri oi oi-plus" /> New contact</a>
+                    <div class="col align-self-end">
+                        <button class="btn btn-primary" @onclick="GenerateExcel" >Export</button>
+                    </div>
+                </div>
+
+                <div class="form-row p-1">
+                    <div class="form-group m-1">
+                        <label>Display </label>
+                        <select class="custom-select-sm" @bind="@recordsPerPage" @onclick="LoadPage">
+                            <option value="">5</option>
+                            <option>10</option>
+                            <option>15</option>
+                            <option>20</option>
+                        </select>
+                        <label> contacts</label>
+                    </div>
+                </div>
+
+
+                <GenericList List="People">
+                    <WholeListTemplate>
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>First name</th>
+                                    <th>Last name</th>
+                                    <th>Telephone number</th>
+                                    <th>E-mail address</th>
+                                    <th>Function</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in People)
+                                {
+                                    <tr>
+                                        <td>@item.FirstName</td>
+                                        <td>@item.LastName</td>
+                                        <td>@item.TelephoneCompany</td>
+                                        <td>@item.EMailAdress</td>
+                                        <td>@item.Function</td>
+                                        <td>
+                                            <a href="/contact/detail/@item.Id"><span class="oi oi-eye" /></a>
+                                            <a href="/contact/edit/@item.Id"><span class="oi oi-pencil" /></a>
+                                            <a href="/contact" @onclick="@(() => DeletePerson(item.Id))"><span class="oi oi-trash" /></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </WholeListTemplate>
+                </GenericList>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex">
+                            <div class="ml-auto">
+                                <Pagination CurrentPage="@paginationDTO.Page" TotalAmountPages="totalAmountPages"
+                                            SelectedPage="SelectedPage" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @code {
+    List<Person> People;
+    PaginationDTO paginationDTO = new PaginationDTO();
+    private int totalAmountPages;
+    private int recordsPerPage = 5;
 
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await LoadPeople();
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    private async Task LoadPage()
+    {
+        paginationDTO = new PaginationDTO();
+        await LoadPeople();
+    }
+
+    private async Task LoadPeople()
+    {
+        paginationDTO.RecordsPerPage = recordsPerPage;
+        var paginatedResponse = await personRepository.GetPeople(paginationDTO);
+        People = paginatedResponse.Response;
+        totalAmountPages = paginatedResponse.TotalAmountPages;
+    }
+
+    private async Task SelectedPage(int page)
+    {
+        paginationDTO.Page = page;
+        await LoadPeople();
+    }
+
+    private async Task DeletePerson(int id)
+    {
+        await personRepository.DeletePerson(id);
+        await LoadPeople();
+    }
+
+    private async Task<List<Person>> GetAllPeople()
+    {
+        return await personRepository.GetAllPeople();
+    }
+
+    private async Task GenerateExcel()
+    {
+        ContactExcel ce = new ContactExcel();
+        var people = await GetAllPeople();
+        ce.GenerateExcel(iJSRuntime, people);
+    }
 }

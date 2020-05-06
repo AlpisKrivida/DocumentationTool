@@ -1,0 +1,45 @@
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>Model Details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">Manufacturer: </label>
+                    <label class="text-right pl-3">@Model.Manufacturer</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Model: </label>
+                    <label class="text-right pl-3">@Model.Name</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Product ID: </label>
+                    <label class="text-right pl-3">@Model.ProductID</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Service tag: </label>
+                    <label class="text-right pl-3">@Model.ServiceTag</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Serial number: </label>
+                    <label class="text-right pl-3">@Model.SerialNumber</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Firmware: </label>
+                    <label class="text-right pl-3">@Model.Firmware</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Description: </label>
+                    <label class="text-right pl-3">@Model.Description</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Model Model { get; set; }
+}

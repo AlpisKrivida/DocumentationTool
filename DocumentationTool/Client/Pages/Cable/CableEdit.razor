@@ -1,0 +1,33 @@
+﻿@page "/cable/edit/{CableId:int}"
+@inject ICableRepository cableRepository
+@inject NavigationManager navigationManager
+
+<h3>Cable edit</h3>
+
+@if (Cable != null)
+{
+    <CableForm OnValidSubmit="Edit"
+                 General="Cable.General"
+                 Cable="Cable"
+                 />
+}
+
+@code {
+    [Parameter]
+    public int CableId { get; set; }
+
+    public Cable Cable;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Cable = await cableRepository.GetCable(CableId);
+    }
+
+    private async Task Edit()
+    {
+        Cable.General.DateOfChange = DateTime.Now;
+
+        await cableRepository.UpdateCable(Cable);
+        navigationManager.NavigateTo("cable");
+    }
+}

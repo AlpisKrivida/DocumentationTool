@@ -25,7 +25,10 @@ namespace DocumentationTool.Server.Controllers.Hardware
         [HttpGet]
         public async Task<ActionResult<List<Switch>>> Get([FromQuery] PaginationDTO paginationDTO)
         {
-            var queryable = context.Switches.AsQueryable();
+            var queryable = context.Switches
+                .Include(x => x.Model)
+                .Include(x => x.General)
+                .AsQueryable();
             await HttpContext.InsertPaginationParametersInResponse(queryable, paginationDTO.RecordsPerPage);
             return await queryable.Paginate(paginationDTO).ToListAsync();
         }
@@ -37,8 +40,8 @@ namespace DocumentationTool.Server.Controllers.Hardware
                 .Include(x => x.Model)
                 .Include(x => x.General)
                 .Include(x => x.Model)
-                .Include(x => x.FormFactory)
-                .Include(x => x.HostAddress)
+                .Include(x => x.FormFactor)
+                .Include(x => x.PowerConsumer)
                 .FirstOrDefaultAsync();
 
             if (switchDevice == null)

@@ -1,63 +1,73 @@
-﻿<EditForm Model="Printer" OnValidSubmit="OnValidSubmit">
-    <DataAnnotationsValidator />
+﻿@using DocumentationTool.Client.Shared.ModelSH
+@using DocumentationTool.Client.Shared.GeneralSH
 
-    <form>
-        <div class="form-group">
-            <label>Type</label>
-            <div>
-                <InputText class="form-control" @bind-Value="@Printer.Type" />
-                <ValidationMessage For="@(() => Printer.Type)" />
+    <h3>Printers</h3>
+    <EditForm Model="Printer" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator />
+
+        <div class="form-group row">
+            <div class="col-md-8">
+                <div class="formInputModel">
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Type</label>
+                        <div class="col-md-4" >
+                            <InputText class="form-control form-control-sm" @bind-Value="@Printer.Type" />
+                            <ValidationMessage For="@(() => Printer.Type)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Colored</label>
+                        <div>
+                            <InputCheckbox  @bind-Value="@Printer.Colored" />
+                            <ValidationMessage For="@(() => Printer.Colored)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Duplex</label>
+                        <div>
+                            <InputCheckbox  @bind-Value="@Printer.Duplex" />
+                            <ValidationMessage For="@(() => Printer.Duplex)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Emulation</label>
+                        <div class="col-md-4" >
+                            <InputText class="form-control form-control-sm" @bind-Value="@Printer.Emulation" />
+                            <ValidationMessage For="@(() => Printer.PaperFormat)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Paper format</label>
+                        <div class="col-md-4" >
+                            <InputText class="form-control form-control-sm" @bind-Value="@Printer.PaperFormat" />
+                            <ValidationMessage For="@(() => Printer.PaperFormat)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Description</label>
+                        <div class="col-md-7" > 
+                            <InputTextArea class="form-control" @bind-Value="@Printer.Description" />
+                            <ValidationMessage For="@(() => Printer.Description)" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label>Color</label>
-            <div>
-                <InputText class="form-control" @bind-Value="@Printer.Color" />
-                <ValidationMessage For="@(() => Printer.Color)" />
-            </div>
-        </div>
+        <ModelForm Model="Model" />
+        <GeneralForm General="General" />
 
-        <div class="form-group">
-            <label>Duplex</label>
-            <div>
-                <InputText @bind-Value="@Printer.Duplex" />
-                <ValidationMessage For="@(() => Printer.Duplex)" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Emulation</label>
-            <div>
-                <InputText @bind-Value="@Printer.Emulation" />
-                <ValidationMessage For="@(() => Printer.PaperFormat)" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Paper format</label>
-            <div>
-                <InputText @bind-Value="@Printer.PaperFormat" />
-                <ValidationMessage For="@(() => Printer.PaperFormat)" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Description</label>
-            <div>
-                <InputTextArea class="form-control" @bind-Value="@Printer.Description" />
-                <ValidationMessage For="@(() => Printer.Description)" />
-            </div>
-        </div>
-    </form>
-
-    <ModelForm Model="Model" />
-
-    <button class="btn btn-primary" type="submit">Save Changes</button>
-</EditForm>
+        <button class="btn btn-primary" type="submit">Save Changes</button>
+    </EditForm>
 
 @code {
     [Parameter] public Printer Printer { get; set; }
     [Parameter] public Model Model { get; set; }
+    [Parameter] public General General { get; set; }
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 }

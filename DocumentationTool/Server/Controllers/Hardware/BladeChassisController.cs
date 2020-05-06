@@ -29,5 +29,54 @@ namespace DocumentationTool.Server.Controllers.Hardware
             await HttpContext.InsertPaginationParametersInResponse(queryable, paginationDTO.RecordsPerPage);
             return await queryable.Paginate(paginationDTO).ToListAsync();
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<BladeChasis>> Get(int id)
+        {
+            var bladeChasis = await context.BladeChases.Where(x => x.Id == id)
+                .Include(x => x.Model)
+                .Include(x => x.General)
+                .Include(x => x.FormFactor)
+                .Include(x => x.PowerConsumer)
+                .FirstOrDefaultAsync();
+
+            if (bladeChasis == null)
+            {
+                return NotFound();
+            }
+
+            return bladeChasis;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<int>> Post(BladeChasis bladeChasis)
+        {
+            context.Add(bladeChasis);
+            await context.SaveChangesAsync();
+            return bladeChasis.Id;
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> Put(BladeChasis bladeChasis)
+        {
+            context.Update(bladeChasis);
+
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var bladeChasis = await context.BladeChases.FirstOrDefaultAsync(x => x.Id == id);
+            if (bladeChasis == null)
+            {
+                return NotFound();
+            }
+
+            context.Remove(bladeChasis);
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }

@@ -9,10 +9,10 @@ namespace DocumentationTool.Client.Repository.Hardware
 {
     public interface IRouterRepository
     {
-        Task<PaginatedResponse<List<Router>>> GetRouters(PaginationDTO paginationDTO);
-        Task<Router> GetRouter(int id);
-        Task<int> CreateRouter(Router router);
+        Task<PaginatedResponse<List<RouterDevice>>> GetRouters(PaginationDTO paginationDTO);
+        Task<RouterDevice> GetRouter(int id);
+        Task<int> CreateRouter(RouterDevice router);
         Task DeleteRouter(int id);
-        Task UpdateRouter(Router router);
+        Task UpdateRouter(RouterDevice router);
     }
 }

@@ -1,0 +1,49 @@
+﻿<h3>Desktop</h3>
+<EditForm Model="Desktop">
+    <DataAnnotationsValidator />
+
+
+    <div class="form-group row">
+        <div class="col-md-8">
+            <div class="formInputModel">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Dekstop type</label>
+                    <div class="col-sm-4">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Desktop.Type" />
+                        <ValidationMessage For="@(() => Desktop.Type)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Keyboard layout</label>
+                    <div class="col-sm-4">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Desktop.KeyboardLayout" />
+                        <ValidationMessage For="@(() => Desktop.KeyboardLayout)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Mouse model</label>
+                    <div class="col-sm-4">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Desktop.MouseModel" />
+                        <ValidationMessage For="@(() => Desktop.MouseModel)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Description</label>
+                    <div class="col-sm-7">
+                        <InputTextArea class="form-control" @bind-Value="@Desktop.Description" />
+                        <ValidationMessage For="@(() => Desktop.Description)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</EditForm>
+
+@code {
+    [Parameter] public Desktop Desktop { get; set; }
+}
+

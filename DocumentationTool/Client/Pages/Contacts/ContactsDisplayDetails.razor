@@ -1,0 +1,49 @@
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>Person Details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">First name: </label>
+                    <label class="text-right pl-3">@Person.FirstName</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Last name: </label>
+                    <label class="text-right pl-3">@Person.LastName</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Function: </label>
+                    <label class="text-right pl-3">@Person.Function</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">City: </label>
+                    <label class="text-right pl-3">@Person.City</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">E-mail address: </label>
+                    <label class="text-right pl-3">@Person.EMailAdress</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Organization: </label>
+                    <label class="text-right pl-3">@Person.Organization</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">TelephoneCompany: </label>
+                    <label class="text-right pl-3">@Person.TelephoneCompany</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Description: </label>
+                    <label class="text-right pl-3">@Person.Description</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Person Person { get; set; }
+}

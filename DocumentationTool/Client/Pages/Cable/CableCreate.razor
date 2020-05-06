@@ -1,0 +1,37 @@
+﻿@page "/cable/create"
+@inject NavigationManager navigationManager
+@inject ICableRepository cableRepository
+
+<CableForm Cable="Cable"
+           General="General"
+           OnValidSubmit="SaveCable"
+           />
+
+@code {
+    private Cable Cable = new Cable();
+    private General General = new General();
+
+    protected async override Task OnInitializedAsync()
+    {
+        General.DateOfChange = DateTime.Now;
+        General.CreatioDate = DateTime.Now;
+    }
+
+    private async Task SaveCable()
+    {
+        try
+        {
+            General.DateOfChange = DateTime.Now;
+            General.CreatioDate = DateTime.Now;
+
+            Cable.General = General;
+
+            var cableId = await cableRepository.CreateCable(Cable);
+            navigationManager.NavigateTo("cable");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+}

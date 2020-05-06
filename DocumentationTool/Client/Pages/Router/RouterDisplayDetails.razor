@@ -1,0 +1,29 @@
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>Router Details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">Routing protocol: </label>
+                    <label class="text-right pl-3">@RouterDevice.RoutingProtocol</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Gateway address: </label>
+                    <label class="text-right pl-3">@RouterDevice.GatewayAddress</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Description: </label>
+                    <label class="text-right pl-3">@RouterDevice.Description</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public RouterDevice RouterDevice { get; set; }
+}

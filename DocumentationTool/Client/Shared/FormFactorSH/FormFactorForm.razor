@@ -1,0 +1,91 @@
+﻿<h3>Form factor</h3>
+<EditForm Model="FormFactor">
+    <DataAnnotationsValidator />
+
+    <div class="form-group row">
+        <div class="col-md-8">
+            <div class="formInputModel">
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Form factor</label>
+                    <div class="col-md-4">
+                        <InputText class="form-control form-control-sm" @bind-Value="@FormFactor.Name" />
+                        <ValidationMessage For="@(() => FormFactor.Name)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Rack units</label>
+                    <div class="col-md-4">
+                        <InputNumber class="form-control form-control-sm" @bind-Value="@FormFactor.RackUnit" />
+                        <ValidationMessage For="@(() => FormFactor.RackUnit)" />
+                    </div>
+                    <div class="col-md-3">
+                        <InputSelect class="form-control form-control-sm" @bind-Value="@FormFactor.DimesnsionUnit">
+                            <option value="">Select measure...</option>
+                            <option>cm</option>
+                            <option>foot</option>
+                            <option>inch</option>
+                            <option>m</option>
+                            <option>mm</option>
+                        </InputSelect>
+                        <ValidationMessage For="@(() => FormFactor.DimesnsionUnit)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Width</label>
+                    <div class="col-sm-4">
+                        <InputNumber class="form-control form-control-sm" @bind-Value="@FormFactor.Width" />
+                        <ValidationMessage For="@(() => FormFactor.Width)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Height</label>
+                    <div class="col-sm-4">
+                        <InputNumber class="form-control form-control-sm" @bind-Value="@FormFactor.Height" />
+                        <ValidationMessage For="@(() => FormFactor.Height)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Depth</label>
+                    <div class="col-sm-4">
+                        <InputNumber class="form-control form-control-sm" @bind-Value="@FormFactor.Depth" />
+                        <ValidationMessage For="@(() => FormFactor.Depth)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Weight</label>
+                    <div class="col-md-4">
+                        <InputNumber class="form-control form-control-sm" @bind-Value="@FormFactor.Weight" />
+                        <ValidationMessage For="@(() => FormFactor.Weight)" />
+                    </div>
+                    <div class="col-md-3">
+                        <InputSelect class="form-control form-control-sm" @bind-Value="@FormFactor.WeightMeasure">
+                            <option value="">Select measure...</option>
+                            <option>g</option>
+                            <option>kg</option>
+                            <option>t</option>
+                        </InputSelect>
+                        <ValidationMessage For="@(() => FormFactor.WeightMeasure)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Description</label>
+                    <div class="col-md-7">
+                        <InputTextArea class="form-control" @bind-Value="@FormFactor.Description" />
+                        <ValidationMessage For="@(() => FormFactor.Description)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter] public FormFactor FormFactor { get; set; }
+}
+

@@ -1,80 +1,90 @@
-﻿    <EditForm Model="Monitor" OnValidSubmit="OnValidSubmit">
-    <DataAnnotationsValidator />
+﻿@using DocumentationTool.Client.Shared.PowerConsumerSH
+@using DocumentationTool.Client.Shared.GeneralSH
+@using DocumentationTool.Client.Shared.ModelSH
+@using DocumentationTool.Client.Shared.FormFactorSH
 
-    <form>
-        <div class="form-row">
-            <div class="form-group col-md-8">
-                <label>Display </label>
-                <InputNumber class="form-control" @bind-Value="@Monitor.Display" />
-                <ValidationMessage For="@(() => Monitor.Display)" />
-            </div>
-            <div class="form-group col-md-4">
-                <label>Display measure</label>
-                <InputSelect class="form-control" @bind-Value="@Monitor.DisplayMeasure">
-                    <option value="">Select measure...</option>
-                    <option>cm</option>
-                    <option>foot</option>
-                    <option>inch</option>
-                    <option>m</option>
-                    <option>mm</option>
-                </InputSelect>
-                <ValidationMessage For="@(() => Monitor.DisplayMeasure)" />
+    <h3>Monitor</h3>
+    <EditForm Model="Monitor" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator />
+
+        <div class="form-group row">
+            <div class="col-md-8">
+                <div class="formInputModel">
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Display </label>
+                        <div class="col-md-4">
+                            <InputNumber class="form-control form-control-sm" @bind-Value="@Monitor.Display" />
+                            <ValidationMessage For="@(() => Monitor.Display)" />
+                        </div>
+
+                        <div class="col-md-3">
+                            <InputSelect class="form-control form-control-sm" @bind-Value="@Monitor.DisplayMeasure">
+                                <option value="">Select measure...</option>
+                                <option>cm</option>
+                                <option>foot</option>
+                                <option>inch</option>
+                                <option>m</option>
+                                <option>mm</option>
+                            </InputSelect>
+                            <ValidationMessage For="@(() => Monitor.DisplayMeasure)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Type</label>
+                        <div class="col-md-4 ">
+                            <InputText class="form-control form-control-sm" @bind-Value="@Monitor.Type" />
+                            <ValidationMessage For="@(() => Monitor.Type)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Resolution</label>
+                        <div class="col-md-4 ">
+                            <InputText class="form-control form-control-sm" @bind-Value="@Monitor.Resolution" />
+                            <ValidationMessage For="@(() => Monitor.Resolution)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Pivot</label>
+                        <div>
+                            <InputCheckbox @bind-Value="@Monitor.Pivot" />
+                            <ValidationMessage For="@(() => Monitor.Pivot)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Speaker</label>
+                        <div>
+                            <InputCheckbox @bind-Value="@Monitor.Speaker" />
+                            <ValidationMessage For="@(() => Monitor.Speaker)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Description</label>
+                        <div class="col-md-7 ">
+                            <InputTextArea class="form-control" @bind-Value="@Monitor.Description" />
+                            <ValidationMessage For="@(() => Monitor.Description)" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label>Type</label>
-            <div>
-                <InputText class="form-control" @bind-Value="@Monitor.Type" />
-                <ValidationMessage For="@(() => Monitor.Type)" />
-            </div>
-        </div>
+            <ModelForm Model="Model" />
+            <GeneralForm General="General" />
+            <FormFactorForm FormFactor="FormFactor" />
+            <PowerConsumerForm PowerConsumer="PowerConsumer" />
 
-        <div class="form-group">
-            <label>Resolution</label>
-            <div>
-                <InputText class="form-control" @bind-Value="@Monitor.Resolution" />
-                <ValidationMessage For="@(() => Monitor.Resolution)" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Pivot</label>
-            <div>
-                <InputCheckbox @bind-Value="@Monitor.Pivot" />
-                <ValidationMessage For="@(() => Monitor.Pivot)" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Speaker</label>
-            <div>
-                <InputCheckbox @bind-Value="@Monitor.Speaker" />
-                <ValidationMessage For="@(() => Monitor.Speaker)" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Description</label>
-            <div>
-                <InputTextArea class="form-control" @bind-Value="@Monitor.Description" />
-                <ValidationMessage For="@(() => Monitor.Description)" />
-            </div>
-        </div>
-    </form>
-
-    <ModelForm Model="Model" />
-    @*<GeneralForm General="General" />*@
-    <FormFactorForm FormFactor="FormFactor" />
-    <PowerConsumerForm PowerConsumer="PowerConsumer" />
-
-    <button class="btn btn-primary" type="submit">Save Changes</button>
+            <button class="btn btn-primary" type="submit">Save Changes</button>
 </EditForm>
 
 @code {
     [Parameter] public Monitor Monitor { get; set; }
     [Parameter] public Model Model { get; set; }
-    //[Parameter] public General General { get; set; }
+    [Parameter] public General General { get; set; }
     [Parameter] public FormFactor FormFactor { get; set; }
     [Parameter] public PowerConsumer PowerConsumer { get; set; }
     [Parameter] public EventCallback OnValidSubmit { get; set; }

@@ -1,0 +1,53 @@
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>Form factor Details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">Factor name: </label>
+                    <label class="text-right pl-3">@FormFactor.Name</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Rack unit: </label>
+                    <label class="text-right pl-3">@FormFactor.RackUnit</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Dimension unit: </label>
+                    <label class="text-right pl-3">@FormFactor.DimesnsionUnit</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Width: </label>
+                    <label class="text-right pl-3">@FormFactor.Width</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Height: </label>
+                    <label class="text-right pl-3">@FormFactor.Height</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Depth: </label>
+                    <label class="text-right pl-3">@FormFactor.Depth</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Weight: </label>
+                    <label class="text-right pl-3">@FormFactor.Weight</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Weight measure: </label>
+                    <label class="text-right pl-3">@FormFactor.WeightMeasure</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Description: </label>
+                    <label class="text-right pl-3">@FormFactor.Description</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public FormFactor FormFactor { get; set; }
+}

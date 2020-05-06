@@ -1,0 +1,41 @@
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>Printer details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">Type: </label>
+                    <label class="text-right pl-3">@Printer.Type</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Colored: </label>
+                    <label class="text-right pl-3">@Printer.Colored</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Duplex: </label>
+                    <label class="text-right pl-3">@Printer.Duplex</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Emulation: </label>
+                    <label class="text-right pl-3">@Printer.Emulation</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">PaperFormat: </label>
+                    <label class="text-right pl-3">@Printer.PaperFormat</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Description: </label>
+                    <label class="text-right pl-3">@Printer.Description</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Printer Printer { get; set; }
+}

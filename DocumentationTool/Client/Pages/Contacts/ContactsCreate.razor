@@ -1,0 +1,37 @@
+﻿@page "/contact/create"
+@inject NavigationManager navigationManager
+@inject IPersonRepostiroy personRepository
+
+<ContactsForm
+             General="General"
+             Person="Person"
+             OnValidSubmit="SavePerson" />
+
+@code {
+    private Person Person = new Person();
+    private General General = new General();
+
+    protected async override Task OnInitializedAsync()
+    {
+        General.DateOfChange = DateTime.Now;
+        General.CreatioDate = DateTime.Now;
+    }
+
+    private async Task SavePerson()
+    {
+        try
+        {
+            General.DateOfChange = DateTime.Now;
+            General.CreatioDate = DateTime.Now;
+
+            Person.General = General;
+
+            var monitorId = await personRepository.CreatePerson(Person);
+            navigationManager.NavigateTo("contact");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+}

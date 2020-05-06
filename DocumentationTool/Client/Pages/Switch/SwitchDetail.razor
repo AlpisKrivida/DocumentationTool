@@ -1,0 +1,46 @@
+﻿@using DocumentationTool.Client.Shared.Tabs
+@using DocumentationTool.Client.Shared.GeneralSH
+@using DocumentationTool.Client.Shared.FormFactorSH
+@using DocumentationTool.Client.Shared.PowerConsumerSH
+@using DocumentationTool.Client.Shared.ModelSH
+
+
+@page "/switch/detail/{SwitchId:int}"
+@inject ISwitchRepository switchRepository
+@inject NavigationManager navigationManager
+
+    <h3>Switch details</h3>
+
+@if (Switch != null)
+{
+    <TabControl>
+        <TabPage Text="General">
+            <GeneralDetails General="Switch.General" />
+        </TabPage>
+        <TabPage Text="Form factor">
+            <FormFactorDetail FormFactor="Switch.FormFactor" />
+        </TabPage>
+        <TabPage Text="Power consumer">
+            <PowerConsumerDetail PowerConsumer="Switch.PowerConsumer" />
+        </TabPage>
+        <TabPage Text="Model">
+            <ModelDetail Model="Switch.Model" />
+        </TabPage>
+        <TabPage Text="Switch">
+            <SwitchDisplayDetail Switch="Switch" />
+        </TabPage>
+    </TabControl>
+
+}
+
+@code {
+    [Parameter]
+    public int SwitchId { get; set; }
+
+    public Switch Switch;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Switch = await switchRepository.GetSwitch(SwitchId);
+    }
+}

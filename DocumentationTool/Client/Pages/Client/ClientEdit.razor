@@ -1,0 +1,36 @@
+﻿@page "/client/edit/{ClientId:int}"
+@inject IClientRepository clientRepository
+@inject NavigationManager navigationManager
+
+<h3>Client edit</h3>
+
+@if (Client != null)
+{
+    <ClientForm OnValidSubmit="Edit"
+                 General="Client.General"
+                 Model="Client.Model"
+                 CPU="Client.CPU"
+                 Desktop="Client.Desktop"
+                 Memory="Client.Memory"
+                 ClientPC="Client" />
+}
+
+@code {
+    [Parameter]
+    public int ClientId { get; set; }
+
+    public ClientPC Client;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Client = await clientRepository.GetClientPC(ClientId);
+    }
+
+    private async Task Edit()
+    {
+        Client.General.DateOfChange = DateTime.Now;
+
+        await clientRepository.UpdateClientPC(Client);
+        navigationManager.NavigateTo("client");
+    }
+}

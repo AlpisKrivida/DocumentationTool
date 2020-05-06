@@ -1,0 +1,83 @@
+﻿@using DocumentationTool.Client.Shared.GeneralSH
+
+<h3>Cables</h3>
+<EditForm Model="Cable" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="form-group row">
+        <div class="col-md-8">
+            <div class="formInputModel">
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Type</label>
+                    <div class="col-md-4 ">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Cable.CableType" />
+                        <ValidationMessage For="@(() => Cable.CableType)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Lenght </label>
+                    <div class="col-md-4">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Cable.CableLenght" />
+                        <ValidationMessage For="@(() => Cable.CableLenght)" />
+                    </div>
+
+                    <div class="col-md-3">
+                        <InputSelect class="form-control form-control-sm" @bind-Value="@Cable.CableLenghtDimensions">
+                            <option value="">Select measure...</option>
+                            <option>cm</option>
+                            <option>foot</option>
+                            <option>inch</option>
+                            <option>m</option>
+                            <option>mm</option>
+                        </InputSelect>
+                        <ValidationMessage For="@(() => Cable.CableLenghtDimensions)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Color</label>
+                    <div class="col-md-4 ">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Cable.Color" />
+                        <ValidationMessage For="@(() => Cable.Color)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Occupancy</label>
+                    <div class="col-md-4 ">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Cable.Occupancy" />
+                        <ValidationMessage For="@(() => Cable.Occupancy)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Fibers/leads</label>
+                    <div class="col-md-4 ">
+                        <InputText class="form-control form-control-sm" @bind-Value="@Cable.FibLeads" />
+                        <ValidationMessage For="@(() => Cable.FibLeads)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Description</label>
+                    <div class="col-md-7 ">
+                        <InputTextArea class="form-control" @bind-Value="@Cable.Description" />
+                        <ValidationMessage For="@(() => Cable.Description)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <GeneralForm General="General" />
+
+    <button class="btn btn-primary" type="submit">Save Changes</button>
+</EditForm>
+
+@code {
+    [Parameter] public Cable Cable { get; set; }
+    [Parameter] public General General { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}

@@ -1,0 +1,46 @@
+﻿@using DocumentationTool.Client.Shared.Tabs
+@using DocumentationTool.Client.Shared.GeneralSH
+@using DocumentationTool.Client.Shared.FormFactorSH
+@using DocumentationTool.Client.Shared.PowerConsumerSH
+@using DocumentationTool.Client.Shared.ModelSH
+
+
+@page "/router/detail/{RouterId:int}"
+@inject IRouterRepository routerRepository
+@inject NavigationManager navigationManager
+
+<h3>Router details</h3>
+
+@if (RouterDevice != null)
+{
+    <TabControl>
+        <TabPage Text="General">
+            <GeneralDetails General="RouterDevice.General" />
+        </TabPage>
+        <TabPage Text="Form factor">
+            <FormFactorDetail FormFactor="RouterDevice.FormFactor" />
+        </TabPage>
+        <TabPage Text="Power consumer">
+            <PowerConsumerDetail PowerConsumer="RouterDevice.PowerConsumer" />
+        </TabPage>
+        <TabPage Text="Model">
+            <ModelDetail Model="RouterDevice.Model" />
+        </TabPage>
+        <TabPage Text="Router">
+            <RouterDisplayDetails RouterDevice="RouterDevice" />
+        </TabPage>
+    </TabControl>
+
+}
+
+@code {
+    [Parameter]
+    public int RouterId { get; set; }
+
+    public RouterDevice RouterDevice;
+
+    protected async override Task OnInitializedAsync()
+    {
+        RouterDevice = await routerRepository.GetRouter(RouterId);
+    }
+}

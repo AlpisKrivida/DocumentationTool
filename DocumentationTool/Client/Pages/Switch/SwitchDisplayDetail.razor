@@ -1,0 +1,33 @@
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>Switch details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">Vlan: </label>
+                    <label class="text-right pl-3">@Switch.Vlan</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Role: </label>
+                    <label class="text-right pl-3">@Switch.Role</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">SpanningTree: </label>
+                    <label class="text-right pl-3">@Switch.SpanningTree</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Description: </label>
+                    <label class="text-right pl-3">@Switch.Description</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Switch Switch { get; set; }
+}

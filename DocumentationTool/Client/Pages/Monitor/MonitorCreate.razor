@@ -2,10 +2,9 @@
 @inject NavigationManager navigationManager
 @inject IMonitorRepository monitorRepository
 
-<h3>MonitorCreate</h3>
-
 <MonitorForm Monitor="Monitor" 
              Model="Model" 
+             General="General"
              FormFactor="FormFactor"
              PowerConsumer="PowerConsumer"
              OnValidSubmit="SaveMonitor" />
@@ -13,17 +12,24 @@
 @code {
     private Monitor Monitor = new Monitor();
     private Model Model = new Model();
-    //private General General = new General();
+    private General General = new General();
     private FormFactor FormFactor = new FormFactor();
     private PowerConsumer PowerConsumer = new PowerConsumer();
 
+    protected async override Task OnInitializedAsync()
+    {
+        General.DateOfChange = DateTime.Now;
+        General.CreatioDate = DateTime.Now;
+    }
 
     private async Task SaveMonitor()
     {
         try
         {
-            Console.WriteLine(Monitor.DisplayMeasure);
+            General.DateOfChange = DateTime.Now;
+            General.CreatioDate = DateTime.Now;
 
+            Monitor.General = General;
             Monitor.Model = Model;
             Monitor.FormFactor = FormFactor;
             Monitor.PowerConsumer = PowerConsumer;

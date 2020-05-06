@@ -1,0 +1,32 @@
+﻿@page "/contact/edit/{PersonId:int}"
+@inject IPersonRepostiroy personRepository
+@inject NavigationManager navigationManager
+
+<h3>Person edit</h3>
+
+@if (Person != null)
+{
+    <ContactsForm OnValidSubmit="Edit"
+                 Person="Person"
+                 General="Person.General" />
+}
+
+@code {
+    [Parameter]
+    public int PersonId { get; set; }
+
+    public Person Person;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Person = await personRepository.GetPerson(PersonId);
+    }
+
+    private async Task Edit()
+    {
+        Person.General.DateOfChange = DateTime.Now;
+
+        await personRepository.UpdatePerson(Person);
+        navigationManager.NavigateTo("contact");
+    }
+}

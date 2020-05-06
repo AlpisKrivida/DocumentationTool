@@ -1,7 +1,46 @@
-﻿@page "/monitor/{MonitorId:int}"
+﻿@using DocumentationTool.Client.Shared.Tabs
+@using DocumentationTool.Client.Shared.GeneralSH
+@using DocumentationTool.Client.Shared.FormFactorSH
+@using DocumentationTool.Client.Shared.PowerConsumerSH
+@using DocumentationTool.Client.Shared.ModelSH
 
-<h3>MonitorDetails</h3>
+
+@page "/monitor/detail/{MonitorId:int}"
+@inject IMonitorRepository monitorRepository
+@inject NavigationManager navigationManager
+
+<h3>Monitor details</h3>
+
+@if (Monitor != null)
+{
+    <TabControl>
+        <TabPage Text="General">
+            <GeneralDetails General="Monitor.General" />
+        </TabPage>
+        <TabPage Text="Form factor">
+            <FormFactorDetail FormFactor="Monitor.FormFactor" />
+        </TabPage>
+        <TabPage Text="Power consumer">
+            <PowerConsumerDetail PowerConsumer="Monitor.PowerConsumer" />
+        </TabPage>
+        <TabPage Text="Model">
+            <ModelDetail Model="Monitor.Model" />
+        </TabPage>
+        <TabPage Text="Monitor">
+            <MonitorDisplayDetail Monitor="Monitor" />
+        </TabPage>
+    </TabControl>
+
+}
 
 @code {
+    [Parameter]
+    public int MonitorId { get; set; }
 
+    public Monitor Monitor;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Monitor = await monitorRepository.GetMonitor(MonitorId);
+    }
 }

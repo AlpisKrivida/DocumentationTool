@@ -1,5 +1,36 @@
-﻿<h3>RouterEdit</h3>
+﻿@page "/router/edit/{RouterId:int}"
+@inject IRouterRepository routerRepository
+@inject NavigationManager navigationManager
+
+
+<h3>Router edit</h3>
+
+@if (RouterDevice != null)
+{
+    <RouterForm OnValidSubmit="Edit"
+                 Model="RouterDevice.Model"
+                 RouterDevice="RouterDevice"
+                 PowerConsumer="RouterDevice.PowerConsumer"
+                 FormFactor="RouterDevice.FormFactor"
+                 General="RouterDevice.General"/>
+}
 
 @code {
+    [Parameter]
+    public int RouterId { get; set; }
 
+    public RouterDevice RouterDevice;
+
+    protected async override Task OnInitializedAsync()
+    {
+        RouterDevice = await routerRepository.GetRouter(RouterId);
+    }
+
+    private async Task Edit()
+    {
+        RouterDevice.General.DateOfChange = DateTime.Now;
+
+        await routerRepository.UpdateRouter(RouterDevice);
+        navigationManager.NavigateTo("router");
+    }
 }

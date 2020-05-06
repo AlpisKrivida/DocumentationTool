@@ -10,8 +10,12 @@ namespace DocumentationTool.Shared.Entities.Infrastructure
     {
         public int Id { get; set; }
         public General General { get; set; }
-        public Color Color { get; set; }
+        public string CableType { get; set; }
+        public string CableLenght { get; set; }
+        public string CableLenghtDimensions { get; set; }
+        public string Color { get; set; }
         public string Occupancy { get; set; }
+        public string FibLeads { get; set; }
         public string Description { get; set; }
     }
 }

@@ -25,7 +25,10 @@ namespace DocumentationTool.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Monitor>>> Get([FromQuery] PaginationDTO paginationDTO)
         {
-            var queryable = context.Monitors.AsQueryable();
+            var queryable = context.Monitors
+                .Include(x => x.Model)
+                .Include(x => x.General)
+                .AsQueryable();
             await HttpContext.InsertPaginationParametersInResponse(queryable, paginationDTO.RecordsPerPage);
             return await queryable.Paginate(paginationDTO).ToListAsync();
         }

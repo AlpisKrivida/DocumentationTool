@@ -1,0 +1,50 @@
+﻿<h3>Access Form</h3>
+<EditForm Model="Access">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label>Title</label>
+        <div>
+            <InputText class="form-control" @bind-Value="@Access.Title" />
+            <ValidationMessage For="@(() => Access.Title)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Access type</label>
+        <div>
+            <InputText @bind-Value="@Access.AccessType" />
+            <ValidationMessage For="@(() => Access.AccessType)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Host[:Port]/URL</label>
+        <div>
+            <InputText @bind-Value="@Access.Host" />
+            <ValidationMessage For="@(() => Access.Host)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Primary</label>
+        <div>
+            <InputCheckbox @bind-Value="@Access.Primary" />
+            <ValidationMessage For="@(() => Access.Primary)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Description</label>
+        <div>
+            <InputTextArea class="form-control" @bind-Value="@Access.Description" />
+            <ValidationMessage For="@(() => Access.Description)" />
+        </div>
+    </div>
+
+</EditForm>
+
+@code {
+    [Parameter] public Access Access { get; set; }
+}
+

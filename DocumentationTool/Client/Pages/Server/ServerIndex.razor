@@ -1,7 +1,119 @@
 ﻿@page "/server"
+@inject IServerRepository serverRepository
 
-<h3>ServerIndex</h3>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h3>Servers</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <div class="form-group">
+                    <a class="btn btn-info" href="server/create"><span class="ri oi oi-plus" /> New Server</a>
+                </div>
+
+                <div class="form-row p-1">
+                    <div class="form-group m-1">
+                        <label>Display </label>
+                        <select class="custom-select-sm" @bind="@recordsPerPage" @onclick="LoadPage">
+                            <option value="">5</option>
+                            <option>10</option>
+                            <option>15</option>
+                            <option>20</option>
+                        </select>
+                        <label> monitors</label>
+                    </div>
+                </div>
+
+
+                <GenericList List="Servers">
+                    <WholeListTemplate>
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Purpose</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Servers)
+                                {
+                                    <tr>
+                                        <td>@item.General.Title</td>
+                                        <td>@item.General.Purpose</td>
+                                        <td>
+                                            <a href="/server/detail/@item.Id"><span class="oi oi-eye" /></a>
+                                            <a href="/server/edit/@item.Id"><span class="oi oi-pencil" /></a>
+                                            <a href="/server" @onclick="@(() => DeleteMonitor(item.Id))"><span class="oi oi-trash" /></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </WholeListTemplate>
+                </GenericList>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex">
+                            <div class="ml-auto">
+                                <Pagination CurrentPage="@paginationDTO.Page" TotalAmountPages="totalAmountPages"
+                                            SelectedPage="SelectedPage" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @code {
+    List<ServerDevice> Servers;
+    PaginationDTO paginationDTO = new PaginationDTO();
+    private int totalAmountPages;
+    private int recordsPerPage = 5;
 
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await LoadServers();
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    private async Task LoadPage()
+    {
+        paginationDTO = new PaginationDTO();
+        await LoadServers();
+    }
+
+    private async Task LoadServers()
+    {
+        paginationDTO.RecordsPerPage = recordsPerPage;
+        var paginatedResponse = await serverRepository.GetServerDevices(paginationDTO);
+        Servers = paginatedResponse.Response;
+        totalAmountPages = paginatedResponse.TotalAmountPages;
+    }
+
+    private async Task SelectedPage(int page)
+    {
+        paginationDTO.Page = page;
+        await LoadServers();
+    }
+
+    private async Task DeleteMonitor(int id)
+    {
+        await serverRepository.DeleteServerDevice(id);
+        await LoadServers();
+    }
 }

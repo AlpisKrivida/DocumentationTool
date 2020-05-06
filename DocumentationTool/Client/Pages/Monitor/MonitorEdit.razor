@@ -2,11 +2,12 @@
 @inject IMonitorRepository monitorRepository
 @inject NavigationManager navigationManager
 
-<h3>MonitorEdit</h3>
+<h3>Monitor edit</h3>
 
 @if (Monitor != null)
 {
     <MonitorForm OnValidSubmit="Edit"
+                 General="Monitor.General"
                  Model="Monitor.Model"
                  Monitor="Monitor"
                  PowerConsumer="Monitor.PowerConsumer"
@@ -27,8 +28,9 @@
 
     private async Task Edit()
     {
+        Monitor.General.DateOfChange = DateTime.Now;
 
         await monitorRepository.UpdateMonitor(Monitor);
-        navigationManager.NavigateTo("Monitor");
+        navigationManager.NavigateTo("monitor");
     }
 }

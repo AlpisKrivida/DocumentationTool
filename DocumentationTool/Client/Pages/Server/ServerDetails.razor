@@ -1,7 +1,51 @@
-﻿@page "/server/{ServerId:int}"
+﻿@using DocumentationTool.Client.Shared.Tabs
+@using DocumentationTool.Client.Shared.GeneralSH
+@using DocumentationTool.Client.Shared.FormFactorSH
+@using DocumentationTool.Client.Shared.PowerConsumerSH
+@using DocumentationTool.Client.Shared.ModelSH
+@using DocumentationTool.Client.Shared.CPUSH
+@using DocumentationTool.Client.Shared.MemorySH
 
-<h3>ServerDetails</h3>
+
+@page "/server/detail/{ServerId:int}"
+@inject IServerRepository serverRepository
+@inject NavigationManager navigationManager
+
+<h3>Server details</h3>
+
+@if (Server != null)
+{
+    <TabControl>
+        <TabPage Text="General">
+            <GeneralDetails General="Server.General" />
+        </TabPage>
+        <TabPage Text="Form factor">
+            <FormFactorDetail FormFactor="Server.FormFactor" />
+        </TabPage>
+        <TabPage Text="Power consumer">
+            <PowerConsumerDetail PowerConsumer="Server.PowerConsumer" />
+        </TabPage>
+        <TabPage Text="Model">
+            <ModelDetail Model="Server.Model" />
+        </TabPage>
+        <TabPage Text="CPU">
+            <CPUForm CPU="Server.CPU" />
+        </TabPage>
+        <TabPage Text="Memory">
+            <MemoryForm  Memory="Server.Memory" />
+        </TabPage>
+    </TabControl>
+
+}
 
 @code {
+    [Parameter]
+    public int ServerId { get; set; }
 
+    public ServerDevice Server;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Server = await serverRepository.GetServerDevice(ServerId);
+    }
 }

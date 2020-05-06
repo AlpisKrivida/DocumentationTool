@@ -1,0 +1,37 @@
+﻿@using DocumentationTool.Client.Shared.Tabs
+@using DocumentationTool.Client.Shared.GeneralSH
+@using DocumentationTool.Client.Shared.FormFactorSH
+@using DocumentationTool.Client.Shared.PowerConsumerSH
+@using DocumentationTool.Client.Shared.ModelSH
+
+
+@page "/cable/detail/{CableId:int}"
+@inject ICableRepository cableRepository
+@inject NavigationManager navigationManager
+
+    <h3>Cable details</h3>
+
+@if (Cable != null)
+{
+    <TabControl>
+        <TabPage Text="General">
+            <GeneralDetails General="Cable.General" />
+        </TabPage>
+        <TabPage Text="Monitor">
+            <CableDisplayDetails Cable="Cable"  />
+        </TabPage>
+    </TabControl>
+
+}
+
+@code {
+    [Parameter]
+    public int CableId { get; set; }
+
+    public Cable Cable;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Cable = await cableRepository.GetCable(CableId);
+    }
+}

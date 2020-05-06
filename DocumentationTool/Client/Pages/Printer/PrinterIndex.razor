@@ -1,51 +1,87 @@
 ﻿@page "/printer"
 @inject IPrinterRepository printerRepository
 
-<h3>Printer Index</h3>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h3>Printers</h3>
+        </div>
+    </div>
 
-<div class="form-group">
-    <a class="btn btn-info" href="printer/create">New Printer</a>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <div class="form-group">
+                    <a class="btn btn-info" href="printer/create"><span class="ri oi oi-plus" /> Add Printer</a>
+                </div>
+
+                <div class="form-row p-1">
+                    <div class="form-group m-1">
+                        <label>Display </label>
+                        <select class="custom-select-sm" @bind="@recordsPerPage" @onclick="LoadPage">
+                            <option value="">5</option>
+                            <option>10</option>
+                            <option>15</option>
+                            <option>20</option>
+                        </select>
+                        <label> monitors</label>
+                    </div>
+                </div>
+
+
+                <GenericList List="Printers">
+                    <WholeListTemplate>
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Type</th>
+                                    <th>Colored</th>
+                                    <th>Emulation</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Printers)
+                                {
+                                    <tr>
+                                        <td>@item.General.Title</td>
+                                        <td>@item.Type</td>
+                                        <td>@item.Colored</td>
+                                        <td>@item.Emulation</td>
+                                        <td>
+                                            <a href="/printer/detail/@item.Id"><span class="oi oi-eye" /></a>
+                                            <a href="/printer/edit/@item.Id"><span class="oi oi-pencil" /></a>
+                                            <a href="/prtiner" @onclick="@(() => DeletePrinter(item.Id))"><span class="oi oi-trash" /></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </WholeListTemplate>
+                </GenericList>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex">
+                            <div class="ml-auto">
+                                <Pagination CurrentPage="@paginationDTO.Page" TotalAmountPages="totalAmountPages"
+                                            SelectedPage="SelectedPage" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<Pagination CurrentPage="@paginationDTO.Page" TotalAmountPages="totalAmountPages"
-            SelectedPage="SelectedPage" />
 
-<GenericList List="Printer">
-    <WholeListTemplate>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Type</th>
-                    <th>Color</th>
-                    <th>Duplex</th>
-                    <th>Emulation</th>
-                    <th>Paper Formas</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Printer)
-                {
-                    <tr>
-                        <td>
-                            <a class="btn btn-success" href="/printer/edit/@item.Id">Edit</a>
-                            <button class="btn btn-danger" @onclick="@(() => DeletePrinter(item.Id))">Delete</button>
-                        </td>
-                        <td>@item.Type</td>
-                        <td>@item.Color</td>
-                        <td>@item.Duplex</td>
-                        <td>@item.Emulation</td>
-                        <td>@item.PaperFormat</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </WholeListTemplate>
-</GenericList>
 @code {
-    List<Printer> Printer;
-    PaginationDTO paginationDTO = new PaginationDTO() { RecordsPerPage = 1 };
+    List<Printer> Printers;
+    PaginationDTO paginationDTO = new PaginationDTO();
     private int totalAmountPages;
+    private int recordsPerPage = 5;
 
     protected override async Task OnInitializedAsync()
     {
@@ -59,10 +95,17 @@
         }
     }
 
+    private async Task LoadPage()
+    {
+        paginationDTO = new PaginationDTO();
+        await LoadPrinters();
+    }
+
     private async Task LoadPrinters()
     {
+        paginationDTO.RecordsPerPage = recordsPerPage;
         var paginatedResponse = await printerRepository.GetPrinters(paginationDTO);
-        Printer = paginatedResponse.Response;
+        Printers = paginatedResponse.Response;
         totalAmountPages = paginatedResponse.TotalAmountPages;
     }
 

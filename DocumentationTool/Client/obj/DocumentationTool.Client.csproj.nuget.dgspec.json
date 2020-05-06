@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alpis\\source\\repos\\DocumentationTool\\DocumentationTool\\Client\\DocumentationTool.Client.csproj": {}
+    "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Client\\DocumentationTool.Client.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alpis\\source\\repos\\DocumentationTool\\DocumentationTool\\Client\\DocumentationTool.Client.csproj": {
+    "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Client\\DocumentationTool.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alpis\\source\\repos\\DocumentationTool\\DocumentationTool\\Client\\DocumentationTool.Client.csproj",
+        "projectUniqueName": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Client\\DocumentationTool.Client.csproj",
         "projectName": "DocumentationTool.Client",
-        "projectPath": "C:\\Users\\Alpis\\source\\repos\\DocumentationTool\\DocumentationTool\\Client\\DocumentationTool.Client.csproj",
+        "projectPath": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Client\\DocumentationTool.Client.csproj",
         "packagesPath": "C:\\Users\\Alpis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alpis\\source\\repos\\DocumentationTool\\DocumentationTool\\Client\\obj\\",
+        "outputPath": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -30,8 +30,8 @@
         "frameworks": {
           "netstandard2.1": {
             "projectReferences": {
-              "C:\\Users\\Alpis\\source\\repos\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj": {
-                "projectPath": "C:\\Users\\Alpis\\source\\repos\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj"
+              "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj": {
+                "projectPath": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj"
               }
             }
           }
@@ -45,6 +45,10 @@
       "frameworks": {
         "netstandard2.1": {
           "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[5.1.1, )"
+            },
             "Markdig": {
               "target": "Package",
               "version": "[0.18.3, )"
@@ -93,14 +97,14 @@
         }
       }
     },
-    "C:\\Users\\Alpis\\source\\repos\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj": {
+    "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alpis\\source\\repos\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj",
+        "projectUniqueName": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj",
         "projectName": "DocumentationTool.Shared",
-        "projectPath": "C:\\Users\\Alpis\\source\\repos\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj",
+        "projectPath": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj",
         "packagesPath": "C:\\Users\\Alpis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alpis\\source\\repos\\DocumentationTool\\DocumentationTool\\Shared\\obj\\",
+        "outputPath": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

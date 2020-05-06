@@ -1,0 +1,45 @@
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>Monitor Details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">Display: </label>
+                    <label class="text-right pl-3">@Monitor.Display</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Display measure: </label>
+                    <label class="text-right pl-3">@Monitor.DisplayMeasure</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Type: </label>
+                    <label class="text-right pl-3">@Monitor.Type</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Resolution: </label>
+                    <label class="text-right pl-3">@Monitor.Resolution</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Pivot: </label>
+                    <label class="text-right pl-3">@Monitor.Pivot</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Speaker: </label>
+                    <label class="text-right pl-3">@Monitor.Speaker</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Description: </label>
+                    <label class="text-right pl-3">@Monitor.Description</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Monitor Monitor { get; set; }
+}

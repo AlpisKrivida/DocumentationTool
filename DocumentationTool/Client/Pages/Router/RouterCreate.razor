@@ -1,5 +1,47 @@
-﻿<h3>RouterCreate</h3>
+﻿@page "/router/create"
+@inject NavigationManager navigationManager
+@inject IRouterRepository routerRepository
+
+<h3>Router create</h3>
+
+<RouterForm RouterDevice="RouterDevice" 
+             Model="Model" 
+             FormFactor="FormFactor"
+             PowerConsumer="PowerConsumer"
+             General="General"
+             OnValidSubmit="SaveRouter" />
 
 @code {
+    private RouterDevice RouterDevice = new RouterDevice();
+    private Model Model = new Model();
+    private General General = new General();
+    private FormFactor FormFactor = new FormFactor();
+    private PowerConsumer PowerConsumer = new PowerConsumer();
 
+    protected async override Task OnInitializedAsync()
+    {
+        General.DateOfChange = DateTime.Now;
+        General.CreatioDate = DateTime.Now;
+    }
+
+    private async Task SaveRouter()
+    {
+        try
+        {
+            General.DateOfChange = DateTime.Now;
+            General.CreatioDate = DateTime.Now;
+
+            RouterDevice.Model = Model;
+            RouterDevice.FormFactor = FormFactor;
+            RouterDevice.PowerConsumer = PowerConsumer;
+            RouterDevice.General = General;
+
+            var monitorId = await routerRepository.CreateRouter(RouterDevice);
+            navigationManager.NavigateTo("router");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
 }

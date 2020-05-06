@@ -1,0 +1,49 @@
+﻿@page "/client/create"
+@inject NavigationManager navigationManager
+@inject IClientRepository clientRepository
+
+<ClientForm ClientPC="Client"
+             Model="Model"
+             CPU="CPU"
+             Desktop="Desktop"
+             Memory="Memory"
+             General="General"
+             OnValidSubmit="SaveClient" />
+
+@code {
+    private ClientPC Client = new ClientPC();
+    private Model Model = new Model();
+    private General General = new General();
+    private CPU CPU = new CPU();
+    private Memory Memory = new Memory();
+    private Desktop Desktop = new Desktop();
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        General.DateOfChange = DateTime.Now;
+        General.CreatioDate = DateTime.Now;
+    }
+
+    private async Task SaveClient()
+    {
+        try
+        {
+            General.DateOfChange = DateTime.Now;
+            General.CreatioDate = DateTime.Now;
+
+            Client.General = General;
+            Client.Model = Model;
+            Client.CPU = CPU;
+            Client.Memory = Memory;
+            Client.Desktop = Desktop;
+
+            var monitorId = await clientRepository.CreateClientPC(Client);
+            navigationManager.NavigateTo("client");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+}

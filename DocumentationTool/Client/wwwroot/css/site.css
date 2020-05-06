@@ -28,10 +28,11 @@ app {
 
 .main {
     flex: 1;
+    background-color: #f8f9fd;
 }
 
     .main .top-row {
-        background-color: #f7f7f7;
+        background-color: #ffffff;
         border-bottom: 1px solid #d6d5d5;
         justify-content: flex-end;
     }
@@ -44,6 +45,13 @@ app {
 .main .top-row a:first-child {
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.no-copy .nav {
+    -webkit-user-select: none; /* Chrome all / Safari all */
+    -moz-user-select: none; /* Firefox all */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Likely future */
 }
 
 .sidebar {
@@ -63,6 +71,11 @@ app {
         font-size: 1.1rem;
         vertical-align: text-top;
         top: -2px;
+    }
+
+    .sidebar .ri {
+        font-size: 70%;
+        padding-left: 7px;
     }
 
     .sidebar .nav-item {
@@ -174,10 +187,34 @@ app {
 
     .navbar-toggler {
         display: none;
+
     }
 
     .sidebar .collapse {
         /* Never collapse the sidebar for wide screens */
         display: block;
     }
+}
+
+/*other*/
+
+.card {
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.formInputModel {
+    background-color: #f0f2fa;
+    border-radius: 5px;
+    padding: 20px;
+    
+}
+
+.scaleModel {
+}
+
+.ri {
+    font-size: 70%;
+    padding-left: -10px;
 }

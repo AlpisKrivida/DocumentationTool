@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alpis\\source\\repos\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj": {}
+    "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alpis\\source\\repos\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj": {
+    "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alpis\\source\\repos\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj",
+        "projectUniqueName": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj",
         "projectName": "DocumentationTool.Shared",
-        "projectPath": "C:\\Users\\Alpis\\source\\repos\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj",
+        "projectPath": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj",
         "packagesPath": "C:\\Users\\Alpis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alpis\\source\\repos\\DocumentationTool\\DocumentationTool\\Shared\\obj\\",
+        "outputPath": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

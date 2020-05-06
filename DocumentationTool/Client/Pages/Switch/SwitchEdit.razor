@@ -1,0 +1,35 @@
+﻿@page "/switch/edit/{SwitchId:int}"
+@inject ISwitchRepository switchRepository
+@inject NavigationManager navigationManager
+
+<h3>Switch edit</h3>
+
+@if (Switch != null)
+{
+    <SwitchForm OnValidSubmit="Edit"
+                 Model="Switch.Model"
+                 Switch="Switch"
+                 PowerConsumer="Switch.PowerConsumer"
+                 FormFactor="Switch.FormFactor"
+                 General="Switch.General"/>
+}
+
+@code {
+    [Parameter]
+    public int SwitchId { get; set; }
+
+    public Switch Switch;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Switch = await switchRepository.GetSwitch(SwitchId);
+    }
+
+    private async Task Edit()
+    {
+        Switch.General.DateOfChange = DateTime.Now;
+
+        await switchRepository.UpdateSwitch(Switch);
+        navigationManager.NavigateTo("switch");
+    }
+}

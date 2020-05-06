@@ -1,0 +1,121 @@
+﻿@page "/cable"
+@inject ICableRepository cableRepository
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h3>Cables</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <div class="form-group">
+                    <a class="btn btn-info" href="cable/create"><span class="ri oi oi-plus" /> New cable</a>
+                </div>
+
+                <div class="form-row p-1">
+                    <div class="form-group m-1">
+                        <label>Display </label>
+                        <select class="custom-select-sm" @bind="@recordsPerPage" @onclick="LoadPage">
+                            <option value="">5</option>
+                            <option>3</option>
+                            <option>2</option>
+                            <option>1</option>
+                        </select>
+                        <label> cables</label>
+                    </div>
+                </div>
+
+
+                <GenericList List="Cables">
+                    <WholeListTemplate>
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Type</th>
+                                    <th>Cable lenght</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Cables)
+                                {
+                                    <tr>
+                                        <td>@item.General.Title</td>
+                                        <td>@item.CableType</td>
+                                        <td>@item.CableLenght</td>
+                                        <td>
+                                            <a href="/cable/detail/@item.Id"><span class="oi oi-eye" /></a>
+                                            <a href="/cable/edit/@item.Id"><span class="oi oi-pencil" /></a>
+                                            <a href="/cable" @onclick="@(() => DeleteCable(item.Id))"><span class="oi oi-trash" /></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </WholeListTemplate>
+                </GenericList>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex">
+                            <div class="ml-auto">
+                                <Pagination CurrentPage="@paginationDTO.Page" TotalAmountPages="totalAmountPages"
+                                            SelectedPage="SelectedPage" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    List<Cable> Cables;
+    PaginationDTO paginationDTO = new PaginationDTO();
+    private int totalAmountPages;
+    private int recordsPerPage = 5;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await LoadCables();
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    private async Task LoadPage()
+    {
+        paginationDTO = new PaginationDTO();
+        await LoadCables();
+    }
+
+    private async Task LoadCables()
+    {
+        paginationDTO.RecordsPerPage = recordsPerPage;
+        var paginatedResponse = await cableRepository.GetCables(paginationDTO);
+        Cables = paginatedResponse.Response;
+        totalAmountPages = paginatedResponse.TotalAmountPages;
+    }
+
+    private async Task SelectedPage(int page)
+    {
+        paginationDTO.Page = page;
+        await LoadCables();
+    }
+
+    private async Task DeleteCable(int id)
+    {
+        await cableRepository.DeleteCable(id);
+        await LoadCables();
+    }
+}

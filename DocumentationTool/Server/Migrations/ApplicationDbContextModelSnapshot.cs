@@ -26,25 +26,13 @@ namespace DocumentationTool.Server.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AcademicDegree")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CellPhone")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Department")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EMailAdress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Fax")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
@@ -59,32 +47,20 @@ namespace DocumentationTool.Server.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Organisation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Pager")
+                    b.Property<string>("Organization")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PersonalNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ServiceDesignation")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("TelephoneCompany")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TelephoneHome")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ZIPCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("GeneralId");
 
-                    b.ToTable("Persons");
+                    b.ToTable("People");
                 });
 
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Hardware.BladeChasis", b =>
@@ -93,9 +69,6 @@ namespace DocumentationTool.Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AccessId")
-                        .HasColumnType("int");
 
                     b.Property<int?>("FormFactorId")
                         .HasColumnType("int");
@@ -110,8 +83,6 @@ namespace DocumentationTool.Server.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccessId");
 
                     b.HasIndex("FormFactorId");
 
@@ -170,7 +141,7 @@ namespace DocumentationTool.Server.Migrations
                     b.Property<int?>("DesktopId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("GenralId")
+                    b.Property<int?>("GeneralId")
                         .HasColumnType("int");
 
                     b.Property<int?>("HostAddressId")
@@ -182,19 +153,24 @@ namespace DocumentationTool.Server.Migrations
                     b.Property<int?>("ModelId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PowerConsumerId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CPUId");
 
                     b.HasIndex("DesktopId");
 
-                    b.HasIndex("GenralId");
+                    b.HasIndex("GeneralId");
 
                     b.HasIndex("HostAddressId");
 
                     b.HasIndex("MemoryId");
 
                     b.HasIndex("ModelId");
+
+                    b.HasIndex("PowerConsumerId");
 
                     b.ToTable("Client");
                 });
@@ -206,10 +182,16 @@ namespace DocumentationTool.Server.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClientType")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KeyboardLayout")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MouseModel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -400,17 +382,14 @@ namespace DocumentationTool.Server.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AccessId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("Colored")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Duplex")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("Duplex")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Emulation")
                         .HasColumnType("nvarchar(max)");
@@ -429,8 +408,6 @@ namespace DocumentationTool.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccessId");
-
                     b.HasIndex("GeneralId");
 
                     b.HasIndex("ModelId");
@@ -438,15 +415,12 @@ namespace DocumentationTool.Server.Migrations
                     b.ToTable("Printers");
                 });
 
-            modelBuilder.Entity("DocumentationTool.Shared.Entities.Hardware.Router", b =>
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Hardware.RouterDevice", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AccessId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -474,8 +448,6 @@ namespace DocumentationTool.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccessId");
-
                     b.HasIndex("FormFactorId");
 
                     b.HasIndex("GeneralId");
@@ -496,9 +468,6 @@ namespace DocumentationTool.Server.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AccessId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("CPUId")
                         .HasColumnType("int");
 
@@ -514,9 +483,10 @@ namespace DocumentationTool.Server.Migrations
                     b.Property<int?>("ModelId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int?>("PowerConsumerId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("AccessId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CPUId");
 
@@ -527,6 +497,8 @@ namespace DocumentationTool.Server.Migrations
                     b.HasIndex("MemoryId");
 
                     b.HasIndex("ModelId");
+
+                    b.HasIndex("PowerConsumerId");
 
                     b.ToTable("ServerDevices");
                 });
@@ -541,7 +513,7 @@ namespace DocumentationTool.Server.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("FormFactoryId")
+                    b.Property<int?>("FormFactorId")
                         .HasColumnType("int");
 
                     b.Property<int?>("GeneralId")
@@ -551,6 +523,9 @@ namespace DocumentationTool.Server.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("ModelId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PowerConsumerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Role")
@@ -564,7 +539,7 @@ namespace DocumentationTool.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FormFactoryId");
+                    b.HasIndex("FormFactorId");
 
                     b.HasIndex("GeneralId");
 
@@ -572,7 +547,47 @@ namespace DocumentationTool.Server.Migrations
 
                     b.HasIndex("ModelId");
 
+                    b.HasIndex("PowerConsumerId");
+
                     b.ToTable("Switches");
+                });
+
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Infrastructure.Cable", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CableLenght")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CableLenghtDimensions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CableType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FibLeads")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("GeneralId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Occupancy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GeneralId");
+
+                    b.ToTable("Cables");
                 });
 
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Shared.Access", b =>
@@ -593,6 +608,9 @@ namespace DocumentationTool.Server.Migrations
 
                     b.Property<bool>("Primary")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -672,6 +690,15 @@ namespace DocumentationTool.Server.Migrations
                     b.Property<string>("IPV4Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("NetAssignment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NetMaskEnd")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NetMaskStart")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NetZone")
                         .HasColumnType("nvarchar(max)");
 
@@ -679,6 +706,9 @@ namespace DocumentationTool.Server.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("SearchDomain")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -749,10 +779,6 @@ namespace DocumentationTool.Server.Migrations
 
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Hardware.BladeChasis", b =>
                 {
-                    b.HasOne("DocumentationTool.Shared.Entities.Shared.Access", "Access")
-                        .WithMany()
-                        .HasForeignKey("AccessId");
-
                     b.HasOne("DocumentationTool.Shared.Entities.Shared.FormFactor", "FormFactor")
                         .WithMany()
                         .HasForeignKey("FormFactorId");
@@ -780,9 +806,9 @@ namespace DocumentationTool.Server.Migrations
                         .WithMany()
                         .HasForeignKey("DesktopId");
 
-                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.General", "Genral")
+                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.General", "General")
                         .WithMany()
-                        .HasForeignKey("GenralId");
+                        .HasForeignKey("GeneralId");
 
                     b.HasOne("DocumentationTool.Shared.Entities.Shared.HostAddress", "HostAddress")
                         .WithMany()
@@ -795,6 +821,10 @@ namespace DocumentationTool.Server.Migrations
                     b.HasOne("DocumentationTool.Shared.Entities.Hardware.Model", "Model")
                         .WithMany()
                         .HasForeignKey("ModelId");
+
+                    b.HasOne("DocumentationTool.Shared.Entities.Shared.PowerConsumer", "PowerConsumer")
+                        .WithMany()
+                        .HasForeignKey("PowerConsumerId");
                 });
 
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Hardware.Monitor", b =>
@@ -818,10 +848,6 @@ namespace DocumentationTool.Server.Migrations
 
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Hardware.Printer", b =>
                 {
-                    b.HasOne("DocumentationTool.Shared.Entities.Shared.Access", "Access")
-                        .WithMany()
-                        .HasForeignKey("AccessId");
-
                     b.HasOne("DocumentationTool.Shared.Entities.Hardware.General", "General")
                         .WithMany()
                         .HasForeignKey("GeneralId");
@@ -831,12 +857,8 @@ namespace DocumentationTool.Server.Migrations
                         .HasForeignKey("ModelId");
                 });
 
-            modelBuilder.Entity("DocumentationTool.Shared.Entities.Hardware.Router", b =>
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Hardware.RouterDevice", b =>
                 {
-                    b.HasOne("DocumentationTool.Shared.Entities.Shared.Access", "Access")
-                        .WithMany()
-                        .HasForeignKey("AccessId");
-
                     b.HasOne("DocumentationTool.Shared.Entities.Shared.FormFactor", "FormFactor")
                         .WithMany()
                         .HasForeignKey("FormFactorId");
@@ -860,10 +882,6 @@ namespace DocumentationTool.Server.Migrations
 
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Hardware.ServerDevice", b =>
                 {
-                    b.HasOne("DocumentationTool.Shared.Entities.Shared.Access", "Access")
-                        .WithMany()
-                        .HasForeignKey("AccessId");
-
                     b.HasOne("DocumentationTool.Shared.Entities.Hardware.CPU", "CPU")
                         .WithMany()
                         .HasForeignKey("CPUId");
@@ -883,13 +901,17 @@ namespace DocumentationTool.Server.Migrations
                     b.HasOne("DocumentationTool.Shared.Entities.Hardware.Model", "Model")
                         .WithMany()
                         .HasForeignKey("ModelId");
+
+                    b.HasOne("DocumentationTool.Shared.Entities.Shared.PowerConsumer", "PowerConsumer")
+                        .WithMany()
+                        .HasForeignKey("PowerConsumerId");
                 });
 
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Hardware.Switch", b =>
                 {
-                    b.HasOne("DocumentationTool.Shared.Entities.Shared.FormFactor", "FormFactory")
+                    b.HasOne("DocumentationTool.Shared.Entities.Shared.FormFactor", "FormFactor")
                         .WithMany()
-                        .HasForeignKey("FormFactoryId");
+                        .HasForeignKey("FormFactorId");
 
                     b.HasOne("DocumentationTool.Shared.Entities.Hardware.General", "General")
                         .WithMany()
@@ -902,6 +924,17 @@ namespace DocumentationTool.Server.Migrations
                     b.HasOne("DocumentationTool.Shared.Entities.Hardware.Model", "Model")
                         .WithMany()
                         .HasForeignKey("ModelId");
+
+                    b.HasOne("DocumentationTool.Shared.Entities.Shared.PowerConsumer", "PowerConsumer")
+                        .WithMany()
+                        .HasForeignKey("PowerConsumerId");
+                });
+
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Infrastructure.Cable", b =>
+                {
+                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.General", "General")
+                        .WithMany()
+                        .HasForeignKey("GeneralId");
                 });
 #pragma warning restore 612, 618
         }

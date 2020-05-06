@@ -1,5 +1,119 @@
-﻿<h3>RouterIndex</h3>
+﻿@page "/router"
+@inject IRouterRepository routerRepository
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h3>Routers</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <div class="form-group">
+                    <a class="btn btn-info" href="router/create"><span class="ri oi oi-plus" /> New Router</a>
+                </div>
+
+                <div class="form-row p-1">
+                    <div class="form-group m-1">
+                        <label>Display </label>
+                        <select class="custom-select-sm" @bind="@recordsPerPage" @onclick="LoadPage">
+                            <option value="">5</option>
+                            <option>10</option>
+                            <option>15</option>
+                            <option>20</option>
+                        </select>
+                        <label> monitors</label>
+                    </div>
+                </div>
+
+
+                <GenericList List="Routers">
+                    <WholeListTemplate>
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>General</th>
+                                    <th>Purpose</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Routers)
+                                {
+                                    <tr>
+                                        <td>@item.General.Title</td>
+                                        <td>@item.General.Purpose</td>
+                                        <td>
+                                            <a href="/router/detail/@item.Id"><span class="oi oi-eye" /></a>
+                                            <a href="/router/edit/@item.Id"><span class="oi oi-pencil" /></a>
+                                            <a href="/router" @onclick="@(() => DeleteRouter(item.Id))"><span class="oi oi-trash" /></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </WholeListTemplate>
+                </GenericList>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex">
+                            <div class="ml-auto">
+                                <Pagination CurrentPage="@paginationDTO.Page" TotalAmountPages="totalAmountPages"
+                                            SelectedPage="SelectedPage" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @code {
+    List<RouterDevice> Routers;
+    PaginationDTO paginationDTO = new PaginationDTO();
+    private int totalAmountPages;
+    private int recordsPerPage = 5;
 
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await LoadRouters();
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    private async Task LoadPage()
+    {
+        paginationDTO = new PaginationDTO();
+        await LoadRouters();
+    }
+
+    private async Task LoadRouters()
+    {
+        paginationDTO.RecordsPerPage = recordsPerPage;
+        var paginatedResponse = await routerRepository.GetRouters(paginationDTO);
+        Routers = paginatedResponse.Response;
+        totalAmountPages = paginatedResponse.TotalAmountPages;
+    }
+
+    private async Task SelectedPage(int page)
+    {
+        paginationDTO.Page = page;
+        await LoadRouters();
+    }
+
+    private async Task DeleteRouter(int id)
+    {
+        await routerRepository.DeleteRouter(id);
+        await LoadRouters();
+    }
 }

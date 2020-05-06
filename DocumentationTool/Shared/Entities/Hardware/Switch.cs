@@ -10,8 +10,9 @@ namespace DocumentationTool.Shared.Entities.Hardware
         public int Id { get; set; }
         public General General { get; set; }
         public Model Model { get; set; }
-        public FormFactor FormFactory {get;set;}
+        public FormFactor FormFactor {get;set;}
         public HostAddress HostAddress { get; set; }
+        public PowerConsumer PowerConsumer { get; set; }
         public string Vlan { get; set; }
         public string Role { get; set; }
         public string SpanningTree { get; set; }

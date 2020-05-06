@@ -1,0 +1,45 @@
+﻿@page "/switch/create"
+@inject NavigationManager navigationManager
+@inject ISwitchRepository switchRepository
+
+<SwitchForm Switch="Switch"
+             Model="Model"
+             FormFactor="FormFactor"
+             PowerConsumer="PowerConsumer"
+             General="General"
+             OnValidSubmit="Save" />
+
+@code {
+    private Switch Switch = new Switch();
+    private Model Model = new Model();
+    private General General = new General();
+    private FormFactor FormFactor = new FormFactor();
+    private PowerConsumer PowerConsumer = new PowerConsumer();
+
+    protected async override Task OnInitializedAsync()
+    {
+        General.DateOfChange = DateTime.Now;
+        General.CreatioDate = DateTime.Now;
+    }
+
+    private async Task Save()
+    {
+        try
+        {
+            General.DateOfChange = DateTime.Now;
+            General.CreatioDate = DateTime.Now;
+
+            Switch.Model = Model;
+            Switch.FormFactor = FormFactor;
+            Switch.PowerConsumer = PowerConsumer;
+            Switch.General = General;
+
+            var switchId = await switchRepository.CreateSwitch(Switch);
+            navigationManager.NavigateTo("switch");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+}

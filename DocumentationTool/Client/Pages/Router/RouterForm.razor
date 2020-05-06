@@ -1,5 +1,64 @@
-﻿<h3>RouterForm</h3>
+﻿@using DocumentationTool.Client.Shared.PowerConsumerSH
+@using DocumentationTool.Client.Shared.GeneralSH
+@using DocumentationTool.Client.Shared.ModelSH
+@using DocumentationTool.Client.Shared.FormFactorSH
+
+
+    <h3>Routers</h3>
+    <EditForm Model="RouterDevice" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator />
+
+        <div class="form-group row">
+            <div class="col-md-8">
+                <div class="formInputModel">
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Routing protocol</label>
+                        <div class="col-md-4">
+                            <InputSelect class="form-control form-control-sm" @bind-Value="@RouterDevice.RoutingProtocol">
+                                <option value="">Select protocol...</option>
+                                <option>RIP</option>
+                                <option>Static</option>
+                                <option>OSPF</option>
+                                <option>BGP</option>
+                                <option>IGRP/EGRP</option>
+                            </InputSelect>
+                            <ValidationMessage For="@(() => RouterDevice.RoutingProtocol)" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Gateway address</label>
+                        <div class="col-md-4 ">
+                            <InputText class="form-control form-control-sm" @bind-Value="@RouterDevice.GatewayAddress" />
+                            <ValidationMessage For="@(() => RouterDevice.GatewayAddress)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Description</label>
+                        <div class="col-md-4 ">
+                            <InputTextArea class="form-control" @bind-Value="@RouterDevice.Description" />
+                            <ValidationMessage For="@(() => RouterDevice.Description)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ModelForm Model="Model" />
+        <FormFactorForm FormFactor="FormFactor" />
+        <PowerConsumerForm PowerConsumer="PowerConsumer" />
+        <GeneralForm General="General" />
+
+        <button class="btn btn-primary" type="submit">Save Changes</button>
+    </EditForm>
 
 @code {
-
+    [Parameter] public RouterDevice RouterDevice { get; set; }
+    [Parameter] public Model Model { get; set; }
+    [Parameter] public General General { get; set; }
+    [Parameter] public FormFactor FormFactor { get; set; }
+    [Parameter] public PowerConsumer PowerConsumer { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
 }

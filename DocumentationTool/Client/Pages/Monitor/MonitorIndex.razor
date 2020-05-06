@@ -1,59 +1,97 @@
 ﻿@page "/monitor"
 @inject IMonitorRepository monitorRepository
 
-<h3>Monitor Index</h3>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h3>Monitors</h3>
+            </div>
+        </div>
 
-<div class="form-group">
-    <a class="btn btn-info" href="monitor/create">New Monitor</a>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+
+                    <div class="form-group">
+                        <a class="btn btn-info" href="monitor/create"><span class="ri oi oi-plus" /> New Monitor</a>
+                    </div>
+
+                    <div class="form-row p-1">
+                        <div class="form-group m-1">
+                            <label>Display </label>
+                            <select class="custom-select-sm" @bind="@recordsPerPage" @onclick="LoadPage">
+                                <option value="">5</option>
+                                <option>10</option>
+                                <option>15</option>
+                                <option>20</option>
+                            </select>
+                            <label> monitors</label>
+                        </div>
+                    </div>
+
+
+                    <GenericList List="Monitors">
+                        <WholeListTemplate>
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Display</th>
+                                        <th>Display Measure</th>
+                                        <th>Resolution</th>
+                                        <th>Type</th>
+                                        <th>Pivot</th>
+                                        <th>Speaker</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Monitors)
+                                    {
+                                        <tr>
+                                            <td>@item.Display</td>
+                                            <td>@item.DisplayMeasure</td>
+                                            <td>@item.Resolution</td>
+                                            <td>@item.Type</td>
+                                            <td>@item.Pivot</td>
+                                            <td>@item.Speaker</td>
+                                            <td>
+                                                <a href="/monitor/detail/@item.Id"><span class="oi oi-eye" /></a>
+                                                <a href="/monitor/edit/@item.Id"><span class="oi oi-pencil" /></a>
+                                                <a href="/monitor/edit/@item.Id" @onclick="@(() => DeleteMonitor(item.Id))"><span class="oi oi-trash" /></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </WholeListTemplate>
+                    </GenericList>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex">
+                                <div class="ml-auto">
+                                    <Pagination CurrentPage="@paginationDTO.Page" TotalAmountPages="totalAmountPages"
+                                                SelectedPage="SelectedPage" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
 
-<Pagination CurrentPage="@paginationDTO.Page" TotalAmountPages="totalAmountPages"
-            SelectedPage="SelectedPage" />
 
-<GenericList List="Monitors">
-    <WholeListTemplate>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Display</th>
-                    <th>Display Measure</th>
-                    <th>Resolution</th>
-                    <th>Type</th>
-                    <th>Pivot</th>
-                    <th>Speaker</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Monitors)
-                {
-                    <tr>
-                        <td>
-                            <a class="btn btn-success" href="/monitor/edit/@item.Id">Edit</a>
-                            <button class="btn btn-danger" @onclick="@(() => DeleteMonitor(item.Id))">Delete</button>
-                        </td>
-                        <td>@item.Display</td>
-                        <td>@item.DisplayMeasure</td>
-                        <td>@item.Resolution</td>
-                        <td>@item.Type</td>
-                        <td>@item.Pivot</td>
-                        <td>@item.Speaker</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </WholeListTemplate>
-</GenericList>
 @code {
     List<Monitor> Monitors;
-    PaginationDTO paginationDTO = new PaginationDTO() { RecordsPerPage = 1 };
+    PaginationDTO paginationDTO = new PaginationDTO();
     private int totalAmountPages;
+    private int recordsPerPage = 5;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            await LoadMouses();
+            await LoadMonitors();
         }
         catch (Exception ex)
         {
@@ -61,8 +99,15 @@
         }
     }
 
-    private async Task LoadMouses()
+    private async Task LoadPage()
     {
+        paginationDTO = new PaginationDTO();
+        await LoadMonitors();
+    }
+
+    private async Task LoadMonitors()
+    {
+        paginationDTO.RecordsPerPage = recordsPerPage;
         var paginatedResponse = await monitorRepository.GetMonitors(paginationDTO);
         Monitors = paginatedResponse.Response;
         totalAmountPages = paginatedResponse.TotalAmountPages;
@@ -71,12 +116,12 @@
     private async Task SelectedPage(int page)
     {
         paginationDTO.Page = page;
-        await LoadMouses();
+        await LoadMonitors();
     }
 
     private async Task DeleteMonitor(int id)
     {
         await monitorRepository.DeleteMonitor(id);
-        await LoadMouses();
+        await LoadMonitors();
     }
 }

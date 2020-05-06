@@ -2,24 +2,35 @@
 @inject NavigationManager navigationManager
 @inject IPrinterRepository printerRepository
 
-<h3>PrinterCreate</h3>
+<h3>Printer create</h3>
 
 <PrinterForm OnValidSubmit="SavePrinter"
              Model="Model"
              Printer="Printer"
+             General="General"
              />
 
 
 @code {
     private Printer Printer = new Printer();
     private Model Model = new Model();
+    private General General = new General();
+
+    protected async override Task OnInitializedAsync()
+    {
+        General.DateOfChange = DateTime.Now;
+        General.CreatioDate = DateTime.Now;
+    }
 
     private async Task SavePrinter()
     {
         try
         {
+            General.DateOfChange = DateTime.Now;
+            General.CreatioDate = DateTime.Now;
 
             Printer.Model = Model;
+            Printer.General = General;
 
             var printerId = await printerRepository.CreatePrinter(Printer);
             navigationManager.NavigateTo("printer");

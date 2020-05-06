@@ -25,7 +25,10 @@ namespace DocumentationTool.Server.Controllers.Hardware
         [HttpGet]
         public async Task<ActionResult<List<Printer>>> Get([FromQuery] PaginationDTO paginationDTO)
         {
-            var queryable = context.Printers.AsQueryable();
+            var queryable = context.Printers
+                .Include(x => x.Model)
+                .Include(x => x.General)
+                .AsQueryable();
             await HttpContext.InsertPaginationParametersInResponse(queryable, paginationDTO.RecordsPerPage);
             return await queryable.Paginate(paginationDTO).ToListAsync();
         }
@@ -36,7 +39,6 @@ namespace DocumentationTool.Server.Controllers.Hardware
             var printer = await context.Printers.Where(x => x.Id == id)
                 .Include(x => x.Model)
                 .Include(x => x.General)
-                .Include(x => x.Access)
                 .FirstOrDefaultAsync();
 
             if (printer == null)

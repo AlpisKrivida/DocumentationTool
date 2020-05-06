@@ -1,0 +1,61 @@
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>General Details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">Title: </label>
+                    <label class="text-right pl-3">@General.Title</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Category: </label>
+                    <label class="text-right pl-3">@General.Category</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Purpose: </label>
+                    <label class="text-right pl-3">@General.Purpose</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Creation date: </label>
+                    <label class="text-right pl-3">@General.CreatioDate</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Date of change: </label>
+                    <label class="text-right pl-3">@General.DateOfChange</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Condition: </label>
+                    <label class="text-right pl-3">@General.Condition</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">CMDB status: </label>
+                    <label class="text-right pl-3">@General.CMDBStatus</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Object ID: </label>
+                    <label class="text-right pl-3">@General.ObjectID</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Object type: </label>
+                    <label class="text-right pl-3">@General.ObjectType</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">SYSID: </label>
+                    <label class="text-right pl-3">@General.SYSID</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Description: </label>
+                    <label class="text-right pl-3">@General.Description</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public General General { get; set; }
+}
