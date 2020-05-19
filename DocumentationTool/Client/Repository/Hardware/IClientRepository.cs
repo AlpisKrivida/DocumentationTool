@@ -11,6 +11,7 @@ namespace DocumentationTool.Client.Repository.Hardware
     {
         Task<PaginatedResponse<List<ClientPC>>> GetClientPCs(PaginationDTO paginationDTO);
         Task<ClientPC> GetClientPC(int id);
+        Task<List<ClientPC>> GetAllClientPC();
         Task<int> CreateClientPC(ClientPC client);
         Task DeleteClientPC(int id);
         Task UpdateClientPC(ClientPC client);

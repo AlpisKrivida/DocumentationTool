@@ -14,5 +14,6 @@ namespace DocumentationTool.Client.Repository.Hardware
         Task<int> CreateMonitor(Monitor monitor);
         Task DeleteMonitor(int id);
         Task UpdateMonitor(Monitor monitor);
+        Task<List<Monitor>> GetAllMonitors();
     }
 }

@@ -22,6 +22,19 @@ namespace DocumentationTool.Server.Controllers.Infrastructure
             this.context = context;
         }
 
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<Cable>>> Get()
+        {
+            var cable = await context.Cables.ToListAsync();
+
+            if (cable == null)
+            {
+                return NotFound();
+            }
+
+            return cable;
+        }
+
         [HttpGet]
         public async Task<ActionResult<List<Cable>>> Get([FromQuery] PaginationDTO paginationDTO)
         {
@@ -67,13 +80,18 @@ namespace DocumentationTool.Server.Controllers.Infrastructure
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var cable = await context.Cables.FirstOrDefaultAsync(x => x.Id == id);
+            var cable = await context.Cables
+                .Include(x => x.General)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
             if (cable == null)
             {
                 return NotFound();
             }
 
+            context.Remove(cable.General);
             context.Remove(cable);
+
             await context.SaveChangesAsync();
             return NoContent();
         }

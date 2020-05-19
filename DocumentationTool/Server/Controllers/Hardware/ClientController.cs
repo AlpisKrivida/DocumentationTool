@@ -51,6 +51,19 @@ namespace DocumentationTool.Server.Controllers.Hardware
             return client;
         }
 
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<ClientPC>>> Get()
+        {
+            var client = await context.Client.ToListAsync();
+
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            return client;
+        }
+
         [HttpPost]
         public async Task<ActionResult<int>> Post(ClientPC client)
         {

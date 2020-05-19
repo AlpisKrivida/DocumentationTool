@@ -33,6 +33,11 @@ namespace DocumentationTool.Client.Repository.Hardware
             throw new NotImplementedException();
         }
 
+        public async Task<List<ServerDevice>> GetAllServers()
+        {
+            return await httpService.GetHelper<List<ServerDevice>>(url);
+        }
+
         public async Task<ServerDevice> GetServerDevice(int id)
         {
             var response = await httpService.Get<ServerDevice>($"{url}/{id}");

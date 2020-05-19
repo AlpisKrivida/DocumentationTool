@@ -31,7 +31,16 @@ namespace DocumentationTool.Client.Repository.Infrastucture
 
         public async Task DeleteCable(int id)
         {
-            throw new NotImplementedException();
+            var response = await httpService.Delete($"{url}/{id}");
+            if (!response.Success)
+            {
+                throw new ApplicationException(await response.GetBody());
+            }
+        }
+
+        public async Task<List<Cable>> GetAllCables()
+        {
+            return await httpService.GetHelper<List<Cable>>(url);
         }
 
         public async Task<Cable> GetCable(int id)

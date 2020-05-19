@@ -45,85 +45,113 @@ using Microsoft.JSInterop;
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Client;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
 #line 7 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Client.Shared;
+using Syncfusion.Blazor;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 8 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Shared.Entities.Hardware;
+using Syncfusion.Blazor.Calendars;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 9 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Shared.Entities.Shared;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 10 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Shared.Entities.Contacts;
+using Syncfusion.Blazor.Diagrams;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 11 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Shared.Entities.Infrastructure;
+using DocumentationTool.Client;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 12 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Client.Excel;
+using DocumentationTool.Client.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 13 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Client.Repository;
+using DocumentationTool.Client.Shared.Tags;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 14 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Client.Repository.Hardware;
+using DocumentationTool.Client.Excel;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 15 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Shared.DTOs;
+using DocumentationTool.Client.Repository;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 16 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Client.Repository.Contacts;
+using DocumentationTool.Client.Repository.Hardware;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 17 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
+using DocumentationTool.Client.Repository.Contacts;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 18 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
 using DocumentationTool.Client.Repository.Infrastucture;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 20 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
+using DocumentationTool.Shared.DTOs;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 21 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
+using DocumentationTool.Shared.Entities.Hardware;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 22 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
+using DocumentationTool.Shared.Entities.Shared;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 23 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
+using DocumentationTool.Shared.Entities.Contacts;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 24 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
+using DocumentationTool.Shared.Entities.Infrastructure;
 
 #line default
 #line hidden

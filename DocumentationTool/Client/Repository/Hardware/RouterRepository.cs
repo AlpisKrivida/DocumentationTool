@@ -32,6 +32,11 @@ namespace DocumentationTool.Client.Repository.Hardware
             throw new NotImplementedException();
         }
 
+        public async Task<List<RouterDevice>> GetAllRouters()
+        {
+            return await httpService.GetHelper<List<RouterDevice>>(url);
+        }
+
         public async Task<RouterDevice> GetRouter(int id)
         {
             var response = await httpService.Get<RouterDevice>($"{url}/{id}");

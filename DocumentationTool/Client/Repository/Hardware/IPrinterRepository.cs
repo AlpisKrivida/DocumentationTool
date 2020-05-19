@@ -14,5 +14,6 @@ namespace DocumentationTool.Client.Repository.Hardware
         Task<int> CreatePrinter(Printer printer);
         Task DeletePrinter(int id);
         Task UpdatePrinter(Printer printer);
+        Task<List<Printer>> GetAllPrintersPC();
     }
 }

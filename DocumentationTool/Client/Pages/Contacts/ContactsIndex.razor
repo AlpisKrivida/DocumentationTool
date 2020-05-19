@@ -14,8 +14,11 @@
             <div class="card">
                 <div class="form-group row">
                     <a class="btn btn-info" href="contact/create"><span class="ri oi oi-plus" /> New contact</a>
-                    <div class="col align-self-end">
-                        <button class="btn btn-primary" @onclick="GenerateExcel" >Export</button>
+                    <div >
+                        <button class="btn btn-primary" @onclick="GenerateExcel">Export</button>
+                    </div>
+                    <div >
+                        <button class="btn btn-primary" @onclick="GenerateExcel">Import</button>
                     </div>
                 </div>
 
@@ -135,6 +138,6 @@
     {
         ContactExcel ce = new ContactExcel();
         var people = await GetAllPeople();
-        ce.GenerateExcel(iJSRuntime, people);
+        ce.GenerateExcel(iJSRuntime, people, false);
     }
 }

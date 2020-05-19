@@ -1,0 +1,21 @@
+﻿
+@if (General.Tag != null)
+{
+    @if (General.Tag.Intersect(Tags).Count() != 0)
+    {
+        <tr>
+            <td>@General.Title</td>
+            <td>@General.Status</td>
+            <td>
+                <a href="/@name/detail/@Id"><span class="oi oi-eye" /></a>
+            </td>
+        </tr>
+    }
+}
+
+@code {
+    [Parameter] public General General { get; set; }
+    [Parameter] public int Id { get; set; }
+    [Parameter] public List<string> Tags { get; set; }
+    [Parameter] public string name { get; set; }
+}

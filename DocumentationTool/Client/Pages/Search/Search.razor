@@ -1,0 +1,128 @@
+﻿@page "/search/{searchTag}"
+@inject IMonitorRepository monitorRepository
+@inject ICableRepository cableRepository
+@inject IPersonRepostiroy personRepository
+@inject IClientRepository clientRepository
+@inject IPrinterRepository printerRepository
+@inject IRouterRepository routerRepository
+@inject IServerRepository serverReposiotry
+@inject ISwitchRepository switchRepository
+
+    <GenericList List="Monitors">
+        <WholeListTemplate>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Monitors)
+                    {
+                        @if (item.General.Tag != null)
+                        {
+                            <ShowItems General="item.General" Id="item.Id" name="monitor" Tags="Tags" />
+                        }
+                    }
+                    @if (Cables != null)
+                    {
+                        @foreach (var item in Cables)
+                        {
+                            <ShowItems General="item.General" Id="item.Id" name="cable" Tags="Tags" />
+                        }
+                    }
+                    @if (People != null)
+                    {
+                        @foreach (var item in People)
+                        {
+                            <ShowItems General="item.General" Id="item.Id" name="person" Tags="Tags" />
+                        }
+                    }
+                    @if (ClientPCs != null)
+                    {
+                        @foreach (var item in ClientPCs)
+                        {
+                            <ShowItems General="item.General" Id="item.Id" name="client" Tags="Tags" />
+                        }
+                    }
+                    @if (Printers != null)
+                    {
+                        @foreach (var item in Printers)
+                        {
+                            <ShowItems General="item.General" Id="item.Id" name="printer" Tags="Tags" />
+                        }
+                    }
+                    @if (RouterDevices != null)
+                    {
+                        @foreach (var item in RouterDevices)
+                        {
+                            <ShowItems General="item.General" Id="item.Id" name="router" Tags="Tags" />
+                        }
+                    }
+                    @if (ServerDevices != null)
+                    {
+                        @foreach (var item in ServerDevices)
+                        {
+                            <ShowItems General="item.General" Id="item.Id" name="server" Tags="Tags" />
+                        }
+                    }
+                    @if (Switches != null)
+                    {
+                        @foreach (var item in Switches)
+                        {
+                            <ShowItems General="item.General" Id="item.Id" name="switch" Tags="Tags" />
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </WholeListTemplate>
+    </GenericList>
+
+@code {
+    [Parameter] public string searchTag { get; set; }
+
+    List<string> Tags { get; set; }
+
+    List<Monitor> Monitors;
+    List<Cable> Cables;
+    List<Person> People;
+    List<ClientPC> ClientPCs;
+    List<Printer> Printers;
+    List<RouterDevice> RouterDevices;
+    List<ServerDevice> ServerDevices;
+    List<Switch> Switches;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Tags = searchTag.Split(null).ToList();
+
+        try
+        {
+            await LoadData();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Tags = searchTag.Split(null).ToList();
+    }
+
+    private async Task LoadData()
+    {
+        Monitors = await monitorRepository.GetAllMonitors();
+        Cables = await cableRepository.GetAllCables();
+        People = await personRepository.GetAllPeople();
+        ClientPCs = await clientRepository.GetAllClientPC();
+        Printers = await printerRepository.GetAllPrintersPC();
+        RouterDevices = await routerRepository.GetAllRouters();
+        ServerDevices = await serverReposiotry.GetAllServers();
+        Switches = await switchRepository.GetAllSwitches();
+    }
+}

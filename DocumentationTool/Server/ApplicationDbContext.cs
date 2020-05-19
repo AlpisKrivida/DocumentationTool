@@ -3,10 +3,12 @@ using DocumentationTool.Shared.Entities.Hardware;
 using DocumentationTool.Shared.Entities.Infrastructure;
 using DocumentationTool.Shared.Entities.Shared;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DocumentationTool.Shared.Entities.Information;
 
 namespace DocumentationTool.Server
 {
@@ -25,6 +27,23 @@ namespace DocumentationTool.Server
         //    modelBuilder.Entity<other>().HasKey(x => new { x.other, x.other });
         //    base.OnModelCreating(modelBuilder);
         //}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<General>().Property(p => p.Tag)
+                .HasConversion(
+                    v => JsonSerializer.Serialize(v, default),
+                    v => JsonSerializer.Deserialize<List<string>>(v, default));
+
+            modelBuilder.Entity<License>()
+                .HasMany(x => x.Keys)
+                .WithOne();
+
+        }
+
+        //Information
+        public DbSet<License> Licenses { get; set; }
+        public DbSet<LicenseKey> LicenseKeys { get; set; }
 
         //Hardware
         public DbSet<Mouse> Mouses { get; set; }

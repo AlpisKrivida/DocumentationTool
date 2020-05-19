@@ -28,9 +28,15 @@ namespace DocumentationTool.Client.Repository.Hardware
             return response.Response;
         }
 
+
         public async Task DeleteClientPC(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<ClientPC>> GetAllClientPC()
+        {
+            return await httpService.GetHelper<List<ClientPC>>(url);
         }
 
         public async Task<ClientPC> GetClientPC(int id)

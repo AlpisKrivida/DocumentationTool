@@ -206,15 +206,6 @@ namespace DocumentationTool.Server.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CMDBStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Condition")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatioDate")
                         .HasColumnType("datetime2");
 
@@ -224,16 +215,13 @@ namespace DocumentationTool.Server.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ObjectID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ObjectType")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Purpose")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SYSID")
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tag")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -552,6 +540,58 @@ namespace DocumentationTool.Server.Migrations
                     b.ToTable("Switches");
                 });
 
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Information.License", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("GeneralId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GeneralId");
+
+                    b.ToTable("Licenses");
+                });
+
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Information.LicenseKey", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ExpireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("LicenseId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("PricePerUnit")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Serial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LicenseId");
+
+                    b.ToTable("LicenseKeys");
+                });
+
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Infrastructure.Cable", b =>
                 {
                     b.Property<int>("Id")
@@ -588,33 +628,6 @@ namespace DocumentationTool.Server.Migrations
                     b.HasIndex("GeneralId");
 
                     b.ToTable("Cables");
-                });
-
-            modelBuilder.Entity("DocumentationTool.Shared.Entities.Shared.Access", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AccessType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Host")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Primary")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Accesses");
                 });
 
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Shared.FormFactor", b =>
@@ -928,6 +941,20 @@ namespace DocumentationTool.Server.Migrations
                     b.HasOne("DocumentationTool.Shared.Entities.Shared.PowerConsumer", "PowerConsumer")
                         .WithMany()
                         .HasForeignKey("PowerConsumerId");
+                });
+
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Information.License", b =>
+                {
+                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.General", "General")
+                        .WithMany()
+                        .HasForeignKey("GeneralId");
+                });
+
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Information.LicenseKey", b =>
+                {
+                    b.HasOne("DocumentationTool.Shared.Entities.Information.License", null)
+                        .WithMany("Keys")
+                        .HasForeignKey("LicenseId");
                 });
 
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Infrastructure.Cable", b =>

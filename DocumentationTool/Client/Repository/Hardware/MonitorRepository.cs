@@ -30,9 +30,15 @@ namespace DocumentationTool.Client.Repository.Hardware
             return response.Response;
         }
 
+
         public async Task DeleteMonitor(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<Monitor>> GetAllMonitors()
+        {
+            return await httpService.GetHelper<List<Monitor>>(url);
         }
 
         public async Task<Monitor> GetMonitor(int id)

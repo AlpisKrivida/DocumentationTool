@@ -59,14 +59,23 @@ namespace DocumentationTool.Server.Controllers
             return monitor.Id;
         }
 
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<Monitor>>> Get()
+        {
+            var monitor = await context.Monitors.ToListAsync();
+
+            if (monitor == null)
+            {
+                return NotFound();
+            }
+
+            return monitor;
+        }
+
         [HttpPut]
         public async Task<ActionResult> Put(Monitor monitor)
         {
             context.Update(monitor);
-            //context.Attach(monitor).State = EntityState.Modified;
-            //var personDB = await context.Monitors.FirstOrDefaultAsync(x => x.Id == monitor.Id);
-
-            //if (personDB == null) { return NotFound(); }
 
             await context.SaveChangesAsync();
             return NoContent();
@@ -75,13 +84,13 @@ namespace DocumentationTool.Server.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var movie = await context.Monitors.FirstOrDefaultAsync(x => x.Id == id);
-            if (movie == null)
+            var license = await context.Monitors.FirstOrDefaultAsync(x => x.Id == id);
+            if (license == null)
             {
                 return NotFound();
             }
 
-            context.Remove(movie);
+            context.Remove(license);
             await context.SaveChangesAsync();
             return NoContent();
         }

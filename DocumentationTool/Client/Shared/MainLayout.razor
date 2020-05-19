@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager navigationManager
 
 <div class="sidebar">
     <NavMenu />
@@ -6,10 +7,27 @@
 
 <div class="main">
     <div class="top-row px-4">
-        <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+        <div class="ml-md-auto">
+            <div class="input-group">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <input class="form-control" @bind="Tags" type="text" placeholder="Search..." aria-label="Search">
+                <button class="btn btn-primary" @onclick="@(() => Search(Tags))" >Search</button>
+            </div>
+        </div>
+        @*<a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>*@
     </div>
 
     <div class="content px-4">
         @Body
     </div>
 </div>
+
+@code{
+    private string Tags { get; set; }
+
+    private void Search(string Tags)
+    {
+        navigationManager.NavigateTo($"/search/{Tags}");
+        Tags = String.Empty;
+    }
+}

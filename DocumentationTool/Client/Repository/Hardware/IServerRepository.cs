@@ -14,5 +14,6 @@ namespace DocumentationTool.Client.Repository.Hardware
         Task<int> CreateServerDevice(ServerDevice server);
         Task DeleteServerDevice(int id);
         Task UpdateServerDevice(ServerDevice server);
+        Task<List<ServerDevice>> GetAllServers();
     }
 }

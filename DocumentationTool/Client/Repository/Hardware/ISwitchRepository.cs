@@ -14,5 +14,6 @@ namespace DocumentationTool.Client.Repository.Hardware
         Task<int> CreateSwitch(Switch switchDevice);
         Task DeleteSwitch(int id);
         Task UpdateSwitch(Switch switchDevice);
+        Task<List<Switch>> GetAllSwitches();
     }
 }

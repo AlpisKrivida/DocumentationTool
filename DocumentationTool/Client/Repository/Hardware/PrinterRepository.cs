@@ -34,6 +34,11 @@ namespace DocumentationTool.Client.Repository.Hardware
             throw new NotImplementedException();
         }
 
+        public async Task<List<Printer>> GetAllPrintersPC()
+        {
+            return await httpService.GetHelper<List<Printer>>(url);
+        }
+
         public async Task<Printer> GetPrinter(int id)
         {
             var response = await httpService.Get<Printer>($"{url}/{id}");

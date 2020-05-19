@@ -49,6 +49,19 @@ namespace DocumentationTool.Server.Controllers.Hardware
             return printer;
         }
 
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<Printer>>> Get()
+        {
+            var printer = await context.Printers.ToListAsync();
+
+            if (printer == null)
+            {
+                return NotFound();
+            }
+
+            return printer;
+        }
+
         [HttpPost]
         public async Task<ActionResult<int>> Post(Printer printer)
         {

@@ -35,6 +35,7 @@ app {
         background-color: #ffffff;
         border-bottom: 1px solid #d6d5d5;
         justify-content: flex-end;
+        z-index: 1;
     }
 
         .main .top-row > a, .main .top-row .btn-link {
@@ -218,3 +219,105 @@ app {
     font-size: 70%;
     padding-left: -10px;
 }
+
+/*TAg*/
+
+.input-tag {
+    background: white;
+    border: 1px solid #d6d6d6;
+    border-radius: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px 5px 0;
+}
+
+    .input-tag input {
+        border: none;
+        width: 100%;
+    }
+
+.input-tag__tags {
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.input-tag__tags li {
+        align-items: center;
+        background: #85A3BF;
+        border-radius: 2px;
+        color: white;
+        display: flex;
+        font-weight: 300;
+        list-style: none;
+        margin-bottom: 5px;
+        margin-right: 5px;
+        padding: 5px 10px;
+        /*height: 35px;*/
+    }
+
+        .input-tag__tags li button {
+            align-items: center;
+            appearance: none;
+            background: #333333;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: inline-flex;
+            font-size: 12px;
+            height: 15px;
+            justify-content: center;
+            line-height: 0;
+            margin-left: 8px;
+            padding: 0;
+            transform: rotate(45deg);
+            width: 15px;
+        }
+
+        .input-tag__tags li.input-tag__tags__input {
+            background: none;
+            flex-grow: 1;
+            padding: 0;
+        }
+
+
+        /*ScrollSpu*/
+#scrollSpy {
+    position: fixed;
+    right: 0;
+    top: 40%;
+/*    background: white;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    border-radius: 15px;*/
+    padding-top: 15px;
+    right: 5px;
+}
+    #scrollSpy ul {
+        list-style: none;
+        float: right;
+        width: calc(100% - 16px);
+        padding: 8px;
+    }
+        #scrollSpy ul li {
+            float: left;
+            width: calc(100% - 16px);
+            font-size: 15px;
+            padding: 12px 8px;
+            border-left-color: #D81B60;
+        }
+            #scrollSpy ul li a {
+                text-decoration: none;
+                color:black;
+            }
+                #scrollSpy ul li a:hover {
+                    color: #ef5350;
+                }
+                #scrollSpy ul li a#scroll-active {
+                    font-weight: bold;
+                    color: #d32f2f;
+                    border-left: 5px solid #d32f2f;
+                }

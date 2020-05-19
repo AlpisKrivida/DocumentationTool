@@ -34,6 +34,11 @@ namespace DocumentationTool.Client.Repository.Hardware
             throw new NotImplementedException();
         }
 
+        public async Task<List<Switch>> GetAllSwitches()
+        {
+            return await httpService.GetHelper<List<Switch>>(url);
+        }
+
         public async Task<Switch> GetSwitch(int id)
         {
             var response = await httpService.Get<Switch>($"{url}/{id}");

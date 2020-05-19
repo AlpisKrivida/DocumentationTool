@@ -53,6 +53,19 @@ namespace DocumentationTool.Server.Controllers.Hardware
             return server;
         }
 
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<ServerDevice>>> Get()
+        {
+            var server = await context.ServerDevices.ToListAsync();
+
+            if (server == null)
+            {
+                return NotFound();
+            }
+
+            return server;
+        }
+
         [HttpPost]
         public async Task<ActionResult<int>> Post(ServerDevice server)
         {

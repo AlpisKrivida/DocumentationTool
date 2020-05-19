@@ -11,8 +11,10 @@ namespace DocumentationTool.Client.Repository.Infrastucture
     {
         Task<PaginatedResponse<List<Cable>>> GetCables(PaginationDTO paginationDTO);
         Task<Cable> GetCable(int id);
+        Task<List<Cable>> GetAllCables();
         Task<int> CreateCable(Cable cable);
         Task DeleteCable(int id);
         Task UpdateCable(Cable cable);
+
     }
 }

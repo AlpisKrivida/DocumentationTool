@@ -22,6 +22,19 @@ namespace DocumentationTool.Server.Controllers.Hardware
             this.context = context;
         }
 
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<Switch>>> Get()
+        {
+            var switchDevice = await context.Switches.ToListAsync();
+
+            if (switchDevice == null)
+            {
+                return NotFound();
+            }
+
+            return switchDevice;
+        }
+
         [HttpGet]
         public async Task<ActionResult<List<Switch>>> Get([FromQuery] PaginationDTO paginationDTO)
         {

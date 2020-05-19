@@ -51,6 +51,19 @@ namespace DocumentationTool.Server.Controllers.Hardware
             return router;
         }
 
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<RouterDevice>>> Get()
+        {
+            var router = await context.Routers.ToListAsync();
+
+            if (router == null)
+            {
+                return NotFound();
+            }
+
+            return router;
+        }
+
         [HttpPost]
         public async Task<ActionResult<int>> Post(RouterDevice router)
         {

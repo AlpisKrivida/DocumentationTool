@@ -1,0 +1,61 @@
+﻿@page "/networkDiagram"
+@using Syncfusion.Blazor.Diagrams
+@using System.Collections.ObjectModel
+
+<SfDiagram @ref="@diagram" id="diagram" Width="100%" Height="580px" tool="@DiagramTools.ZoomPan" NodeDefaults="@NodeDefaults" ConnectorDefaults="@ConnectorDefault" Layout="@LayoutValue">
+    <DiagramDataSource Id="Name" ParentId="ReportingPerson" DataMapSettings="@datamap" DataSource="@dataSource"></DiagramDataSource>
+    <DiagramSnapSettings Constraints="@SnapConstraints.None"></DiagramSnapSettings>
+</SfDiagram>
+
+@code {
+    SfDiagram diagram;
+    List<DiagramDataMapSetting> datamap = new List<DiagramDataMapSetting>() {
+        new DiagramDataMapSetting() { Property = "Shape.Source", Field = "image" },
+        //new DiagramDataMapSetting() { Property = "Style.fill", Field = "fillColor" },
+        //new DiagramDataMapSetting() { Property = "Style.strokeColor", Field = "border" }
+
+    };
+
+    DiagramLayout LayoutValue = new DiagramLayout()
+    {
+        Type = LayoutType.ComplexHierarchicalTree,
+        HorizontalSpacing = 40,
+        VerticalSpacing = 40,
+        Orientation = LayoutOrientation.TopToBottom,
+        Margin = new LayoutMargin() { Left = 20, Top = 20 },
+    };
+
+    DiagramNode NodeDefaults = new DiagramNode
+    {
+        Height = 40,
+        Width = 40,
+        Shape = new DiagramShape() {
+            Type = Shapes.Image,
+            //Source = "/Icons/printer.png"
+        },
+    };
+
+    DiagramConnector ConnectorDefault = new DiagramConnector
+    {
+        Type = Syncfusion.Blazor.Diagrams.Segments.Orthogonal,
+        CornerRadius = 7,
+        TargetDecorator = new ConnectorTargetDecorator() { Width = 7, Height = 7 },
+        Style = new ConnectorShapeStyle() { StrokeColor = "#6d6d6d" }
+
+    };
+    public class DataModel
+    {
+        public string Name;
+        public string fillColor;
+        public string border;
+        public string image;
+        public string[] ReportingPerson;
+    }
+    public object dataSource = new List<object>()
+{
+        new DataModel { Name = "node11", fillColor = "#e7704c", border = "#c15433", image = "/Icons/internet.jpg" },
+        new DataModel {  Name = "node12", ReportingPerson = new string[]{ "node10" }, fillColor = "#efd46e", border = "#d6b123", image = "/Icons/switch.png" },
+        new DataModel {  Name = "node13", ReportingPerson = new string[]{ "node10" }, fillColor = "#efd46e", border = "#d6b123", image = "/Icons/switch.png" },
+        new DataModel {  Name = "node10", ReportingPerson = new string[] { "node11" }, fillColor = "#58b087", border = "#16955e", image = "/Icons/router.png" },
+    };
+}

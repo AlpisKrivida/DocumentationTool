@@ -8,7 +8,7 @@ namespace DocumentationTool.Shared.Entities.Information
     public class License
     {
         public int Id { get; set; }
-        //File?
         public General General { get; set; }
+        public List<LicenseKey> Keys { get; set; }
     }
 }

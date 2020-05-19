@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Entities\Network\" />
-    <Folder Include="Entities\Software\" />
   </ItemGroup>
 
 </Project>

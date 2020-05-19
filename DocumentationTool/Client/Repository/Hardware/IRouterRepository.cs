@@ -1,5 +1,6 @@
 ﻿using DocumentationTool.Shared.DTOs;
 using DocumentationTool.Shared.Entities.Hardware;
+using Microsoft.AspNetCore.Components.Routing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace DocumentationTool.Client.Repository.Hardware
         Task<int> CreateRouter(RouterDevice router);
         Task DeleteRouter(int id);
         Task UpdateRouter(RouterDevice router);
+        Task<List<RouterDevice>> GetAllRouters();
     }
 }

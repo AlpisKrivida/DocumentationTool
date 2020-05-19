@@ -19,7 +19,25 @@
   <assembly fullname="Microsoft.AspNetCore.Components.Web">
     <type fullname="*" preserve="all" required="false" />
   </assembly>
+  <assembly fullname="Microsoft.AspNetCore.Http">
+    <type fullname="*" preserve="all" required="false" />
+  </assembly>
+  <assembly fullname="Microsoft.AspNetCore.Http.Abstractions">
+    <type fullname="*" preserve="all" required="false" />
+  </assembly>
+  <assembly fullname="Microsoft.AspNetCore.Http.Extensions">
+    <type fullname="*" preserve="all" required="false" />
+  </assembly>
+  <assembly fullname="Microsoft.AspNetCore.Http.Features">
+    <type fullname="*" preserve="all" required="false" />
+  </assembly>
+  <assembly fullname="Microsoft.AspNetCore.Localization">
+    <type fullname="*" preserve="all" required="false" />
+  </assembly>
   <assembly fullname="Microsoft.AspNetCore.Metadata">
+    <type fullname="*" preserve="all" required="false" />
+  </assembly>
+  <assembly fullname="Microsoft.AspNetCore.WebUtilities">
     <type fullname="*" preserve="all" required="false" />
   </assembly>
   <assembly fullname="Microsoft.Extensions.Configuration">
@@ -28,13 +46,34 @@
   <assembly fullname="Microsoft.Extensions.Configuration.Abstractions">
     <type fullname="*" preserve="all" required="false" />
   </assembly>
+  <assembly fullname="Microsoft.Extensions.Configuration.FileExtensions">
+    <type fullname="*" preserve="all" required="false" />
+  </assembly>
+  <assembly fullname="Microsoft.Extensions.Configuration.Json">
+    <type fullname="*" preserve="all" required="false" />
+  </assembly>
   <assembly fullname="Microsoft.Extensions.DependencyInjection">
     <type fullname="*" preserve="all" required="false" />
   </assembly>
   <assembly fullname="Microsoft.Extensions.DependencyInjection.Abstractions">
     <type fullname="*" preserve="all" required="false" />
   </assembly>
+  <assembly fullname="Microsoft.Extensions.FileProviders.Abstractions">
+    <type fullname="*" preserve="all" required="false" />
+  </assembly>
+  <assembly fullname="Microsoft.Extensions.FileProviders.Physical">
+    <type fullname="*" preserve="all" required="false" />
+  </assembly>
+  <assembly fullname="Microsoft.Extensions.FileSystemGlobbing">
+    <type fullname="*" preserve="all" required="false" />
+  </assembly>
+  <assembly fullname="Microsoft.Extensions.Localization.Abstractions">
+    <type fullname="*" preserve="all" required="false" />
+  </assembly>
   <assembly fullname="Microsoft.Extensions.Logging.Abstractions">
+    <type fullname="*" preserve="all" required="false" />
+  </assembly>
+  <assembly fullname="Microsoft.Extensions.ObjectPool">
     <type fullname="*" preserve="all" required="false" />
   </assembly>
   <assembly fullname="Microsoft.Extensions.Options">

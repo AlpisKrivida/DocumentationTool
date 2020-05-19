@@ -11,8 +11,7 @@ namespace DocumentationTool.Shared.Entities.Information
         public int Amount { get; set; }
         public string Key { get; set; }
         public string Serial { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? ExpireDate { get; set; }
+        public DateTime ExpireDate { get; set; }
         public double PricePerUnit { get; set; }
         public string Description { get; set; }
     }

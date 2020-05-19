@@ -1,0 +1,52 @@
+﻿<div class="input-tag">
+    <ul class="input-tag__tags">
+        @if (General.Tag != null)
+        {
+            @foreach (var item in General.Tag)
+            {
+                <li>
+                    @item
+                    <button type="button" @onclick="@(e => RemoveTag(item))">+</button>
+                </li>
+            }
+            <li class="input-tag__tags__input">
+                <input type="text" @onkeydown="AddTag" @bind-value="tag" @bind-value:event="oninput" />
+            </li>
+        }
+        else
+        {
+            <li class="input-tag__tags__input">
+                <input type="text" @onkeydown="AddTag" @bind-value="tag" @bind-value:event="oninput" />
+            </li>
+        }
+    </ul>
+</div>
+
+@code {
+
+    [Parameter] public General General { get; set; }
+    private string tag { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if(General.Tag == null)
+        {
+            General.Tag = new List<string>();
+        }
+    }
+
+    private void AddTag(KeyboardEventArgs keyEvent)
+    {
+        if(keyEvent.Key == "Enter")
+        {
+            General.Tag.Add(tag);
+            tag = string.Empty;
+            Console.WriteLine(General.Tag.Count);
+        }
+    }
+
+    private void RemoveTag(string tagToRemove)
+    {
+        General.Tag.Remove(tagToRemove);
+    }
+}
