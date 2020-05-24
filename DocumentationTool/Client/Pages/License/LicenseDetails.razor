@@ -1,5 +1,30 @@
-﻿<h3>LicenseIndex</h3>
+﻿@using DocumentationTool.Client.Shared.Tabs
+
+
+@page "/license/detail/{LicenseId:int}"
+@inject ILicenseRepository licenseRepository
+@inject NavigationManager navigationManager
+
+<h3>License details</h3>
+
+@if (License != null)
+{
+    <TabControl>
+        <TabPage Text="General">
+            <LicenseDisplayDetails License="License" />
+        </TabPage>
+    </TabControl>
+
+}
 
 @code {
+    [Parameter]
+    public int LicenseId { get; set; }
 
+    public LicenseKey License;
+
+    protected async override Task OnInitializedAsync()
+    {
+        License = await licenseRepository.GetLicenseKey(LicenseId);
+    }
 }

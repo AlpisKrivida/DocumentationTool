@@ -21,33 +21,30 @@ namespace DocumentationTool.Server.Controllers.Information
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<License>>> Get([FromQuery] PaginationDTO paginationDTO)
+        public async Task<ActionResult<List<LicenseKey>>> Get([FromQuery] PaginationDTO paginationDTO)
         {
-            var queryable = context.Licenses
-                .Include(x => x.General)
+            var queryable = context.LicenseKeys
                 .AsQueryable();
             await HttpContext.InsertPaginationParametersInResponse(queryable, paginationDTO.RecordsPerPage);
             return await queryable.Paginate(paginationDTO).ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<License>> Get(int id)
+        public async Task<ActionResult<LicenseKey>> Get(int id)
         {
-            var monitor = await context.Licenses.Where(x => x.Id == id)
-                .Include(x => x.General)
-                .Include(x => x.Keys)
+            var license = await context.LicenseKeys.Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
-            if (monitor == null)
+            if (license == null)
             {
                 return NotFound();
             }
 
-            return monitor;
+            return license;
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Post(License license)
+        public async Task<ActionResult<int>> Post(LicenseKey license)
         {
             context.Add(license);
             await context.SaveChangesAsync();
@@ -55,9 +52,9 @@ namespace DocumentationTool.Server.Controllers.Information
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<License>>> Get()
+        public async Task<ActionResult<List<LicenseKey>>> Get()
         {
-            var license = await context.Licenses.ToListAsync();
+            var license = await context.LicenseKeys.ToListAsync();
 
             if (license == null)
             {
@@ -68,7 +65,7 @@ namespace DocumentationTool.Server.Controllers.Information
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put(License license)
+        public async Task<ActionResult> Put(Application license)
         {
             context.Update(license);
 
@@ -79,7 +76,7 @@ namespace DocumentationTool.Server.Controllers.Information
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var license = await context.Licenses.FirstOrDefaultAsync(x => x.Id == id);
+            var license = await context.LicenseKeys.FirstOrDefaultAsync(x => x.Id == id);
             if (license == null)
             {
                 return NotFound();

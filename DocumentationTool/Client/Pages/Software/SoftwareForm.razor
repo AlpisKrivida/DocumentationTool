@@ -1,0 +1,49 @@
+﻿@using DocumentationTool.Client.Shared.GeneralSH
+
+
+    <EditForm Model="Application" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator />
+
+        <GeneralForm General="General" />
+
+        <h3>Application</h3>
+
+        <div class="form-group row">
+            <div class="col-md-8">
+                <div class="formInputModel">
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Specification</label>
+                        <div class="col-md-4 ">
+                            <InputText class="form-control form-control-sm" @bind-Value="@Application.Specification" />
+                            <ValidationMessage For="@(() => Application.Specification)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Manufacturer</label>
+                        <div class="col-md-4 ">
+                            <InputText class="form-control form-control-sm" @bind-Value="@Application.Manufacturer" />
+                            <ValidationMessage For="@(() => Application.Manufacturer)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Description</label>
+                        <div class="col-md-7 ">
+                            <InputTextArea class="form-control" @bind-Value="@Application.Description" />
+                            <ValidationMessage For="@(() => Application.Description)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Save Changes</button>
+    </EditForm>
+
+@code {
+    [Parameter] public Application Application { get; set; }
+    [Parameter] public General General { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}

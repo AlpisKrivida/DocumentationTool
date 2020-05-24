@@ -1,0 +1,124 @@
+﻿
+
+@page "/software"
+@inject IApplicationRepository applicationRepository
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h3>Applications</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <div class="form-group">
+                    <a class="btn btn-info" href="software/create"><span class="ri oi oi-plus" /> New Application</a>
+                </div>
+
+                <div class="form-row p-1">
+                    <div class="form-group m-1">
+                        <label>Display</label>
+                        <select class="custom-select-sm" @bind="@recordsPerPage" @onclick="LoadPage">
+                            <option value="">5</option>
+                            <option>10</option>
+                            <option>15</option>
+                            <option>20</option>
+                        </select>
+                        <label> applications</label>
+                    </div>
+                </div>
+
+
+                <GenericList List="Application">
+                    <WholeListTemplate>
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Manufacturer</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Application)
+                                {
+                                    <tr>
+                                        <td>@item.General.Title</td>
+                                        <td>@item.General.Status</td>
+                                        <td>@item.Manufacturer</td>
+                                        <td>
+                                            <a href="/software/detail/@item.Id"><span class="oi oi-eye" /></a>
+                                            <a href="/software/edit/@item.Id"><span class="oi oi-pencil" /></a>
+                                            <a href="/software/delete/@item.Id" @onclick="@(() => DeleteApplication(item.Id))"><span class="oi oi-trash" /></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </WholeListTemplate>
+                </GenericList>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex">
+                            <div class="ml-auto">
+                                <Pagination CurrentPage="@paginationDTO.Page" TotalAmountPages="totalAmountPages"
+                                            SelectedPage="SelectedPage" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    List<Application> Application;
+    PaginationDTO paginationDTO = new PaginationDTO();
+    private int totalAmountPages;
+    private int recordsPerPage = 5;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await LoadApplications();
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    private async Task LoadPage()
+    {
+        paginationDTO = new PaginationDTO();
+        await LoadApplications();
+    }
+
+    private async Task LoadApplications()
+    {
+        paginationDTO.RecordsPerPage = recordsPerPage;
+        var paginatedResponse = await applicationRepository.GetApplication(paginationDTO);
+        Application = paginatedResponse.Response;
+        totalAmountPages = paginatedResponse.TotalAmountPages;
+    }
+
+    private async Task SelectedPage(int page)
+    {
+        paginationDTO.Page = page;
+        await LoadApplications();
+    }
+
+    private async Task DeleteApplication(int id)
+    {
+        await applicationRepository.DeleteApplication(id);
+        await LoadApplications();
+    }
+}
+

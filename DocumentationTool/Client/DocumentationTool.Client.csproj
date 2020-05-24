@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,7 +29,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Import\" />
-    <Folder Include="Repository\Sowftware\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\Icons\internet.jpg" />

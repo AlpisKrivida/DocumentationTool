@@ -1,5 +1,30 @@
-﻿<h3>LicenseIndex</h3>
+﻿@page "/license/edit/{LicenseId:int}"
+@inject ILicenseRepository licenseRepository
+@inject NavigationManager navigationManager
+
+    <h3>License edit</h3>
+
+@if (License != null)
+{
+    <LicenseForm OnValidSubmit="Edit"
+                  LicenseKey="License"/>
+}
 
 @code {
+    [Parameter]
+    public int LicenseId { get; set; }
 
+    public LicenseKey License;
+
+    protected async override Task OnInitializedAsync()
+    {
+        License = await licenseRepository.GetLicenseKey(LicenseId);
+    }
+
+    private async Task Edit()
+    {
+
+        await licenseRepository.UpdateLicenseKey(License);
+        navigationManager.NavigateTo("license");
+    }
 }

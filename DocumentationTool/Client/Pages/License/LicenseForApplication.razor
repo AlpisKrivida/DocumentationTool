@@ -1,0 +1,123 @@
+﻿@inject ILicenseRepository licenseRepository
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h3>Licenses</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="form-group">
+                    <a class="btn btn-info" href="license/create/@ApplicationId"><span class="ri oi oi-plus" /> New License</a>
+                </div>
+
+                <div class="form-row p-1">
+                    <div class="form-group m-1">
+                        <label>Display </label>
+                        <select class="custom-select-sm" @bind="@recordsPerPage" @onclick="LoadPage">
+                            <option value="">5</option>
+                            <option>10</option>
+                            <option>15</option>
+                            <option>20</option>
+                        </select>
+                        <label> licenses</label>
+                    </div>
+                </div>
+
+
+                <GenericList List="License">
+                    <WholeListTemplate>
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Expire date</th>
+                                    <th>Total price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in License)
+                                {
+                                    <tr>
+                                        <td>@item.Key</td>
+                                        <td>@item.ExpireDate</td>
+                                        <td>(@item.Amount + @item.PricePerUnit)</td>
+                                        <td>
+                                            <a href="/license/detail/@item.Id"><span class="oi oi-eye" /></a>
+                                            <a href="/license/edit/@item.Id"><span class="oi oi-pencil" /></a>
+                                            <a href="/license/delete/@item.Id" @onclick="@(() => DeleteLicense(item.Id))"><span class="oi oi-trash" /></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </WholeListTemplate>
+                </GenericList>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex">
+                            <div class="ml-auto">
+                                <Pagination CurrentPage="@paginationDTO.Page" TotalAmountPages="totalAmountPages"
+                                            SelectedPage="SelectedPage" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public int ApplicationId { get; set; }
+
+    List<LicenseKey> License;
+    PaginationDTO paginationDTO = new PaginationDTO();
+    private int totalAmountPages;
+    private int recordsPerPage = 5;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await LoadLicense();
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    private async Task LoadPage()
+    {
+        paginationDTO = new PaginationDTO();
+        await LoadLicense();
+    }
+
+    private async Task LoadLicense()
+    {
+        paginationDTO.RecordsPerPage = recordsPerPage;
+        var paginatedResponse = await licenseRepository.GetLicenseKey(paginationDTO);
+        License = paginatedResponse.Response
+            .Where(x => x.ApplicationId == ApplicationId).ToList();
+        totalAmountPages = paginatedResponse.TotalAmountPages;
+    }
+
+    private async Task SelectedPage(int page)
+    {
+        paginationDTO.Page = page;
+        await LoadLicense();
+    }
+
+    private async Task DeleteLicense(int id)
+    {
+        await licenseRepository.DeleteLicenseKey(id);
+        await LoadLicense();
+    }
+}

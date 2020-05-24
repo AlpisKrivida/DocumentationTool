@@ -1,26 +1,28 @@
 ﻿@using DocumentationTool.Client.Shared.Tabs
 @using DocumentationTool.Client.Shared.GeneralSH
-@using DocumentationTool.Client.Shared.FormFactorSH
-@using DocumentationTool.Client.Shared.PowerConsumerSH
-@using DocumentationTool.Client.Shared.ModelSH
-
 
 @page "/cable/detail/{CableId:int}"
 @inject ICableRepository cableRepository
+@inject ISwitchRepository switchRepository
+@inject IServerRepository serverRepository
+@inject IRouterRepository routerRepository
 @inject NavigationManager navigationManager
 
     <h3>Cable details</h3>
 
 @if (Cable != null)
 {
-    <TabControl>
-        <TabPage Text="General">
-            <GeneralDetails General="Cable.General" />
-        </TabPage>
-        <TabPage Text="Monitor">
-            <CableDisplayDetails Cable="Cable"  />
-        </TabPage>
-    </TabControl>
+<TabControl>
+    <TabPage Text="General">
+        <GeneralDetails General="Cable.General" />
+    </TabPage>
+    <TabPage Text="Cable">
+        <CableDisplayDetails Cable="Cable" />
+    </TabPage>
+    <TabPage Text="Connections">
+        <Connections />
+    </TabPage>
+</TabControl>
 
 }
 

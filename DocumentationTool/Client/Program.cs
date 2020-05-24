@@ -9,10 +9,13 @@ using DocumentationTool.Client.Helpers;
 using DocumentationTool.Client.Repository;
 using DocumentationTool.Client.Repository.Hardware;
 using DocumentationTool.Client.Repository.Infrastucture;
+using DocumentationTool.Client.Repository.Software;
 using System.Security;
 using DocumentationTool.Client.Repository.Contacts;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Http;
+using DocumentationTool.Client.Repository.Sowftware;
+using DocumentationTool.Client.Repository.Shared;
 
 namespace DocumentationTool.Client
 {
@@ -45,6 +48,14 @@ namespace DocumentationTool.Client
             services.AddScoped<ISwitchRepository, SwitchRepository>();
             services.AddScoped<ICableRepository, CableRepostitory>();
             services.AddScoped<IClientRepository, ClientRepository>();
+ 
+
+            //Software
+            services.AddScoped<IApplicationRepository, ApplicationRepository>();
+            services.AddScoped<ILicenseRepository, LicenseRepository>();
+
+            //Shared
+            services.AddScoped<IPortRepository, PortRepository>();
         }
     }
 }

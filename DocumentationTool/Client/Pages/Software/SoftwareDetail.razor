@@ -1,0 +1,38 @@
+﻿@using DocumentationTool.Client.Shared.Tabs
+@using DocumentationTool.Client.Shared.GeneralSH
+@using DocumentationTool.Client.Pages.License
+
+
+@page "/software/detail/{ApplicationId:int}"
+@inject IApplicationRepository applicationRepository
+@inject NavigationManager navigationManager
+
+    <h3>Application details</h3>
+
+@if (Application != null)
+{
+<TabControl>
+    <TabPage Text="General">
+        <GeneralDetails General="Application.General" />
+    </TabPage>
+    <TabPage Text="Software">
+        <SoftwareDisplayDetails Application="Application" />
+    </TabPage>
+    <TabPage Text="Licenses">
+        <LicenseForApplication ApplicationId="ApplicationId" />
+    </TabPage>
+</TabControl>
+
+}
+
+@code {
+    [Parameter]
+    public int ApplicationId { get; set; }
+
+    public Application Application;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Application = await applicationRepository.GetApplication(ApplicationId);
+    }
+}

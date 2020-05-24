@@ -1,0 +1,51 @@
+﻿@page "/port/create"
+@inject NavigationManager navigationManager
+@inject IServerRepository serverRepository
+
+<ServerForm Server="Server"
+             Model="Model"
+             General="General"
+             FormFactor="FormFactor"
+             PowerConsumer="PowerConsumer"
+             CPU="CPU"
+             Memory="Memory"
+             OnValidSubmit="SaveServer" />
+
+@code {
+    private ServerDevice Server = new ServerDevice();
+    private Model Model = new Model();
+    private General General = new General();
+    private CPU CPU = new CPU();
+    private Memory Memory = new Memory();
+    private FormFactor FormFactor = new FormFactor();
+    private PowerConsumer PowerConsumer = new PowerConsumer();
+
+    protected async override Task OnInitializedAsync()
+    {
+        General.DateOfChange = DateTime.Now;
+        General.CreatioDate = DateTime.Now;
+    }
+
+    private async Task SaveServer()
+    {
+        try
+        {
+            General.DateOfChange = DateTime.Now;
+            General.CreatioDate = DateTime.Now;
+
+            Server.General = General;
+            Server.Model = Model;
+            Server.FormFactor = FormFactor;
+            Server.PowerConsumer = PowerConsumer;
+            Server.Memory = Memory;
+            Server.CPU = CPU;
+
+            var monitorId = await serverRepository.CreateServerDevice(Server);
+            navigationManager.NavigateTo("server");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+}

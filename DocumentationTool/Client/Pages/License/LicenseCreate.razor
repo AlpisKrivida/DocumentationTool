@@ -1,5 +1,28 @@
-﻿<h3>LicenseIndex</h3>
+﻿@page "/license/create/{ApplicationId:int}"
+@inject NavigationManager navigationManager
+@inject ILicenseRepository licenseRepository
+
+<LicenseForm LicenseKey="License"
+             OnValidSubmit="SaveLicense" />
 
 @code {
+    private LicenseKey License = new LicenseKey();
+    [Parameter]
+    public int ApplicationId { get; set; }
 
+    private async Task SaveLicense()
+    {
+        try
+        {
+            License.ApplicationId = ApplicationId;
+
+            var licenseId = await licenseRepository.CreateLicenseKey(License);
+            var uri = "software/detail/" + ApplicationId;
+            navigationManager.NavigateTo(uri);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
 }

@@ -1,5 +1,70 @@
-﻿<h3>LicenseIndex</h3>
+﻿@using DocumentationTool.Client.Shared.PowerConsumerSH
+@using DocumentationTool.Client.Shared.GeneralSH
+@using DocumentationTool.Client.Shared.ModelSH
+@using DocumentationTool.Client.Shared.FormFactorSH
+
+<h3>Monitor</h3>
+<EditForm Model="LicenseKey" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="form-group row">
+        <div class="col-md-8">
+            <div class="formInputModel">
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Amount</label>
+                    <div class="col-md-4 ">
+                        <InputNumber class="form-control form-control-sm" @bind-Value="@LicenseKey.Amount" />
+                        <ValidationMessage For="@(() => LicenseKey.Amount)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Key</label>
+                    <div class="col-md-4 ">
+                        <InputText class="form-control form-control-sm" @bind-Value="@LicenseKey.Key" />
+                        <ValidationMessage For="@(() => LicenseKey.Key)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Serial</label>
+                    <div class="col-md-4 ">
+                        <InputText class="form-control form-control-sm" @bind-Value="@LicenseKey.Serial" />
+                        <ValidationMessage For="@(() => LicenseKey.Serial)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Expire date</label>
+                    <div class="col-md-4 ">
+                        <InputDate class="form-control form-control-sm" @bind-Value="@LicenseKey.ExpireDate" />
+                        <ValidationMessage For="@(() => LicenseKey.ExpireDate)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Price per unit</label>
+                    <div class="col-md-4 ">
+                        <InputNumber class="form-control form-control-sm" @bind-Value="@LicenseKey.PricePerUnit" />
+                        <ValidationMessage For="@(() => LicenseKey.PricePerUnit)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Description</label>
+                    <div class="col-md-7 ">
+                        <InputTextArea class="form-control" @bind-Value="@LicenseKey.Description" />
+                        <ValidationMessage For="@(() => LicenseKey.Description)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Save Changes</button>
+</EditForm>
 
 @code {
-
+    [Parameter] public LicenseKey LicenseKey { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
 }

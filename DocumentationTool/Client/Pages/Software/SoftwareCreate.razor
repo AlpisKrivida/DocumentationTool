@@ -1,0 +1,37 @@
+﻿@page "/software/create"
+@inject NavigationManager navigationManager
+@inject IApplicationRepository applicationRepository
+
+<SoftwareForm 
+             General="General"
+             Application="Application"
+             OnValidSubmit="SaveApplication" />
+
+@code {
+    private Application Application = new Application();
+    private General General = new General();
+
+    protected async override Task OnInitializedAsync()
+    {
+        General.DateOfChange = DateTime.Now;
+        General.CreatioDate = DateTime.Now;
+    }
+
+    private async Task SaveApplication()
+    {
+        try
+        {
+            General.DateOfChange = DateTime.Now;
+            General.CreatioDate = DateTime.Now;
+
+            Application.General = General;
+
+            var applicationId = await applicationRepository.CreateApplication(Application);
+            navigationManager.NavigateTo("software");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+}

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DocumentationTool.Shared.Entities.Information;
+using DocumentationTool.Shared.Entities.Common;
 
 namespace DocumentationTool.Server
 {
@@ -35,14 +36,21 @@ namespace DocumentationTool.Server
                     v => JsonSerializer.Serialize(v, default),
                     v => JsonSerializer.Deserialize<List<string>>(v, default));
 
-            modelBuilder.Entity<License>()
-                .HasMany(x => x.Keys)
-                .WithOne();
+
+            modelBuilder.Entity<Application>()
+                .HasMany<LicenseKey>(x => x.LicenseKeys)
+                .WithOne(s => s.Application)
+                .HasForeignKey(s => s.ApplicationId);
+
+            //cables
+            modelBuilder.Entity<PortCable>()
+                .HasKey(pc => new { pc.CableId, pc.PortId });
+                
 
         }
 
-        //Information
-        public DbSet<License> Licenses { get; set; }
+        //Software
+        public DbSet<Application> Applications { get; set; }
         public DbSet<LicenseKey> LicenseKeys { get; set; }
 
         //Hardware
@@ -64,11 +72,20 @@ namespace DocumentationTool.Server
         public DbSet<RouterDevice> Routers { get; set; }
         public DbSet<ServerDevice> ServerDevices { get; set; }
         public DbSet<Switch> Switches { get; set; }
+        public DbSet<DevicePort> DevicePort { get; set; }
 
         //Contacts
         public DbSet<Person> People { get; set; }
 
         //Infrastructure 
         public DbSet<Cable> Cables { get; set; }
+
+        //Common
+        public DbSet<ManufacturerNames> ManufacturerNames {get;set;}
+        public DbSet<RecentlyAdded> RecentlyAddeds {get;set;}
+        public DbSet<RecentlyUpdated> RecentlyUpdateds {get;set;}
+
+        //Shared
+        public DbSet<PortCable> PortCables { get; set; }
     }
 }

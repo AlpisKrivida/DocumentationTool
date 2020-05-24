@@ -14,5 +14,8 @@ namespace DocumentationTool.Shared.Entities.Information
         public DateTime ExpireDate { get; set; }
         public double PricePerUnit { get; set; }
         public string Description { get; set; }
+
+        public int? ApplicationId { get; set; }
+        public Application Application { get; set; }
     }
 }

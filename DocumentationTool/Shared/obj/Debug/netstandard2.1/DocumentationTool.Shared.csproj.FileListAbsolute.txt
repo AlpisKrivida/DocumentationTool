@@ -10,9 +10,8 @@ C:\Users\Alpis\source\repos\DocumentationTool\DocumentationTool\Shared\obj\Debug
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Shared\bin\Debug\netstandard2.1\DocumentationTool.Shared.deps.json
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Shared\bin\Debug\netstandard2.1\DocumentationTool.Shared.dll
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Shared\bin\Debug\netstandard2.1\DocumentationTool.Shared.pdb
-B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.csproj.CoreCompileInputs.cache
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.AssemblyInfoInputs.cache
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.AssemblyInfo.cs
+B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.csproj.CoreCompileInputs.cache
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.dll
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.pdb
-B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.csprojAssemblyReference.cache

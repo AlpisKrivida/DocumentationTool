@@ -1,0 +1,53 @@
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>Port details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">Title: </label>
+                    <label class="text-right pl-3">@DevicePort.Title</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Type: </label>
+                    <label class="text-right pl-3">@DevicePort.Type</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Mode: </label>
+                    <label class="text-right pl-3">@DevicePort.Mode</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Plug: </label>
+                    <label class="text-right pl-3">@DevicePort.Plug</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Negotiation: </label>
+                    <label class="text-right pl-3">@DevicePort.Negotiation</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Duplex: </label>
+                    <label class="text-right pl-3">@DevicePort.Duplex</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Speed: </label>
+                    <label class="text-right pl-3">@DevicePort.Speed</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Speed measure: </label>
+                    <label class="text-right pl-3">@DevicePort.SpeedMeasure</label>
+                </div> 
+                <div class="row">
+                    <label class="font-weight-bold text-left">Mac: </label>
+                    <label class="text-right pl-3">@DevicePort.Mac</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public DevicePort DevicePort { get; set; }
+}

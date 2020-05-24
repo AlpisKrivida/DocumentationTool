@@ -1,0 +1,33 @@
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>Cable Details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">Type: </label>
+                    <label class="text-right pl-3">@Cable.CableType</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Lenght: </label>
+                    <label class="text-right pl-3">@Cable.CableLenght</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Lenght measure: </label>
+                    <label class="text-right pl-3">@Cable.CableLenghtDimensions</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Description: </label>
+                    <label class="text-right pl-3">@Cable.Description</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Cable Cable { get; set; }
+}

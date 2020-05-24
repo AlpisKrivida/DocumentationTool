@@ -1,0 +1,89 @@
+﻿<h3>Device port</h3>
+<EditForm Model="DevicePort">
+    <DataAnnotationsValidator />
+
+    <div class="form-group row">
+        <div class="col-md-8">
+            <div class="formInputModel">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Title</label>
+                    <div class="col-sm-4">
+                        <InputText class="form-control form-control-sm" @bind-Value="@DevicePort.Title" />
+                        <ValidationMessage For="@(() => DevicePort.Title)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Type</label>
+                    <div class="col-sm-4">
+                        <InputText class="form-control form-control-sm" @bind-Value="@DevicePort.Type" />
+                        <ValidationMessage For="@(() => DevicePort.Type)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Mode</label>
+                    <div class="col-sm-4">
+                        <InputText class="form-control form-control-sm" @bind-Value="@DevicePort.Mode" />
+                        <ValidationMessage For="@(() => DevicePort.Mode)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Plug</label>
+                    <div class="col-sm-4">
+                        <InputText class="form-control form-control-sm" @bind-Value="@DevicePort.Plug" />
+                        <ValidationMessage For="@(() => DevicePort.Plug)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Negotiation</label>
+                    <div class="col-sm-4">
+                        <InputText class="form-control form-control-sm" @bind-Value="@DevicePort.Negotiation" />
+                        <ValidationMessage For="@(() => DevicePort.Negotiation)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Duplex</label>
+                    <div class="col-sm-4">
+                        <InputText class="form-control form-control-sm" @bind-Value="@DevicePort.Duplex" />
+                        <ValidationMessage For="@(() => DevicePort.Duplex)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Speed</label>
+                    <div class="col-sm-4">
+                        <InputNumber class="form-control form-control-sm" @bind-Value="@DevicePort.Speed" />
+                        <ValidationMessage For="@(() => DevicePort.Speed)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Speed Measure</label>
+                    <div class="col-sm-4">
+                        <InputText class="form-control form-control-sm" @bind-Value="@DevicePort.Type" />
+                        <ValidationMessage For="@(() => DevicePort.Type)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Mac</label>
+                    <div class="col-sm-4">
+                        <InputText class="form-control form-control-sm" @bind-Value="@DevicePort.Mac" />
+                        <ValidationMessage For="@(() => DevicePort.Mac)" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</EditForm>
+
+@code {
+    [Parameter] public DevicePort DevicePort { get; set; }
+}
+

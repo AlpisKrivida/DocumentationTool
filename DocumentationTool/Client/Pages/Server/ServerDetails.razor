@@ -5,6 +5,7 @@
 @using DocumentationTool.Client.Shared.ModelSH
 @using DocumentationTool.Client.Shared.CPUSH
 @using DocumentationTool.Client.Shared.MemorySH
+@using DocumentationTool.Client.Shared.DevicePortSH
 
 
 @page "/server/detail/{ServerId:int}"
@@ -34,6 +35,10 @@
         <TabPage Text="Memory">
             <MemoryForm  Memory="Server.Memory" />
         </TabPage>
+        <TabPage Text="Port">
+            < />
+        </TabPage>
+        
     </TabControl>
 
 }

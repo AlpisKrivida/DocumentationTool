@@ -17,5 +17,7 @@ namespace DocumentationTool.Shared.Entities.Infrastructure
         public string Occupancy { get; set; }
         public string FibLeads { get; set; }
         public string Description { get; set; }
+
+        public List<PortCable> Port { get; set; }
     }
 }

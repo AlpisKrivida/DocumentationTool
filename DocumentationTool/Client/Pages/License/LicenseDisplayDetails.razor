@@ -1,5 +1,41 @@
-﻿<h3>LicenseIndex</h3>
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>License Details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">Amount: </label>
+                    <label class="text-right pl-3">@License.Amount</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Key: </label>
+                    <label class="text-right pl-3">@License.Key</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Serial: </label>
+                    <label class="text-right pl-3">@License.Serial</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Expire date: </label>
+                    <label class="text-right pl-3">@License.ExpireDate</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Price per unit: </label>
+                    <label class="text-right pl-3">@License.PricePerUnit</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Description: </label>
+                    <label class="text-right pl-3">@License.Description</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
-
+    [Parameter] public LicenseKey License { get; set; }
 }

@@ -1,0 +1,33 @@
+﻿@page "/software/edit/{SoftwareId:int}"
+@inject IApplicationRepository applicationRepository
+@inject NavigationManager navigationManager
+
+    <h3>Application edit</h3>
+
+@if (Application != null)
+{
+    <SoftwareForm OnValidSubmit="Edit"
+                 General="Application.General"
+                 Application="Application"
+                  />
+}
+
+@code {
+    [Parameter]
+    public int SoftwareId { get; set; }
+
+    public Application Application;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Application = await applicationRepository.GetApplication(SoftwareId);
+    }
+
+    private async Task Edit()
+    {
+        Application.General.DateOfChange = DateTime.Now;
+
+        await applicationRepository.UpdateApplication(Application);
+        navigationManager.NavigateTo("software");
+    }
+}

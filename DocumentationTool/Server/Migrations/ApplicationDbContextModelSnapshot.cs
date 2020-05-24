@@ -19,6 +19,55 @@ namespace DocumentationTool.Server.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Common.ManufacturerNames", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Name")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ManufacturerNames");
+                });
+
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Common.RecentlyAdded", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("GeneralId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GeneralId");
+
+                    b.ToTable("RecentlyAddeds");
+                });
+
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Common.RecentlyUpdated", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("GeneralId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GeneralId");
+
+                    b.ToTable("RecentlyUpdateds");
+                });
+
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Contacts.Person", b =>
                 {
                     b.Property<int>("Id")
@@ -540,21 +589,30 @@ namespace DocumentationTool.Server.Migrations
                     b.ToTable("Switches");
                 });
 
-            modelBuilder.Entity("DocumentationTool.Shared.Entities.Information.License", b =>
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Information.Application", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("GeneralId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Manufacturer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Specification")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("GeneralId");
 
-                    b.ToTable("Licenses");
+                    b.ToTable("Applications");
                 });
 
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Information.LicenseKey", b =>
@@ -567,6 +625,9 @@ namespace DocumentationTool.Server.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ApplicationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -576,9 +637,6 @@ namespace DocumentationTool.Server.Migrations
                     b.Property<string>("Key")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("LicenseId")
-                        .HasColumnType("int");
-
                     b.Property<double>("PricePerUnit")
                         .HasColumnType("float");
 
@@ -587,7 +645,7 @@ namespace DocumentationTool.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LicenseId");
+                    b.HasIndex("ApplicationId");
 
                     b.ToTable("LicenseKeys");
                 });
@@ -628,6 +686,78 @@ namespace DocumentationTool.Server.Migrations
                     b.HasIndex("GeneralId");
 
                     b.ToTable("Cables");
+                });
+
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Shared.DevicePort", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Duplex")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mac")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Negotiation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Plug")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RouterId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RouterInpuId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RouterOutputd")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ServerDeviceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ServerInpuId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ServerOutputId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Speed")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SpeedMeasure")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SwitchId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SwitchInputId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SwitchOutputId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RouterId");
+
+                    b.HasIndex("ServerDeviceId");
+
+                    b.HasIndex("SwitchId");
+
+                    b.ToTable("DevicePort");
                 });
 
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Shared.FormFactor", b =>
@@ -744,6 +874,24 @@ namespace DocumentationTool.Server.Migrations
                     b.ToTable("Manufacturers");
                 });
 
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Shared.PortCable", b =>
+                {
+                    b.Property<int>("CableId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PortId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DevicePortId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CableId", "PortId");
+
+                    b.HasIndex("DevicePortId");
+
+                    b.ToTable("PortCables");
+                });
+
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Shared.PowerConsumer", b =>
                 {
                     b.Property<int>("Id")
@@ -781,6 +929,20 @@ namespace DocumentationTool.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PowerConsumers");
+                });
+
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Common.RecentlyAdded", b =>
+                {
+                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.General", "General")
+                        .WithMany()
+                        .HasForeignKey("GeneralId");
+                });
+
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Common.RecentlyUpdated", b =>
+                {
+                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.General", "General")
+                        .WithMany()
+                        .HasForeignKey("GeneralId");
                 });
 
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Contacts.Person", b =>
@@ -943,7 +1105,7 @@ namespace DocumentationTool.Server.Migrations
                         .HasForeignKey("PowerConsumerId");
                 });
 
-            modelBuilder.Entity("DocumentationTool.Shared.Entities.Information.License", b =>
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Information.Application", b =>
                 {
                     b.HasOne("DocumentationTool.Shared.Entities.Hardware.General", "General")
                         .WithMany()
@@ -952,9 +1114,9 @@ namespace DocumentationTool.Server.Migrations
 
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Information.LicenseKey", b =>
                 {
-                    b.HasOne("DocumentationTool.Shared.Entities.Information.License", null)
-                        .WithMany("Keys")
-                        .HasForeignKey("LicenseId");
+                    b.HasOne("DocumentationTool.Shared.Entities.Information.Application", "Application")
+                        .WithMany("LicenseKeys")
+                        .HasForeignKey("ApplicationId");
                 });
 
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Infrastructure.Cable", b =>
@@ -962,6 +1124,34 @@ namespace DocumentationTool.Server.Migrations
                     b.HasOne("DocumentationTool.Shared.Entities.Hardware.General", "General")
                         .WithMany()
                         .HasForeignKey("GeneralId");
+                });
+
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Shared.DevicePort", b =>
+                {
+                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.RouterDevice", "Router")
+                        .WithMany("DevicePorts")
+                        .HasForeignKey("RouterId");
+
+                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.ServerDevice", "ServerDevice")
+                        .WithMany("DevicePorts")
+                        .HasForeignKey("ServerDeviceId");
+
+                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.Switch", "Switch")
+                        .WithMany("DevicePorts")
+                        .HasForeignKey("SwitchId");
+                });
+
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Shared.PortCable", b =>
+                {
+                    b.HasOne("DocumentationTool.Shared.Entities.Infrastructure.Cable", "Cable")
+                        .WithMany("Port")
+                        .HasForeignKey("CableId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DocumentationTool.Shared.Entities.Shared.DevicePort", "DevicePort")
+                        .WithMany("Cables")
+                        .HasForeignKey("DevicePortId");
                 });
 #pragma warning restore 612, 618
         }
