@@ -1,0 +1,41 @@
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>Layer three net Details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">Type: </label>
+                    <label class="text-right pl-3">@LayerThreeNet.Type</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Network address: </label>
+                    <label class="text-right pl-3">@LayerThreeNet.Net</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Prefix: </label>
+                    <label class="text-right pl-3">@LayerThreeNet.Prefix</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Netmask: </label>
+                    <label class="text-right pl-3">@LayerThreeNet.NetMask</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">DNS domain: </label>
+                    <label class="text-right pl-3">@LayerThreeNet.DNSDomain</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Description: </label>
+                    <label class="text-right pl-3">@LayerThreeNet.Description</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public LayerThreeNet LayerThreeNet { get; set; }
+}

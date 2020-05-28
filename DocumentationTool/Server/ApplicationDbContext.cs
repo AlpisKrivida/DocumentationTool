@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DocumentationTool.Shared.Entities.Information;
 using DocumentationTool.Shared.Entities.Common;
+using DocumentationTool.Shared.Entities.Network;
 
 namespace DocumentationTool.Server
 {
@@ -21,14 +22,6 @@ namespace DocumentationTool.Server
 
         }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    //sample
-        //    modelBuilder.Entity<other>().HasKey(x => new { x.other, x.other });
-        //    modelBuilder.Entity<other>().HasKey(x => new { x.other, x.other });
-        //    base.OnModelCreating(modelBuilder);
-        //}
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<General>().Property(p => p.Tag)
@@ -36,18 +29,27 @@ namespace DocumentationTool.Server
                     v => JsonSerializer.Serialize(v, default),
                     v => JsonSerializer.Deserialize<List<string>>(v, default));
 
-
+            //Software
             modelBuilder.Entity<Application>()
                 .HasMany<LicenseKey>(x => x.LicenseKeys)
                 .WithOne(s => s.Application)
                 .HasForeignKey(s => s.ApplicationId);
 
+            //Network
+            modelBuilder.Entity<LayerThreeNet>()
+                .HasMany(x => x.IpLists)
+                .WithOne(s => s.LayerThreeNet)
+                .HasForeignKey(s => s.LayerThreeNetId);
+
             //cables
             modelBuilder.Entity<PortCable>()
                 .HasKey(pc => new { pc.CableId, pc.PortId });
                 
-
         }
+
+        //Network
+        public DbSet<LayerThreeNet> LayerThreeNets { get; set; }
+        public DbSet<IPList> IpLists { get; set; }
 
         //Software
         public DbSet<Application> Applications { get; set; }

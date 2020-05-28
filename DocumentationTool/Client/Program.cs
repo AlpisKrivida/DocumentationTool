@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Http;
 using DocumentationTool.Client.Repository.Sowftware;
 using DocumentationTool.Client.Repository.Shared;
+using DocumentationTool.Client.Repository.Network;
 
 namespace DocumentationTool.Client
 {
@@ -39,7 +40,6 @@ namespace DocumentationTool.Client
             services.AddOptions();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IHttpService, HttpService>();
-            services.AddScoped<IMouseRepository, MouseRepository>();
             services.AddScoped<IMonitorRepository, MonitorRepository>();
             services.AddScoped<IPrinterRepository, PrinterRepository>();
             services.AddScoped<IPersonRepostiroy, PersonRepository>();
@@ -56,6 +56,9 @@ namespace DocumentationTool.Client
 
             //Shared
             services.AddScoped<IPortRepository, PortRepository>();
+
+            //Network
+            services.AddScoped<INetworkRepository, NetworkRepository>();
         }
     }
 }

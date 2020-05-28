@@ -1,0 +1,34 @@
+﻿@using DocumentationTool.Client.Pages.Network.ThreeLayerNetwork
+
+@page "/threeLayerNetwork/edit/{NetworkId:int}"
+@inject INetworkRepository networkRepository
+@inject NavigationManager navigationManager
+
+<h3>Three layer Net edit</h3>
+
+@if (LayerThreeNet != null)
+{
+    <ThreeLayerNetworkForm General="LayerThreeNet.General"
+                            LayerThreeNet="LayerThreeNet"
+                            OnValidSubmit="Edit"/>
+}
+
+@code {
+    [Parameter]
+    public int NetworkId { get; set; }
+
+    public LayerThreeNet LayerThreeNet;
+
+    protected async override Task OnInitializedAsync()
+    {
+        LayerThreeNet = await networkRepository.GetLayerThreeNet(NetworkId);
+    }
+
+    private async Task Edit()
+    {
+        LayerThreeNet.General.DateOfChange = DateTime.Now;
+
+        await networkRepository.UpdateLayerThreeNet(LayerThreeNet);
+        navigationManager.NavigateTo("threeLayerNetwork");
+    }
+}

@@ -688,6 +688,86 @@ namespace DocumentationTool.Server.Migrations
                     b.ToTable("Cables");
                 });
 
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Network.IPList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IpAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("LayerThreeNetId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PrinterId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RouterId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ServerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SwitchId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("LayerThreeNetId");
+
+                    b.HasIndex("PrinterId");
+
+                    b.HasIndex("RouterId");
+
+                    b.HasIndex("ServerId");
+
+                    b.HasIndex("SwitchId");
+
+                    b.ToTable("IpLists");
+                });
+
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Network.LayerThreeNet", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DNSDomain")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("GeneralId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Net")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NetMask")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Prefix")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GeneralId");
+
+                    b.ToTable("LayerThreeNets");
+                });
+
             modelBuilder.Entity("DocumentationTool.Shared.Entities.Shared.DevicePort", b =>
                 {
                     b.Property<int>("Id")
@@ -710,7 +790,7 @@ namespace DocumentationTool.Server.Migrations
                     b.Property<string>("Plug")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RouterId")
+                    b.Property<int?>("RouterDeviceId")
                         .HasColumnType("int");
 
                     b.Property<int?>("RouterInpuId")
@@ -751,7 +831,7 @@ namespace DocumentationTool.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RouterId");
+                    b.HasIndex("RouterDeviceId");
 
                     b.HasIndex("ServerDeviceId");
 
@@ -1126,17 +1206,51 @@ namespace DocumentationTool.Server.Migrations
                         .HasForeignKey("GeneralId");
                 });
 
-            modelBuilder.Entity("DocumentationTool.Shared.Entities.Shared.DevicePort", b =>
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Network.IPList", b =>
                 {
+                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.ClientPC", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
+
+                    b.HasOne("DocumentationTool.Shared.Entities.Network.LayerThreeNet", "LayerThreeNet")
+                        .WithMany("IpLists")
+                        .HasForeignKey("LayerThreeNetId");
+
+                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.Printer", "Printer")
+                        .WithMany()
+                        .HasForeignKey("PrinterId");
+
                     b.HasOne("DocumentationTool.Shared.Entities.Hardware.RouterDevice", "Router")
-                        .WithMany("DevicePorts")
+                        .WithMany()
                         .HasForeignKey("RouterId");
 
-                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.ServerDevice", "ServerDevice")
+                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.ServerDevice", "Server")
+                        .WithMany()
+                        .HasForeignKey("ServerId");
+
+                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.Switch", "Switch")
+                        .WithMany()
+                        .HasForeignKey("SwitchId");
+                });
+
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Network.LayerThreeNet", b =>
+                {
+                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.General", "General")
+                        .WithMany()
+                        .HasForeignKey("GeneralId");
+                });
+
+            modelBuilder.Entity("DocumentationTool.Shared.Entities.Shared.DevicePort", b =>
+                {
+                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.RouterDevice", null)
+                        .WithMany("DevicePorts")
+                        .HasForeignKey("RouterDeviceId");
+
+                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.ServerDevice", null)
                         .WithMany("DevicePorts")
                         .HasForeignKey("ServerDeviceId");
 
-                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.Switch", "Switch")
+                    b.HasOne("DocumentationTool.Shared.Entities.Hardware.Switch", null)
                         .WithMany("DevicePorts")
                         .HasForeignKey("SwitchId");
                 });

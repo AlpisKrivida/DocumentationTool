@@ -1,47 +1,46 @@
-﻿@page "/port/create"
+﻿@page "/port/create/{Device}/{DeviceId:int}"
+@using DocumentationTool.Client.Shared.DevicePortSH
 @inject NavigationManager navigationManager
-@inject IServerRepository serverRepository
+@inject IPortRepository portRepository
 
-<ServerForm Server="Server"
-             Model="Model"
-             General="General"
-             FormFactor="FormFactor"
-             PowerConsumer="PowerConsumer"
-             CPU="CPU"
-             Memory="Memory"
-             OnValidSubmit="SaveServer" />
+<DevicePortForm 
+                DevicePort="DevicePort"
+                OnValidSubmit="SaveData"
+                SelectedCables="SelectedCables"
+                />
 
 @code {
-    private ServerDevice Server = new ServerDevice();
-    private Model Model = new Model();
-    private General General = new General();
-    private CPU CPU = new CPU();
-    private Memory Memory = new Memory();
-    private FormFactor FormFactor = new FormFactor();
-    private PowerConsumer PowerConsumer = new PowerConsumer();
+    [Parameter] public string Device { get; set; }
+    [Parameter] public int DeviceId { get; set; }
 
-    protected async override Task OnInitializedAsync()
-    {
-        General.DateOfChange = DateTime.Now;
-        General.CreatioDate = DateTime.Now;
-    }
+    public List<Cable> SelectedCables = new List<Cable>();
+    private DevicePort DevicePort = new DevicePort();
+    //private List<Cable> Cables;
 
-    private async Task SaveServer()
+    private async Task SaveData()
     {
         try
         {
-            General.DateOfChange = DateTime.Now;
-            General.CreatioDate = DateTime.Now;
+            DevicePort.Cables = SelectedCables.Select( x => new PortCable { CableId = x.Id }).ToList();
+            switch (Device)
+            {
+                case "server":
+                    DevicePort.ServerInpuId = DeviceId;
+                    break;
+                case "switch":
+                    DevicePort.SwitchInputId = DeviceId;
+                    break;
+                case "router":
+                    DevicePort.RouterInpuId = DeviceId;
+                    break;
+                default:
+                    throw new ArgumentException(message: "invalid device value", paramName: nameof(Device));
+            };
 
-            Server.General = General;
-            Server.Model = Model;
-            Server.FormFactor = FormFactor;
-            Server.PowerConsumer = PowerConsumer;
-            Server.Memory = Memory;
-            Server.CPU = CPU;
 
-            var monitorId = await serverRepository.CreateServerDevice(Server);
-            navigationManager.NavigateTo("server");
+            var portId = await portRepository.CreateDevicePort(DevicePort);
+
+            navigationManager.NavigateTo(Device);
         }
         catch (Exception ex)
         {

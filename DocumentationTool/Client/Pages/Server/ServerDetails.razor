@@ -30,13 +30,14 @@
             <ModelDetail Model="Server.Model" />
         </TabPage>
         <TabPage Text="CPU">
-            <CPUForm CPU="Server.CPU" />
+            <CPUDetail CPU="Server.CPU" />
         </TabPage>
         <TabPage Text="Memory">
-            <MemoryForm  Memory="Server.Memory" />
+            <MemoryDetail  Memory="Server.Memory" />
         </TabPage>
         <TabPage Text="Port">
-            < />
+            <DeviceIndex Device="server"
+                         DeviceId="ServerId"/>
         </TabPage>
         
     </TabControl>
@@ -48,6 +49,8 @@
     public int ServerId { get; set; }
 
     public ServerDevice Server;
+
+    public string ServerName = "server";
 
     protected async override Task OnInitializedAsync()
     {

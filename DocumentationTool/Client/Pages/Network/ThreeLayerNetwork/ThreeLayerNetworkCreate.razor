@@ -1,0 +1,65 @@
+﻿@page "/threeLayerNetwork/create"
+@inject NavigationManager navigationManager
+@inject INetworkRepository networkRepository
+
+<ThreeLayerNetworkForm 
+           LayerThreeNet="LayerThreeNet"
+           General="General"
+           OnValidSubmit="SaveLayerThreeNet" />
+
+@code {
+    private LayerThreeNet LayerThreeNet = new LayerThreeNet();
+    private General General = new General();
+    private Prefix PrefixNumber = new Prefix();
+    private List<IPList> IpLists = new List<IPList>();
+
+    protected async override Task OnInitializedAsync()
+    {
+        General.DateOfChange = DateTime.Now;
+        General.CreatioDate = DateTime.Now;
+    }
+
+    private async Task SaveLayerThreeNet()
+    {
+        try
+        {
+            General.DateOfChange = DateTime.Now;
+            General.CreatioDate = DateTime.Now;
+            LayerThreeNet.General = General;
+
+
+            string[] values = LayerThreeNet.Net.Split('.');
+            var hostfourth = int.Parse(values[values.Length - 1]);
+            if(values.Length == 4 &&
+                hostfourth <= 255 &&
+                hostfourth >= 0
+                )
+            {
+                var hosts = PrefixNumber.GetAdressCount(int.Parse(LayerThreeNet.Prefix));
+
+                if((hostfourth + hosts) <=255)
+                {
+                    Console.WriteLine(hostfourth);
+                    Console.WriteLine(hosts);
+                    for (int x=hostfourth;x<hosts+hostfourth;x++)
+                    {
+                        IpLists.Add(new IPList { IpAddress = $"{values[0]}.{values[1]}.{values[2]}.{x}" });
+
+                    }
+                }
+            }
+
+            foreach (IPList x in IpLists)
+                Console.WriteLine(x.IpAddress);
+
+            LayerThreeNet.IpLists = IpLists;
+
+            var cableId = await networkRepository.CreateLayerThreeNet(LayerThreeNet);
+            navigationManager.NavigateTo("threeLayerNetwork");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+}

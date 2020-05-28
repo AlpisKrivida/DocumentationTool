@@ -7,11 +7,11 @@
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <ul class="nav flex-column">
-        <li class="nav-item px-3">
+        @*<li class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span> Dashboard
             </NavLink>
-        </li>
+        </li>*@
         <li class="nav-item px-3">
             <NavLink class="nav-link" @onclick="()=>expandHardwareNav = !expandHardwareNav">
                 <span class="oi oi-list-rich" aria-hidden="true"></span>Hardware<span class="ri oi oi-chevron-bottom" aria-hidden="true"></span>
@@ -62,11 +62,11 @@
                     @*<span class="oi oi-plus" aria-hidden="true"></span>*@ Persons
                 </NavLink>
             </li>
-            <li class="nav-item px-3">
+            @*<li class="nav-item px-3">
                 <NavLink class="nav-link" href="group">
-                    @*<span class="oi oi-plus" aria-hidden="true"></span>*@ Groups
+                    Groups
                 </NavLink>
-            </li>
+            </li>*@
         }
         <li class="nav-item px-3">
             <NavLink class="nav-link no-copy" @onclick="()=>expandSoftwareNav = !expandSoftwareNav">
@@ -98,7 +98,7 @@
                     @*<span class="oi oi-plus" aria-hidden="true"></span>*@ Cables
                 </NavLink>
             </li>
-        } 
+        }
         <li class="nav-item px-3">
             <NavLink class="nav-link no-copy" @onclick="()=>expandNetowrkNav = !expandNetowrkNav">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Network <span class="ri oi oi-chevron-bottom" aria-hidden="true"></span>
@@ -106,9 +106,14 @@
         </li>
         @if (expandNetowrkNav)
         {
-            <li class="nav-item px-3">
+            @*<li class="nav-item px-3">
                 <NavLink class="nav-link" href="networkDiagram">
-                    @*<span class="oi oi-plus" aria-hidden="true"></span>*@ Network diagram
+                     Network diagram
+                </NavLink>
+            </li>*@
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="threeLayerNetwork">
+                    Layer 3-Net
                 </NavLink>
             </li>
         }

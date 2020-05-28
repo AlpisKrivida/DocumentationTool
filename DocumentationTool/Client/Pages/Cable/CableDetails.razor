@@ -8,21 +8,21 @@
 @inject IRouterRepository routerRepository
 @inject NavigationManager navigationManager
 
-    <h3>Cable details</h3>
+<h3>Cable details</h3>
 
 @if (Cable != null)
 {
-<TabControl>
-    <TabPage Text="General">
-        <GeneralDetails General="Cable.General" />
-    </TabPage>
-    <TabPage Text="Cable">
-        <CableDisplayDetails Cable="Cable" />
-    </TabPage>
-    <TabPage Text="Connections">
-        <Connections />
-    </TabPage>
-</TabControl>
+    <TabControl>
+        <TabPage Text="General">
+            <GeneralDetails General="Cable.General" />
+        </TabPage>
+        <TabPage Text="Cable">
+            <CableDisplayDetails Cable="Cable" />
+        </TabPage>
+        <TabPage Text="Connections">
+            <CableConnections />
+        </TabPage>
+    </TabControl>
 
 }
 

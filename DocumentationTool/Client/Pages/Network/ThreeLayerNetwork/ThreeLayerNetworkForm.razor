@@ -1,0 +1,126 @@
+﻿@using DocumentationTool.Client.Shared.GeneralSH
+@using DocumentationTool.Client.Helpers
+
+    <EditForm Model="LayerThreeNet" OnValidSubmit="OnValidSubmit">
+
+        <GeneralForm General="General" />
+
+        <DataAnnotationsValidator />
+        <h3>Network</h3>
+        <div class="form-group row">
+            <div class="col-md-8">
+                <div class="formInputModel">
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Type</label>
+                        <div class="col-md-4 ">
+                            <InputText class="form-control form-control-sm" @bind-Value="@LayerThreeNet.Type" />
+                            <ValidationMessage For="@(() => LayerThreeNet.Type)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Net </label>
+                        <div class="col-md-4">
+                            <InputText class="form-control form-control-sm" @bind-Value="@LayerThreeNet.Net" />
+                            <ValidationMessage For="@(() => LayerThreeNet.Net)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Netmask</label>
+                        <div class="col-md-4 ">
+                            <InputText disabled="true" class="form-control form-control-sm" @bind-Value="@LayerThreeNet.NetMask" />
+                            <ValidationMessage For="@(() => LayerThreeNet.NetMask)" />
+                        </div>
+
+                        <div class="col-md-3">
+                            <InputSelect class="form-control form-control-sm" @onclick="@(() => UpdateNetmask())" @bind-Value="@Prefix">
+                                <option value="">Select prefix...</option>
+                                <option>30</option>
+                                <option>29</option>
+                                <option>28</option>
+                                <option>27</option>
+                                <option>26</option>
+                            </InputSelect>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Address range</label>
+                        <div class="col-md-3 ">
+                            <InputText disabled="true" class="form-control form-control-sm" @bind-Value="@AddressStart" />
+                        </div>
+
+                        <div class="col-md-3 ">
+                            <InputText disabled="true" class="form-control form-control-sm" @bind-Value="@AddressEnd" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">DNS domain</label>
+                        <div class="col-md-4 ">
+                            <InputText class="form-control form-control-sm" @bind-Value="@LayerThreeNet.DNSDomain" />
+                            <ValidationMessage For="@(() => LayerThreeNet.DNSDomain)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Description</label>
+                        <div class="col-md-7 ">
+                            <InputTextArea class="form-control" @bind-Value="@LayerThreeNet.Description" />
+                            <ValidationMessage For="@(() => LayerThreeNet.Description)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <button class="btn btn-primary" type="submit">Save Changes</button>
+    </EditForm>
+
+@code {
+
+    [Parameter] public LayerThreeNet LayerThreeNet { get; set; }
+    [Parameter] public General General { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+
+    private string AddressStart { get; set; }
+    private string AddressEnd { get; set; }
+    private string Prefix { get; set; }
+    
+
+    private async Task CalculateRange()
+    {
+        
+    }
+
+    private async Task UpdateNetmask()
+    {
+        switch(Prefix)
+        {
+            case "30":
+                LayerThreeNet.NetMask = "255.255.255.252";
+                break;
+            case "29":
+                LayerThreeNet.NetMask = "255.255.255.248";
+                break;
+            case "28":
+                LayerThreeNet.NetMask = "255.255.255.240";
+                break;
+            case "27":
+                LayerThreeNet.NetMask = "255.255.255.224";
+                break;
+            case "26":
+                LayerThreeNet.NetMask = "255.255.255.192";
+                break;
+            default:
+                LayerThreeNet.NetMask = "";
+                break;
+        }
+        LayerThreeNet.Prefix = Prefix;
+    }
+}

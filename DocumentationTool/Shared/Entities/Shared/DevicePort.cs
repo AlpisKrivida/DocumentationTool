@@ -27,13 +27,13 @@ namespace DocumentationTool.Shared.Entities.Shared
 
         //Device Input
         public int? SwitchInputId { get; set; }
-        public Switch Switch { get; set; }
+        //public Switch Switch { get; set; }
 
         public int? RouterInpuId { get; set; }
-        public RouterDevice Router { get; set; }
+        //public RouterDevice Router { get; set; }
 
         public int? ServerInpuId { get; set; }
-        public ServerDevice ServerDevice { get; set; }
+        //public ServerDevice ServerDevice { get; set; }
 
         //Device Output
         public int? SwitchOutputId { get; set; }
