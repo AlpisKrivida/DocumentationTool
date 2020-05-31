@@ -1,5 +1,4 @@
-﻿@*@page "/server"*@
-@inject IPortRepository portRepository
+﻿@inject IPortRepository portRepository
 
 <div class="container-fluid">
     <div class="row">
@@ -25,7 +24,7 @@
                             <option>15</option>
                             <option>20</option>
                         </select>
-                        <label> monitors</label>
+                        <label> ports</label>
                     </div>
                 </div>
 
@@ -48,12 +47,12 @@
                                     <tr>
                                         <td>@item.Title</td>
                                         <td>@item.Type</td>
-                                        <td>@item</td>
-                                        <td></td>
+                                        <td>@GetDevice(item)</td>
+                                        <td>@GetCable(item)</td>
                                         <td>
-                                            <a href="/server/detail/@item.Id"><span class="oi oi-eye" /></a>
-                                            <a href="/server/edit/@item.Id"><span class="oi oi-pencil" /></a>
-                                            <a href="/server" @onclick="@(() => DeleteDevicePort(item.Id))"><span class="oi oi-trash" /></a>
+                                            @*<a href="/server/detail/@item.Id"><span class="oi oi-eye" /></a>*@
+                                            <a href="/port/edit/@Device/@item.Id"><span class="oi oi-pencil" /></a>
+                                            <a href="/@Device" @onclick="@(() => DeleteDevicePort(item.Id))"><span class="oi oi-trash" /></a>
                                         </td>
                                     </tr>
                                 }
@@ -89,6 +88,16 @@
     [Parameter]
     public int DeviceId { get; set; }
 
+    private async Task<string> GetCable(DevicePort dp)
+    {
+        return "test";
+    }
+
+    private async Task<string> GetDevice(DevicePort dp)
+    {
+        return "test";
+    }
+
     protected override async Task OnInitializedAsync()
     {
         try
@@ -111,7 +120,13 @@
     {
         paginationDTO.RecordsPerPage = recordsPerPage;
         var paginatedResponse = await portRepository.GetDevicePort(paginationDTO);
-        DevicePort = paginatedResponse.Response;
+        switch (Device)
+        {
+            case "server":
+                DevicePort = paginatedResponse.Response.Where(x => x.ServerId == DeviceId).ToList();
+                break;
+        }
+        //DevicePort = paginatedResponse.Response.Where(x => x.Id == DeviceId).ToList();
         totalAmountPages = paginatedResponse.TotalAmountPages;
     }
 

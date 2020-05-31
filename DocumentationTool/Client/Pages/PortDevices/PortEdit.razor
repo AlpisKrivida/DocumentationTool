@@ -1,0 +1,35 @@
+﻿@using DocumentationTool.Client.Shared.DevicePortSH 
+@page "/port/edit/{Device}/{PortId:int}"
+@inject IPortRepository portRepository
+@inject NavigationManager navigationManager
+
+<h3>Port Edit</h3>
+
+@if (DevicePort != null)
+{
+    <DevicePortForm OnValidSubmit="Edit"
+                DevicePort="DevicePort"
+                SelectedCable="SelectedCable"
+                    />
+}
+
+@code {
+    [Parameter] public int PortId { get; set; }
+    [Parameter] public string Device { get; set; }
+
+    public DevicePort DevicePort;
+    public Cable SelectedCable = new Cable();
+
+    protected async override Task OnInitializedAsync()
+    {
+        DevicePort = await portRepository.GetDevicePort(PortId);
+    }
+
+    private async Task Edit()
+    {
+
+        await portRepository.UpdateDevicePort(DevicePort);
+
+        navigationManager.NavigateTo(Device);
+    }
+}

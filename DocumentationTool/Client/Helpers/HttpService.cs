@@ -11,6 +11,8 @@ namespace DocumentationTool.Client.Helpers
     public class HttpService: IHttpService
     {
         private readonly HttpClient httpClient;
+        private string addedUrl = "api/recentlyadded";
+        private string updateddUrl = "api/recentlyupdated";
 
         private JsonSerializerOptions defaultJsonSerializerOptions =>
             new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
@@ -39,7 +41,8 @@ namespace DocumentationTool.Client.Helpers
         {
             var dataJson = JsonSerializer.Serialize(data);
             var stringContent = new StringContent(dataJson, Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync(url, stringContent);
+            var response = await httpClient.PostAsync(url, stringContent);        
+
             return new HttpResponseWrapper<object>(null, response.IsSuccessStatusCode, response);
         }
 

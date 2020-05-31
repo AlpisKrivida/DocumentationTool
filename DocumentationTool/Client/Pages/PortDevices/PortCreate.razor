@@ -6,32 +6,34 @@
 <DevicePortForm 
                 DevicePort="DevicePort"
                 OnValidSubmit="SaveData"
-                SelectedCables="SelectedCables"
+                SelectedCable="SelectedCable"
                 />
 
 @code {
     [Parameter] public string Device { get; set; }
     [Parameter] public int DeviceId { get; set; }
 
-    public List<Cable> SelectedCables = new List<Cable>();
+    public Cable SelectedCable = new Cable();
     private DevicePort DevicePort = new DevicePort();
-    //private List<Cable> Cables;
 
     private async Task SaveData()
     {
         try
         {
-            DevicePort.Cables = SelectedCables.Select( x => new PortCable { CableId = x.Id }).ToList();
+            DevicePort.Cable = SelectedCable;
             switch (Device)
             {
                 case "server":
                     DevicePort.ServerInpuId = DeviceId;
+                    DevicePort.ServerId = DeviceId;
                     break;
                 case "switch":
                     DevicePort.SwitchInputId = DeviceId;
                     break;
                 case "router":
                     DevicePort.RouterInpuId = DeviceId;
+                    break;
+                case "printer":
                     break;
                 default:
                     throw new ArgumentException(message: "invalid device value", paramName: nameof(Device));

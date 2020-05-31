@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using DocumentationTool.Shared.DTOs;
 using DocumentationTool.Shared.Entities.Hardware;
-using System.Security.Cryptography.X509Certificates;
 using DocumentationTool.Server.Helpers;
 
 namespace DocumentationTool.Server.Controllers.Hardware
@@ -43,6 +40,11 @@ namespace DocumentationTool.Server.Controllers.Hardware
                 .Include(x => x.CPU)
                 .Include(x => x.Memory)
                 .Include(x => x.PowerConsumer)
+                .Include(x => x.HostAddress)
+                .Include(x => x.DevicePorts)
+                .Include(x => x.LicenseKey)
+                .Include(x => x.People)
+                .Include(x => x.Application)
                 .FirstOrDefaultAsync();
 
             if (server == null)

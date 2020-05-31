@@ -1,0 +1,95 @@
+﻿@inject IPersonRepostiroy personRepository
+@inject IServerRepository serverRepository 
+
+<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-12">
+            <h3>Contacts</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <div class="col-sm-1">
+                    <button type="button" class="btn btn-primary btn-sm" @onclick="() => ContactModal.Open()">Add contact</button>
+                </div>
+
+                <ContactModal @ref="ContactModal"
+                                 serverDevice="ServerDevice"
+                                 saved="GetPeople" />
+
+                <GenericList List="ServerDevice.People">
+                    <WholeListTemplate>
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>First name</th>
+                                    <th>Last name</th>
+                                    <th>Telephone number</th>
+                                    <th>E-mail address</th>
+                                    <th>Function</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ServerDevice.People)
+                                {
+                                    <tr>
+                                        <td>@item.FirstName</td>
+                                        <td>@item.LastName</td>
+                                        <td>@item.TelephoneCompany</td>
+                                        <td>@item.EMailAdress</td>
+                                        <td>@item.Function</td>
+                                        <td>
+                                            <a href="/contact/detail/@item.Id"><span class="oi oi-eye" /></a>
+                                            <a href="/contact/edit/@item.Id"><span class="oi oi-pencil" /></a>
+                                            <a href="/contact" @onclick="@(() => RemovePerson(item))"><span class="oi oi-trash" /></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </WholeListTemplate>
+                </GenericList>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter] public ServerDevice ServerDevice { get; set; }
+
+    PaginationDTO paginationDTO = new PaginationDTO();
+    private int totalAmountPages;
+    private int recordsPerPage = 5;
+
+    public ContactModal ContactModal { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+
+    public async Task GetPeople(List<Person> people)
+    {
+        foreach (var person in people)
+            ServerDevice.People.Add(person);
+
+        await UpdateServerData();
+    }
+
+    private async Task UpdateServerData()
+    {
+        await serverRepository.UpdateServerDevice(ServerDevice);
+    }
+
+    private async Task RemovePerson(Person person)
+    {
+
+        ServerDevice.People.Remove(person);
+        await UpdateServerData();
+    }
+}

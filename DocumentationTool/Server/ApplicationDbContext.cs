@@ -31,7 +31,7 @@ namespace DocumentationTool.Server
 
             //Software
             modelBuilder.Entity<Application>()
-                .HasMany<LicenseKey>(x => x.LicenseKeys)
+                .HasMany(x => x.LicenseKeys)
                 .WithOne(s => s.Application)
                 .HasForeignKey(s => s.ApplicationId);
 
@@ -41,10 +41,48 @@ namespace DocumentationTool.Server
                 .WithOne(s => s.LayerThreeNet)
                 .HasForeignKey(s => s.LayerThreeNetId);
 
-            //cables
-            modelBuilder.Entity<PortCable>()
-                .HasKey(pc => new { pc.CableId, pc.PortId });
-                
+            //Server
+            modelBuilder.Entity<ServerDevice>()
+                .HasMany(x => x.Application)
+                .WithOne(s => s.ServerDevice)
+                .HasForeignKey(s => s.ServerId);
+
+            modelBuilder.Entity<ServerDevice>()
+                .HasMany(x => x.People)
+                .WithOne(s => s.ServerDevice)
+                .HasForeignKey(s => s.ServerId);
+
+            modelBuilder.Entity<ServerDevice>()
+                .HasMany(x => x.LicenseKey)
+                .WithOne(s => s.ServerDevice)
+                .HasForeignKey(s => s.ServerId);
+
+
+            //Cables
+            modelBuilder.Entity<Cable>()
+                .HasMany(x => x.Port)
+                .WithOne(s => s.Cable)
+                .HasForeignKey(s => s.CableId);
+
+            modelBuilder.Entity<ServerDevice>()
+                .HasMany(x => x.DevicePorts)
+                .WithOne(s => s.ServerDevice)
+                .HasForeignKey(s => s.ServerId);
+
+            modelBuilder.Entity<Switch>()
+                .HasMany(x => x.DevicePorts)
+                .WithOne(s => s.SwitchDevice)
+                .HasForeignKey(s => s.SwitchId);
+
+            modelBuilder.Entity<RouterDevice>()
+                .HasMany(x => x.DevicePorts)
+                .WithOne(s => s.RouterDevice)
+                .HasForeignKey(s => s.RouterId);
+
+            modelBuilder.Entity<Printer>()
+                .HasMany(x => x.DevicePorts)
+                .WithOne(s => s.Printer)
+                .HasForeignKey(s => s.PrinterId);
         }
 
         //Network
@@ -56,9 +94,7 @@ namespace DocumentationTool.Server
         public DbSet<LicenseKey> LicenseKeys { get; set; }
 
         //Hardware
-        public DbSet<Mouse> Mouses { get; set; }
         public DbSet<Monitor> Monitors { get; set; }
-        public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<Model> Models { get; set; }
         public DbSet<BladeChasis> BladeChases { get; set; }
         public DbSet<General> General { get; set; }
@@ -88,6 +124,6 @@ namespace DocumentationTool.Server
         public DbSet<RecentlyUpdated> RecentlyUpdateds {get;set;}
 
         //Shared
-        public DbSet<PortCable> PortCables { get; set; }
+        //public DbSet<PortCable> PortCables { get; set; }
     }
 }

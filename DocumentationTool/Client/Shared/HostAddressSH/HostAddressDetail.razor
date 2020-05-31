@@ -1,0 +1,41 @@
+﻿<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>Host address</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <label class="font-weight-bold text-left">Type: </label>
+                    <label class="text-right pl-3">@hostAddress.Type</label>
+                </div>
+                @*<div class="row">
+            <label class="font-weight-bold text-left">Net assignemnt: </label>
+            <label class="text-right pl-3">@hostAddress.NetAssignment.General.Title</label>
+        </div>*@
+                @*<div class="row">
+            <label class="font-weight-bold text-left">Address: </label>
+            <label class="text-right pl-3">@hostAddress.Address.IpAddress</label>
+        </div>*@
+                <div class="row">
+                    <label class="font-weight-bold text-left">HostName: </label>
+                    <label class="text-right pl-3">@hostAddress.HostName</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Domain: </label>
+                    <label class="text-right pl-3">@hostAddress.Domain</label>
+                </div>
+                <div class="row">
+                    <label class="font-weight-bold text-left">Description: </label>
+                    <label class="text-right pl-3">@hostAddress.Description</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public HostAddress hostAddress { get; set; }
+}

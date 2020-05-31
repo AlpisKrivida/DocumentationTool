@@ -1,5 +1,6 @@
 ﻿@using DocumentationTool.Client.Shared.Tabs
 @using DocumentationTool.Client.Shared.GeneralSH
+@using DocumentationTool.Client.Pages.Network.IpLists 
 
 @page "/threeLayerNetwork/detail/{NetworkId:int}"
 @inject INetworkRepository networkRepository
@@ -9,11 +10,14 @@
 
 @if (LayerThreeNet != null)
 {
-    <TabControl>
-        <TabPage Text="General">
-            <GeneralDetails General="LayerThreeNet.General" />
-        </TabPage>
-    </TabControl>
+<TabControl>
+    <TabPage Text="General">
+        <GeneralDetails General="LayerThreeNet.General" />
+    </TabPage>
+    <TabPage Text="Ip list">
+        <IpListIndex NetworkId="LayerThreeNet.Id" />
+    </TabPage>
+</TabControl>
 }
 
 @code {

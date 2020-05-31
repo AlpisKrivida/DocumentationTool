@@ -19,5 +19,8 @@ namespace DocumentationTool.Shared.Entities.Contacts
         public string PersonalNumber { get; set; }
         public string Description { get; set; }
         public General General { get; set; }
+        
+        public int? ServerId { get; set; }
+        public ServerDevice ServerDevice { get; set; }
     }
 }

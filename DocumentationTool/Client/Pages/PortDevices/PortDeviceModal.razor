@@ -1,0 +1,270 @@
+﻿@inject ICableRepository cableRepository
+@inject IRouterRepository routerRepository
+@inject ISwitchRepository switchRepository
+
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                @if (DeviceName == "Router")
+                {
+                    <h5 class="modal-title">Routers</h5>
+                }
+                else if (DeviceName == "Switch")
+                {
+                    <h5 class="modal-title">Switches</h5>
+                }
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="() => Close()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="form-row p-1">
+                                    <div class="form-group m-1">
+                                        <label>Display </label>
+                                        <select class="custom-select-sm" @bind="@recordsPerPage" @onclick="LoadPage">
+                                            <option value="">5</option>
+                                            <option>10</option>
+                                            <option>15</option>
+                                            <option>20</option>
+                                        </select>
+                                        @if (DeviceName == "Router")
+                                        {
+                                            <label> routers</label>
+                                        }
+                                        else if (DeviceName == "Switch")
+                                        {
+                                            <label> switches</label>
+                                        }
+
+                                    </div>
+                                </div>
+
+                                @if (DeviceName == "Router")
+                                {
+                                    <GenericList List="Checklist">
+                                        <WholeListTemplate>
+                                            <table class="table">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>
+                                                        </th>
+                                                        <th>Title</th>
+                                                        <th>Type</th>
+                                                        <th>Cable lenght</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Checklist)
+                                                    {
+                                                        @if (item.Router != null)
+                                                        {
+                                                            <tr>
+                                                                <th>
+                                                                    <input disabled="@isDisabled" type="checkbox" @bind="item.IsActive" @onclick="() => CheckBox(item)" />
+                                                                </th>
+                                                                <td>@item.Router.General.Title</td>
+                                                                <td> </td>
+                                                                <td> </td>
+                                                                <td>
+                                                                    <a href="/router/detail/@item.Router.Id"><span class="oi oi-eye" /></a>
+                                                                </td>
+                                                            </tr>
+                                                            }
+                                                        }
+                                                </tbody>
+                                            </table>
+                                        </WholeListTemplate>
+                                    </GenericList>
+                                }
+                                else if (DeviceName == "Switch")
+                                {
+                                    Console.WriteLine("Switch gauna");
+                                    <GenericList List="Checklist">
+                                        <WholeListTemplate>
+                                            <table class="table">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>
+                                                        </th>
+                                                        <th>Title</th>
+                                                        <th>Type</th>
+                                                        <th>Cable lenght</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Checklist)
+                                                    {
+                                                        if (item.Switch != null)
+                                                        {
+                                                            <tr>
+                                                                <th>
+                                                                    <input disabled="@isDisabled" type="checkbox" @bind="item.IsActive" @onclick="() => CheckBox(item)" />
+                                                                </th>
+                                                                <td>@item.Switch.General.Title</td>
+                                                                <td> </td>
+                                                                <td> </td>
+                                                                <td>
+                                                                    <a href="/router/detail/@item.Switch.Id"><span class="oi oi-eye" /></a>
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </WholeListTemplate>
+                                    </GenericList>
+                                }
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="d-flex">
+                                            <div class="ml-auto">
+                                                <Pagination CurrentPage="@paginationDTO.Page" TotalAmountPages="totalAmountPages"
+                                                            SelectedPage="SelectedPage" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" @onclick="() => Close()">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => ChangeDisabled()">Remove checked</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+
+@code {
+    //Modal
+    public Guid Guid = Guid.NewGuid();
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+    private bool isDisabled { get; set; } = false;
+
+    private List<DeviceModal> Checklist = new List<DeviceModal>();
+
+
+    PaginationDTO paginationDTO = new PaginationDTO();
+    private int totalAmountPages;
+    private int recordsPerPage = 5;
+
+
+    public List<RouterDevice> RouterDevices;
+    public List<Switch> SwitchDevices;
+
+    [Parameter] public DevicePort DevicePort { get; set; }
+    [Parameter] public string DeviceName { get; set; }
+    [Parameter] public EventCallback<DevicePort> saved { get; set; }
+
+    public async Task Open(string deviceName)
+    {
+
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+        DeviceName = deviceName;
+        await LoadData();
+        await LoadPage();
+    }
+
+    public void Close()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        saved.InvokeAsync(DevicePort);
+        StateHasChanged();
+    }
+
+    private void CheckBox(DeviceModal item)
+    {
+        item.IsActive = !item.IsActive;
+        isDisabled = true;
+        DevicePort.RouterDevice = item.Router;
+    }
+
+    private void ChangeDisabled()
+    {
+        foreach (var item in Checklist)
+            item.IsActive = false;
+
+        isDisabled = false;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await LoadData();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+
+    private async Task LoadPage()
+    {
+        paginationDTO = new PaginationDTO();
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        Checklist = new List<DeviceModal>();
+
+        //Console.WriteLine(DeviceName);
+        if (DeviceName == "Router")
+        {
+            paginationDTO.RecordsPerPage = recordsPerPage;
+            var paginatedResponse = await routerRepository.GetRouters(paginationDTO);
+            RouterDevices = paginatedResponse.Response;
+            totalAmountPages = paginatedResponse.TotalAmountPages;
+
+            foreach (var item in RouterDevices)
+            {
+                Checklist.Add(new DeviceModal { IsActive = false, Router = item });
+            }
+        }
+        else if (DeviceName == "Switch")
+        {
+            paginationDTO.RecordsPerPage = recordsPerPage;
+            var paginatedResponse = await switchRepository.GetSwitches(paginationDTO);
+            SwitchDevices = paginatedResponse.Response;
+            totalAmountPages = paginatedResponse.TotalAmountPages;
+
+            foreach (var item in SwitchDevices)
+            {
+                Checklist.Add(new DeviceModal { IsActive = false, Switch = item });
+            }
+
+        }
+        Console.WriteLine("yes " + Checklist.Count);
+    }
+
+    private async Task SelectedPage(int page)
+    {
+        paginationDTO.Page = page;
+        await LoadData();
+    }
+}

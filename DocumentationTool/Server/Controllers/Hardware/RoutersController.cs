@@ -84,13 +84,13 @@ namespace DocumentationTool.Server.Controllers.Hardware
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var movie = await context.Routers.FirstOrDefaultAsync(x => x.Id == id);
-            if (movie == null)
+            var router = await context.Routers.FirstOrDefaultAsync(x => x.Id == id);
+            if (router == null)
             {
                 return NotFound();
             }
 
-            context.Remove(movie);
+            context.Remove(router);
             await context.SaveChangesAsync();
             return NoContent();
         }

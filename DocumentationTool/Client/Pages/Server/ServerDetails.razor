@@ -6,6 +6,8 @@
 @using DocumentationTool.Client.Shared.CPUSH
 @using DocumentationTool.Client.Shared.MemorySH
 @using DocumentationTool.Client.Shared.DevicePortSH
+@using DocumentationTool.Client.Shared.HostAddressSH
+@using DocumentationTool.Client.Pages.Contacts
 
 
 @page "/server/detail/{ServerId:int}"
@@ -16,31 +18,39 @@
 
 @if (Server != null)
 {
-    <TabControl>
-        <TabPage Text="General">
-            <GeneralDetails General="Server.General" />
-        </TabPage>
-        <TabPage Text="Form factor">
-            <FormFactorDetail FormFactor="Server.FormFactor" />
-        </TabPage>
-        <TabPage Text="Power consumer">
-            <PowerConsumerDetail PowerConsumer="Server.PowerConsumer" />
-        </TabPage>
-        <TabPage Text="Model">
-            <ModelDetail Model="Server.Model" />
-        </TabPage>
-        <TabPage Text="CPU">
-            <CPUDetail CPU="Server.CPU" />
-        </TabPage>
-        <TabPage Text="Memory">
-            <MemoryDetail  Memory="Server.Memory" />
-        </TabPage>
-        <TabPage Text="Port">
-            <DeviceIndex Device="server"
-                         DeviceId="ServerId"/>
-        </TabPage>
-        
-    </TabControl>
+<TabControl>
+    <TabPage Text="General">
+        <GeneralDetails General="Server.General" />
+    </TabPage>
+    <TabPage Text="Form factor">
+        <FormFactorDetail FormFactor="Server.FormFactor" />
+    </TabPage>
+    <TabPage Text="Power consumer">
+        <PowerConsumerDetail PowerConsumer="Server.PowerConsumer" />
+    </TabPage>
+    <TabPage Text="Model">
+        <ModelDetail Model="Server.Model" />
+    </TabPage>
+    <TabPage Text="CPU">
+        <CPUDetail CPU="Server.CPU" />
+    </TabPage>
+    <TabPage Text="Memory">
+        <MemoryDetail Memory="Server.Memory" />
+    </TabPage>
+    <TabPage Text="Port">
+        <DeviceIndex Device="server"
+                     DeviceId="ServerId" />
+    </TabPage>
+    <TabPage Text="Host address">
+        <HostAddressDetail />
+    </TabPage>
+    <TabPage Text="Application">
+    </TabPage>
+    <TabPage Text="Contacts">
+        <ContactForDevices ServerDevice="Server" />
+    </TabPage>
+
+</TabControl>
 
 }
 

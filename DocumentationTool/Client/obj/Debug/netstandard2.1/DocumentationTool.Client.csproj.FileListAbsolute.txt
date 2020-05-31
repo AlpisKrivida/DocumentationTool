@@ -185,8 +185,6 @@ B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\nets
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\RazorDeclaration\Pages\Contacts\ContactsEdit.razor.g.cs
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\RazorDeclaration\Pages\Contacts\ContactsForm.razor.g.cs
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\RazorDeclaration\Pages\Contacts\ContactsIndex.razor.g.cs
-B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\RazorDeclaration\Pages\Counter.razor.g.cs
-B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\RazorDeclaration\Pages\FetchData.razor.g.cs
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\RazorDeclaration\Pages\Index.razor.g.cs
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\RazorDeclaration\Pages\License\LicenseCreate.razor.g.cs
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\RazorDeclaration\Pages\License\LicenseDetails.razor.g.cs
@@ -273,7 +271,6 @@ B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\bin\Debug\nets
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\bin\Debug\netstandard2.1\dist\_framework\_bin\EPPlus.dll
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\bin\Debug\netstandard2.1\dist\_framework\_bin\Markdig.dll
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\bin\Debug\netstandard2.1\dist\_framework\_bin\Microsoft.AspNetCore.Blazor.dll
-B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\bin\Debug\netstandard2.1\dist\_framework\_bin\Microsoft.AspNetCore.Blazor.HttpClient.dll
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\bin\Debug\netstandard2.1\dist\_framework\_bin\Microsoft.AspNetCore.Components.dll
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\bin\Debug\netstandard2.1\dist\_framework\_bin\Microsoft.AspNetCore.Components.Forms.dll
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\bin\Debug\netstandard2.1\dist\_framework\_bin\Microsoft.AspNetCore.Components.Web.dll
@@ -424,8 +421,6 @@ B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\nets
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\Contacts\ContactsEdit.razor.g.cs
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\Contacts\ContactsForm.razor.g.cs
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\Contacts\ContactsIndex.razor.g.cs
-B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\Counter.razor.g.cs
-B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\FetchData.razor.g.cs
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\Index.razor.g.cs
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\License\LicenseCreate.razor.g.cs
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\License\LicenseDetails.razor.g.cs
@@ -528,3 +523,17 @@ B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\nets
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\Network\ThreeLayerNetwork\ThreeLayerNetworkEdit.razor.g.cs
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\Network\ThreeLayerNetwork\ThreeLayerNetworkForm.razor.g.cs
 B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\Network\ThreeLayerNetwork\ThreeLayerNetworkIndex.razor.g.cs
+B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\RazorDeclaration\Pages\Network\IpLists\IpListIndex.razor.g.cs
+B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\Network\IpLists\IpListIndex.razor.g.cs
+B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\RazorDeclaration\Pages\PortDevices\PortEdit.razor.g.cs
+B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\PortDevices\PortEdit.razor.g.cs
+B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\RazorDeclaration\Pages\PortDevices\PortDeviceModal.razor.g.cs
+B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\PortDevices\PortDeviceModal.razor.g.cs
+B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\RazorDeclaration\Pages\PortDevices\DeviceModalItem.razor.g.cs
+B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\PortDevices\DeviceModalItem.razor.g.cs
+B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\RazorDeclaration\Shared\HostAddressSH\HostAddressDetail.razor.g.cs
+B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Shared\HostAddressSH\HostAddressDetail.razor.g.cs
+B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\RazorDeclaration\Pages\Contacts\ContactForDevices.razor.g.cs
+B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\RazorDeclaration\Pages\Contacts\ContactModal.razor.g.cs
+B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\Contacts\ContactForDevices.razor.g.cs
+B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\obj\Debug\netstandard2.1\Razor\Pages\Contacts\ContactModal.razor.g.cs

@@ -1,0 +1,200 @@
+﻿@inject IPersonRepostiroy personRepository
+
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                    <h5 class="modal-title">People</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="() => Close()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="form-row p-1">
+                                    <div class="form-group m-1">
+                                        <label>Display </label>
+                                        <select class="custom-select-sm" @bind="@recordsPerPage" @onclick="LoadPage">
+                                            <option value="">5</option>
+                                            <option>10</option>
+                                            <option>15</option>
+                                            <option>20</option>
+                                        </select>
+                                            <label> people</label>
+                                    </div>
+                                </div>
+                                    <GenericList List="Checklist">
+                                        <WholeListTemplate>
+                                            <table class="table">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>
+                                                        </th>
+                                                        <th>Title</th>
+                                                        <th>Type</th>
+                                                        <th>Cable lenght</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Checklist)
+                                                    {
+                                                        @if (item.Person != null)
+                                                        {
+                                                            <tr>
+                                                                <th>
+                                                                    <input type="checkbox" @onchange="(e) => { CheckBox(item.Person, e.Value); }" />
+                                                                </th>
+                                                                <td>@item.Person.General.Title</td>
+                                                                <td> </td>
+                                                                <td> </td>
+                                                                <td>
+                                                                    <a href="/router/detail/@item.Person.Id"><span class="oi oi-eye" /></a>
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </WholeListTemplate>
+                                    </GenericList>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="d-flex">
+                                            <div class="ml-auto">
+                                                <Pagination CurrentPage="@paginationDTO.Page" TotalAmountPages="totalAmountPages"
+                                                            SelectedPage="SelectedPage" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" @onclick="() => Save()">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+
+@code {
+    //Modal
+    public Guid Guid = Guid.NewGuid();
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+
+    private List<PersonModal> Checklist = new List<PersonModal>();
+    PaginationDTO paginationDTO = new PaginationDTO();
+    private int totalAmountPages;
+    private int recordsPerPage = 5;
+
+
+    public List<Person> People;
+    public List<Person> temp;
+
+    [Parameter] public ServerDevice serverDevice { get; set; }
+    [Parameter] public EventCallback<List<Person>> saved { get; set; }
+
+    public async Task Open()
+    {
+
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+        await LoadData();
+        await LoadPage();
+    }
+
+    public void Close()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        StateHasChanged();
+    }
+
+    public void Save()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        saved.InvokeAsync(People);
+        StateHasChanged();
+    }
+
+    private void CheckBox(Person item, object checkedValue)
+    {
+        if ((bool)checkedValue)
+        {
+            if (!People.Contains(item))
+            {
+                People.Add(item);
+            }
+        }
+        else
+        {
+            if (People.Contains(item))
+            {
+                People.Remove(item);
+            }
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await LoadData();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+
+    private async Task LoadPage()
+    {
+        paginationDTO = new PaginationDTO();
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        Checklist = new List<PersonModal>();
+
+
+        paginationDTO.RecordsPerPage = recordsPerPage;
+        var paginatedResponse = await personRepository.GetPeople(paginationDTO);
+        temp = paginatedResponse.Response.Where(x => x.ServerId != serverDevice.Id).ToList();
+        totalAmountPages = paginatedResponse.TotalAmountPages;
+
+        foreach (var item in temp)
+        {
+            Checklist.Add(new PersonModal { IsActive = false, Person = item });
+        }
+
+        Console.WriteLine("yes " + Checklist.Count);
+    }
+
+    private async Task SelectedPage(int page)
+    {
+        paginationDTO.Page = page;
+        await LoadData();
+    }
+}

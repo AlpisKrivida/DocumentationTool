@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Cables</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="() => Close()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -14,11 +14,6 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-
-                                @*<div class="form-group">
-                                    <a class="btn btn-info" href="cable/create"><span class="ri oi oi-plus" /> New cable</a>
-                                </div>*@
-
                                 <div class="form-row p-1">
                                     <div class="form-group m-1">
                                         <label>Display </label>
@@ -33,7 +28,7 @@
                                 </div>
 
 
-                                <GenericList List="Cables">
+                                <GenericList List="CableChecklist">
                                     <WholeListTemplate>
                                         <table class="table">
                                             <thead class="thead-light">
@@ -47,19 +42,18 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach (var item in Cables)
+                                                @foreach (var item in CableChecklist)
                                                 {
                                                     <tr>
                                                         <th>
-                                                            <input type="checkbox" @onchange="(e) => CheckboxClicked(e.Value, item)" />
+                                                            <input disabled="@isDisabled" type="checkbox" @bind="item.IsActive" @onclick="() => CheckBox(item)" />
+                                                            @*<input type="checkbox" @bind-value="@isChecked[counter]" @onclick="() => CheckBox(isChecked[counter]) @onchange="(e) => CheckboxClicked(e.Value, item" />*@
                                                         </th>
-                                                        <td>@item.General.Title</td>
-                                                        <td>@item.CableType</td>
-                                                        <td>@item.CableLenght</td>
+                                                        <td>@item.Cable.General.Title</td>
+                                                        <td>@item.Cable.CableType</td>
+                                                        <td>@item.Cable.CableLenght</td>
                                                         <td>
-                                                            <a href="/cable/detail/@item.Id"><span class="oi oi-eye" /></a>
-                                                            @*<a href="/cable/edit/@item.Id"><span class="oi oi-pencil" /></a>
-                                                            <a href="/cable" @onclick="@(() => DeleteCable(item.Id))"><span class="oi oi-trash" /></a>*@
+                                                            <a href="/cable/detail/@item.Cable.Id"><span class="oi oi-eye" /></a>
                                                         </td>
                                                     </tr>
                                                 }
@@ -83,8 +77,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save changes</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Close</button>
+                <button type="button" class="btn btn-primary" @onclick="() => Close()">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => ChangeDisabled()">Remove checked</button>
             </div>
         </div>
     </div>
@@ -103,14 +97,19 @@
     public string ModalDisplay = "none;";
     public string ModalClass = "";
     public bool ShowBackdrop = false;
+
     List<Cable> Cables;
-    List<bool> CheckBox;
     PaginationDTO paginationDTO = new PaginationDTO();
     private int totalAmountPages;
     private int recordsPerPage = 5;
     private int currentCheckbox = 0;
 
-    [Parameter] public List<Cable> SelectedCables { get; set; }
+    private bool isDisabled { get; set; } = false;
+
+    private List<CableModal> CableChecklist = new List<CableModal>();
+
+    [Parameter] public Cable SelectedCable { get; set; }
+    [Parameter] public EventCallback<Cable> saved { get; set; }
 
     public void Open()
     {
@@ -125,27 +124,25 @@
         ModalDisplay = "none";
         ModalClass = "";
         ShowBackdrop = false;
+        saved.InvokeAsync(SelectedCable);
         StateHasChanged();
     }
 
-    private void CheckboxClicked(object e, Cable cable)
+    private void CheckBox(CableModal item)
     {
-        if((bool)e)
-        {
-            SelectedCables.Add(cable);
-        }
-        else
-        {
-            SelectedCables.Remove(cable);
-        }
-        Console.WriteLine(SelectedCables.Count());
+        item.IsActive = !item.IsActive;
+        isDisabled = true;
+        SelectedCable = item.Cable;
+        Console.WriteLine(SelectedCable.General.Title);
     }
 
-    private bool GetCheckBoxValue()
+    private void ChangeDisabled()
     {
-        CheckBox.Add(false);
+        foreach (var item in CableChecklist)
+            item.IsActive = false;
 
-        return CheckBox.ElementAt(currentCheckbox);
+        //SelectedCable = new Cable();
+        isDisabled = false;
     }
 
     protected override async Task OnInitializedAsync()
@@ -172,17 +169,17 @@
         var paginatedResponse = await cableRepository.GetCables(paginationDTO);
         Cables = paginatedResponse.Response;
         totalAmountPages = paginatedResponse.TotalAmountPages;
+
+        CableChecklist = new List<CableModal>();
+        foreach (var item in Cables)
+        {
+            CableChecklist.Add(new CableModal { IsActive = false, Cable=item });
+        }
     }
 
     private async Task SelectedPage(int page)
     {
         paginationDTO.Page = page;
-        await LoadCables();
-    }
-
-    private async Task DeleteCable(int id)
-    {
-        await cableRepository.DeleteCable(id);
         await LoadCables();
     }
 }

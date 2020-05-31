@@ -13,23 +13,23 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                @*<div class="form-group">
                     <label>Primary</label>
                     <div>
                         <InputCheckbox class="form-control" @bind-Value="@HostAddress.Primary" />
                         <ValidationMessage For="@(() => HostAddress.Primary)" />
                     </div>
-                </div>
+                </div>*@
 
-                <div class="form-group">
+                @*<div class="form-group">
                     <label>Active</label>
                     <div>
                         <InputCheckbox @bind-Value="@HostAddress.Active" />
                         <ValidationMessage For="@(() => HostAddress.Active)" />
                     </div>
-                </div>
+                </div>*@
 
-                <div class="form-group">
+                @*<div class="form-group">
                     <label>Net Assignment</label>
                     <div>
                         <InputText @bind-Value="@HostAddress.NetAssignment" />
@@ -43,9 +43,9 @@
                         <InputText @bind-Value="@HostAddress.AddressStartRange" />
                         <ValidationMessage For="@(() => HostAddress.AddressStartRange)" />
                     </div>
-                </div>
+                </div>*@
 
-                <div class="form-group">
+                @*<div class="form-group">
                     <label>Address range end</label>
                     <div>
                         <InputText @bind-Value="@HostAddress.AdressEndRange" />
@@ -59,7 +59,7 @@
                         <InputText @bind-Value="@HostAddress.NetZone" />
                         <ValidationMessage For="@(() => HostAddress.NetZone)" />
                     </div>
-                </div>
+                </div>*@
 
                 <div class="form-group">
                     <label>Address allocation</label>
@@ -69,7 +69,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                @*<div class="form-group">
                     <label>IPv4 address</label>
                     <div>
                         <InputText @bind-Value="@HostAddress.IPV4Address" />
@@ -91,15 +91,15 @@
                         <InputText @bind-Value="@HostAddress.NetMaskEnd" />
                         <ValidationMessage For="@(() => HostAddress.NetMaskEnd)" />
                     </div>
-                </div>
+                </div>*@
 
-                <div class="form-group">
+                @*<div class="form-group">
                     <label>Default gateway for the net</label>
                     <div>
-                        <InputCheckbox @bind-Value="@HostAddress.DefaultGatewayForNet" />
+                        <InputText @bind-Value="@HostAddress.DefaultGatewayForNet" />
                         <ValidationMessage For="@(() => HostAddress.DefaultGatewayForNet)" />
                     </div>
-                </div>
+                </div>*@
 
                 <div class="form-group">
                     <label>Hostname (FQDN)</label>
@@ -125,7 +125,7 @@
                         </div>
                     </div>*@
 
-                <div class="form-group">
+                @*<div class="form-group">
                     <label>Search domain</label>
                     <div>
                         <InputText @bind-Value="@HostAddress.SearchDomain" />
@@ -139,7 +139,7 @@
                         <InputText @bind-Value="@HostAddress.AssignedPort" />
                         <ValidationMessage For="@(() => HostAddress.AssignedPort)" />
                     </div>
-                </div>
+                </div>*@
 
                 <div class="form-group">
                     <label>Description</label>

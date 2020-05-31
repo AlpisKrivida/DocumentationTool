@@ -1,5 +1,8 @@
 ﻿@using DocumentationTool.Client.Pages.PortDevices
 
+@inject IRouterRepository routerRepository
+@inject ISwitchRepository switchRepository
+
 <h3>Device port</h3>
 <EditForm Model="DevicePort" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
@@ -18,7 +21,11 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Type</label>
                     <div class="col-sm-4">
-                        <InputText class="form-control form-control-sm" @bind-Value="@DevicePort.Type" />
+                        <InputSelect class="form-control form-control-sm" @bind-Value="@DevicePort.Type">
+                            <option>Select type...</option>
+                            <option>In</option>
+                            <option>Output</option>
+                        </InputSelect>
                         <ValidationMessage For="@(() => DevicePort.Type)" />
                     </div>
                 </div>
@@ -79,10 +86,72 @@
                     </div>
                 </div>
 
-                <PortModal @ref="Modal" SelectedCables="SelectedCables"/>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Cable</label>
+                    @if (SelectedCable.General != null)
+                    {
+                        <div class="col-sm-4">
+                            <input disabled class="form-control form-control-sm" @bind="@SelectedCable.General.Title" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-sm-4">
+                            <input disabled class="form-control form-control-sm" @bind="@SelectedCable.CableType" />
+                        </div>
+                    }
 
-                <button type="button" @onclick="() => Modal.Open()">Add cable</button>
+                    <div class="col-sm-1">
+                        <button type="button" class="btn btn-primary btn-sm" @onclick="() => Modal.Open()">+</button>
+                    </div>
 
+                    <PortModal @ref="Modal"
+                               SelectedCable="TestCable"
+                               saved="GetCable" />
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Device type</label>
+                    <div class="col-sm-4">
+                        <select class="form-control form-control-sm" @bind="@DeviceType" @onclick="test">
+                            <option>Router</option>
+                            <option>Switch</option>
+                            <option>Printer</option>
+                            <option>Server</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Device</label>
+                    @if (DeviceType == "Router" && TestDevicePort.RouterDevice != null)
+                    {
+                        <div class="col-sm-4">
+                            <input disabled class="form-control form-control-sm" @bind="@TestDevicePort.RouterDevice.General.Title" />
+                        </div>
+                    }
+                    else if (DeviceType == "Switch" && TestDevicePort.SwitchDevice != null)
+                    {
+                        <div class="col-sm-4">
+                            <input disabled class="form-control form-control-sm" @bind="@TestDevicePort.SwitchDevice.General.Title" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-sm-4">
+                            <input disabled class="form-control form-control-sm" />
+                        </div>
+                    }
+
+                    <div class="col-sm-1">
+                        <button type="button" class="btn btn-primary btn-sm" @onclick="() => DeviceModal.Open(DeviceType)">+</button>
+                    </div>
+
+                    <PortDeviceModal @ref="DeviceModal"
+                                     DeviceName=@DeviceType
+                                     DevicePort="TestDevicePort"
+                                     saved="GetDevicePort" />
+                </div>
             </div>
         </div>
     </div>
@@ -94,8 +163,111 @@
 @code {
     [Parameter] public DevicePort DevicePort { get; set; }
     [Parameter] public EventCallback OnValidSubmit { get; set; }
-    [Parameter] public List<Cable> SelectedCables { get; set; }
+    [Parameter] public Cable SelectedCable { get; set; }
+
+    public Cable TestCable = new Cable();
+    public DevicePort TestDevicePort = new DevicePort();
 
     private PortModal Modal { get; set; }
+    private PortDeviceModal DeviceModal { get; set; }
+    private string DeviceType { get; set; }
+
+    //public List<Switch> SwitchDevices;
+    //public List<RouterDevice> RouterDevices;
+
+    //Pages
+    //PaginationDTO paginationDTO = new PaginationDTO();
+    //private int totalAmountPages;
+    //private int recordsPerPage = 5;
+
+    private void test()
+    {
+        Console.WriteLine(DeviceType);
+        Console.WriteLine(DevicePort.Type);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            DevicePort.Type = "In";
+            DeviceType = "Router";
+
+            //await LoadData();
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    //private async Task LoadData()
+    //{
+    //    if (DeviceType == "Router")
+    //    {
+    //        paginationDTO.RecordsPerPage = recordsPerPage;
+    //        var paginatedResponse = await routerRepository.GetRouters(paginationDTO);
+    //        RouterDevices = paginatedResponse.Response;
+    //        totalAmountPages = paginatedResponse.TotalAmountPages;
+    //    }
+    //    else if (DeviceType == "Switch")
+    //    {
+    //        paginationDTO.RecordsPerPage = recordsPerPage;
+    //        var paginatedResponse = await switchRepository.GetSwitches(paginationDTO);
+    //        SwitchDevices = paginatedResponse.Response;
+    //        totalAmountPages = paginatedResponse.TotalAmountPages;
+    //    }
+    //}
+
+    private void GetCable(Cable item)
+    {
+        SelectedCable = item;
+    }
+
+    private void GetDevicePort(DevicePort item)
+    {
+        if (DevicePort.Type == "In")
+        {
+            switch (DeviceType)
+            {
+                case "Router":
+                    DevicePort.RouterInpuId = item.RouterId;
+                    break;
+                case "Swich":
+                    DevicePort.SwitchInputId = item.RouterId;
+                    break;
+                case "Printer":
+                    DevicePort.PrinterInputId = item.RouterId;
+                    break;
+                case "Server":
+                    DevicePort.ServerInpuId = item.RouterId;
+                    break;
+            }
+        }
+        else if (DevicePort.Type == "Out")
+        {
+            switch (DeviceType)
+            {
+                case "Router":
+                    DevicePort.RouterOutputd = item.RouterId;
+                    break;
+                case "Swich":
+                    DevicePort.SwitchOutputId = item.RouterId;
+                    break;
+                case "Printer":
+                    DevicePort.PrinterOutputId = item.RouterId;
+                    break;
+                case "Server":
+                    DevicePort.ServerInpuId = item.RouterId;
+                    break;
+            }
+        }
+        else { }
+    }
+
+    private void SetIDs(DevicePort item)
+    {
+
+    }
 }
 

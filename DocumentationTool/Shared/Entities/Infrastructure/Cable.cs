@@ -18,6 +18,6 @@ namespace DocumentationTool.Shared.Entities.Infrastructure
         public string FibLeads { get; set; }
         public string Description { get; set; }
 
-        public List<PortCable> Port { get; set; }
+        public List<DevicePort> Port { get; set; }
     }
 }

@@ -37,11 +37,10 @@
                         <div class="col-md-3">
                             <InputSelect class="form-control form-control-sm" @onclick="@(() => UpdateNetmask())" @bind-Value="@Prefix">
                                 <option value="">Select prefix...</option>
-                                <option>30</option>
-                                <option>29</option>
-                                <option>28</option>
-                                <option>27</option>
-                                <option>26</option>
+                                @for (int i = 32; i >= 0; i--)
+                                {
+                                    <option>@i</option>
+                                }
                             </InputSelect>
                         </div>
                     </div>
@@ -90,37 +89,53 @@
 
     private string AddressStart { get; set; }
     private string AddressEnd { get; set; }
-    private string Prefix { get; set; }
-    
+    private string Prefix { get; set; } = "32";
+
+
+    //Getmask
+    private int SlashPrefix { get; set; } = 32;
+    private string DefaultNetmask { get; set; } = "255.255.255.255";
 
     private async Task CalculateRange()
     {
-        
+
     }
 
     private async Task UpdateNetmask()
     {
-        switch(Prefix)
+
+        await PrefixUpdate();
+        await UpdateRange();
+    }
+
+    private async Task UpdateRange()
+    {
+
+    }
+
+    private async Task PrefixUpdate()
+    {
+        var prefix = int.Parse(Prefix);
+        double[] values = new double[4];
+        int byteNumber = 1;
+        int NetmaskNth = 3;
+        if (prefix != SlashPrefix)
         {
-            case "30":
-                LayerThreeNet.NetMask = "255.255.255.252";
-                break;
-            case "29":
-                LayerThreeNet.NetMask = "255.255.255.248";
-                break;
-            case "28":
-                LayerThreeNet.NetMask = "255.255.255.240";
-                break;
-            case "27":
-                LayerThreeNet.NetMask = "255.255.255.224";
-                break;
-            case "26":
-                LayerThreeNet.NetMask = "255.255.255.192";
-                break;
-            default:
-                LayerThreeNet.NetMask = "";
-                break;
+            for (int x = SlashPrefix-1; x >= prefix; x--)
+            {
+                if(values[NetmaskNth] == 255)
+                {
+                    NetmaskNth--;
+                    byteNumber = 1;
+                    values[NetmaskNth] = 0;
+                }
+
+                values[NetmaskNth] = (Math.Pow(2, byteNumber) - 1);
+                byteNumber++;
+            }
         }
+
         LayerThreeNet.Prefix = Prefix;
+        LayerThreeNet.NetMask = $"{(255-values[0])}.{(255-values[1])}.{(255-values[2])}.{(255-values[3])}";  
     }
 }

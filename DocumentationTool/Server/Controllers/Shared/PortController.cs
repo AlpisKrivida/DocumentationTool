@@ -24,7 +24,7 @@ namespace DocumentationTool.Server.Controllers.Shared
         public async Task<ActionResult<List<DevicePort>>> Get([FromQuery] PaginationDTO paginationDTO)
         {
             var queryable = context.DevicePort
-                .Include(x => x.Cables)
+                .Include(x => x.Cable)
                 .AsQueryable();
             await HttpContext.InsertPaginationParametersInResponse(queryable, paginationDTO.RecordsPerPage);
             return await queryable.Paginate(paginationDTO).ToListAsync();
@@ -47,7 +47,7 @@ namespace DocumentationTool.Server.Controllers.Shared
         public async Task<ActionResult<DevicePort>> Get(int id)
         {
             var person = await context.DevicePort.Where(x => x.Id == id)
-                .Include(x => x.Cables)
+                .Include(x => x.Cable)
                 .FirstOrDefaultAsync();
 
             if (person == null)

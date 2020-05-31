@@ -5,6 +5,7 @@ using System.Text;
 
 namespace DocumentationTool.Shared.Entities.Common
 {
+
     public class RecentlyAdded
     {
         public int Id { get; set; }
