@@ -7,7 +7,7 @@ namespace DocumentationTool.Client.Repository.Network
 {
     public interface IHostAddress
     {
-        Task<HostAddress> GetHostAddress(int id);
-        Task<int> CreateHostAddress(HostAddress layerThreeNet);
+        Task<HostAddressRepository> GetHostAddress(int id);
+        Task<int> CreateHostAddress(HostAddressRepository layerThreeNet);
     }
 }

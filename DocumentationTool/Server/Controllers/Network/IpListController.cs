@@ -21,15 +21,37 @@ namespace DocumentationTool.Server.Controllers.Network
         [HttpGet("{id}")]
         public async Task<ActionResult<List<IPList>>> Get(int id)
         {
-            var iplists = await context.IpLists.Where(x => x.LayerThreeNetId == id)
+            var iplists = await context.IpLists
+                .Include(x => x.Server)
+                .Include(x => x.Printer)
+                .Include(x => x.Switch)
+                .Include(x => x.Client)
+                .Where(x => x.LayerThreeNetId == id)
                 .ToListAsync();
 
             if (iplists == null)
             {
                 return NotFound();
             }
-
             return iplists;
+        }
+
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<IPList>>> Get()
+        {
+            var iplist = await context.IpLists
+                .Include(x => x.Server)
+                .Include(x => x.Printer)
+                .Include(x => x.Switch)
+                .Include(x => x.Client)
+                .ToListAsync();
+
+            if (iplist == null)
+            {
+                return NotFound();
+            }
+
+            return iplist;
         }
     }
 }

@@ -1,48 +1,50 @@
 ﻿@page "/port/create/{Device}/{DeviceId:int}"
-@using DocumentationTool.Client.Shared.DevicePortSH
-@inject NavigationManager navigationManager
-@inject IPortRepository portRepository
 
-<DevicePortForm 
-                DevicePort="DevicePort"
-                OnValidSubmit="SaveData"
-                SelectedCable="SelectedCable"
-                />
-8
+@inject NavigationManager navigationManager
+@inject IServerRepository serverRepository
+@inject IRouterRepository routerRepository
+@inject ISwitchRepository switchRepository
+@inject IClientRepository clientRepository  
+
+
+<HostAddressForm HostAddress="HostAddress" />
+
 @code {
     [Parameter] public string Device { get; set; }
     [Parameter] public int DeviceId { get; set; }
 
-    public Cable SelectedCable = new Cable();
-    private DevicePort DevicePort = new DevicePort();
+    public HostAddress HostAddress = new HostAddress();
+    private ServerDevice ServerDevice;
 
     private async Task SaveData()
     {
         try
         {
-            DevicePort.Cable = SelectedCable;
             switch (Device)
             {
                 case "server":
-                    DevicePort.ServerInpuId = DeviceId;
-                    DevicePort.ServerId = DeviceId;
+                    ServerDevice = await serverRepository.GetServerDevice(DeviceId);
+                    ServerDevice.HostAddress = HostAddress;
+                    await serverRepository.UpdateServerDevice(ServerDevice);
                     break;
+
                 case "switch":
-                    DevicePort.SwitchInputId = DeviceId;
+
                     break;
+
                 case "router":
-                    DevicePort.RouterInpuId = DeviceId;
+
                     break;
+
                 case "printer":
                     break;
+
                 default:
                     throw new ArgumentException(message: "invalid device value", paramName: nameof(Device));
             };
 
-
-            var portId = await portRepository.CreateDevicePort(DevicePort);
-
-            navigationManager.NavigateTo(Device);
+            var url = $"{Device}/detail/{DeviceId}";
+            navigationManager.NavigateTo(url);
         }
         catch (Exception ex)
         {

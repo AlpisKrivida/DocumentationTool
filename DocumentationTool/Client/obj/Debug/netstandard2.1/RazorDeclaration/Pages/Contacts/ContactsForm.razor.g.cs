@@ -84,119 +84,126 @@ using DocumentationTool.Client.Helpers;
 #line hidden
 #nullable disable
 #nullable restore
-#line 14 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Client.Shared.Tags;
+#line 13 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
+using DocumentationTool.Client.Helpers.Modals;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 15 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Client.Excel;
+using DocumentationTool.Client.Shared.Tags;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 16 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Client.Repository;
+using DocumentationTool.Client.Excel;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 17 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Client.Repository.Hardware;
+using DocumentationTool.Client.Repository;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 18 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Client.Repository.Contacts;
+using DocumentationTool.Client.Repository.Hardware;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 19 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Client.Repository.Infrastucture;
+using DocumentationTool.Client.Repository.Contacts;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 20 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Client.Repository.Software;
+using DocumentationTool.Client.Repository.Infrastucture;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 21 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Client.Repository.Sowftware;
+using DocumentationTool.Client.Repository.Software;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 22 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
-using DocumentationTool.Client.Repository.Shared;
+using DocumentationTool.Client.Repository.Sowftware;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 23 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
+using DocumentationTool.Client.Repository.Shared;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 24 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
 using DocumentationTool.Client.Repository.Network;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 25 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
+#line 26 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
 using DocumentationTool.Shared.DTOs;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 26 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
+#line 27 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
 using DocumentationTool.Shared.Entities.Hardware;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 27 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
+#line 28 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
 using DocumentationTool.Shared.Entities.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 28 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
+#line 29 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
 using DocumentationTool.Shared.Entities.Contacts;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 29 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
+#line 30 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
 using DocumentationTool.Shared.Entities.Infrastructure;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 30 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
+#line 31 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
 using DocumentationTool.Shared.Entities.Information;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 31 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
+#line 32 "B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Client\_Imports.razor"
 using DocumentationTool.Shared.Entities.Network;
 
 #line default

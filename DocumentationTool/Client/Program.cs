@@ -60,7 +60,7 @@ namespace DocumentationTool.Client
             //Network
             services.AddScoped<INetworkRepository, NetworkRepository>();
             services.AddScoped<IIPListRepository, IPListRepository>();
-            services.AddScoped<IHostAddress, HostAddress>();
+            services.AddScoped<IHostAddress, HostAddressRepository>();
         }
     }
 }

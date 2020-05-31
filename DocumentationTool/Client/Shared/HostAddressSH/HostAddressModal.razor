@@ -1,0 +1,185 @@
+﻿@inject INetworkRepository networkRepository
+
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Network</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="() => Close()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="form-row p-1">
+                                    <div class="form-group m-1">
+                                        <label>Network </label>
+                                        <select class="custom-select-sm" @bind="@recordsPerPage" @onclick="LoadPage">
+                                            <option value="">5</option>
+                                            <option>10</option>
+                                            <option>15</option>
+                                            <option>20</option>
+                                        </select>
+                                        <label> cables</label>
+                                    </div>
+                                </div>
+
+
+                                <GenericList List="CableChecklist">
+                                    <WholeListTemplate>
+                                        <table class="table">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>
+                                                    </th>
+                                                    <th>Title</th>
+                                                    <th>Type</th>
+                                                    <th>Cable lenght</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in CableChecklist)
+                                                {
+                                                    <tr>
+                                                        <th>
+                                                            <input disabled="@isDisabled" type="checkbox" @bind="item.IsActive" @onclick="() => CheckBox(item)" />
+                                                            @*<input type="checkbox" @bind-value="@isChecked[counter]" @onclick="() => CheckBox(isChecked[counter]) @onchange="(e) => CheckboxClicked(e.Value, item" />*@
+                                                        </th>
+                                                        <td>@item.LayerThreeNet.General.Title</td>
+                                                        <td>@item.LayerThreeNet.NetMask</td>
+                                                        <td>@item.LayerThreeNet.Prefix</td>
+                                                        <td>
+                                                            <a href="/cable/detail/@item.LayerThreeNet.Id"><span class="oi oi-eye" /></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </WholeListTemplate>
+                                </GenericList>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="d-flex">
+                                            <div class="ml-auto">
+                                                <Pagination CurrentPage="@paginationDTO.Page" TotalAmountPages="totalAmountPages"
+                                                            SelectedPage="SelectedPage" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" @onclick="() => Close()">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => ChangeDisabled()">Remove checked</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+
+@code {
+
+    public Guid Guid = Guid.NewGuid();
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+
+    List<LayerThreeNet> LayerThreeNets;
+    PaginationDTO paginationDTO = new PaginationDTO();
+    private int totalAmountPages;
+    private int recordsPerPage = 5;
+    private int currentCheckbox = 0;
+
+    private bool isDisabled { get; set; } = false;
+
+    private List<NetworkModal> CableChecklist = new List<NetworkModal>();
+
+    [Parameter] public LayerThreeNet SelectedCable { get; set; }
+    [Parameter] public EventCallback<LayerThreeNet> saved { get; set; }
+
+    public void Open()
+    {
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+    }
+
+    public void Close()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        saved.InvokeAsync(SelectedCable);
+        StateHasChanged();
+    }
+
+    private void CheckBox(NetworkModal item)
+    {
+        item.IsActive = !item.IsActive;
+        isDisabled = true;
+        SelectedCable = item.LayerThreeNet;
+        Console.WriteLine(SelectedCable.General.Title);
+    }
+
+    private void ChangeDisabled()
+    {
+        foreach (var item in CableChecklist)
+            item.IsActive = false;
+
+        //SelectedCable = new Cable();
+        isDisabled = false;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await LoadCables();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+
+    private async Task LoadPage()
+    {
+        paginationDTO = new PaginationDTO();
+        await LoadCables();
+    }
+
+    private async Task LoadCables()
+    {
+        paginationDTO.RecordsPerPage = recordsPerPage;
+        var paginatedResponse = await networkRepository.GetLayerThreeNet(paginationDTO);
+        LayerThreeNets = paginatedResponse.Response;
+        totalAmountPages = paginatedResponse.TotalAmountPages;
+
+        CableChecklist = new List<NetworkModal>();
+        foreach (var item in LayerThreeNets)
+        {
+            CableChecklist.Add(new NetworkModal { IsActive = false, LayerThreeNet = item });
+        }
+    }
+
+    private async Task SelectedPage(int page)
+    {
+        paginationDTO.Page = page;
+        await LoadCables();
+    }
+}

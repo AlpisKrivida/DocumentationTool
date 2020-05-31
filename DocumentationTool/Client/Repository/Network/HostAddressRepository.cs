@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace DocumentationTool.Client.Repository.Network
 {
-    public class HostAddress : IHostAddress
+    public class HostAddressRepository : IHostAddress
     {
         private readonly IHttpService httpService;
         private string url = "api/hostaddress";
 
-        public HostAddress(IHttpService httpService)
+        public HostAddressRepository(IHttpService httpService)
         {
             this.httpService = httpService;
         }
-        public async Task<int> CreateHostAddress(HostAddress hostAddress)
+        public async Task<int> CreateHostAddress(HostAddressRepository hostAddress)
         {
-            var response = await httpService.Post<HostAddress, int>(url, hostAddress);
+            var response = await httpService.Post<HostAddressRepository, int>(url, hostAddress);
             if (!response.Success)
             {
                 throw new ApplicationException(await response.GetBody());
@@ -26,9 +26,9 @@ namespace DocumentationTool.Client.Repository.Network
             return response.Response;
         }
 
-        public async Task<HostAddress> GetHostAddress(int id)
+        public async Task<HostAddressRepository> GetHostAddress(int id)
         {
-            var response = await httpService.Get<HostAddress>($"{url}/{id}");
+            var response = await httpService.Get<HostAddressRepository>($"{url}/{id}");
             if (!response.Success)
             {
                 throw new ApplicationException(await response.GetBody());
