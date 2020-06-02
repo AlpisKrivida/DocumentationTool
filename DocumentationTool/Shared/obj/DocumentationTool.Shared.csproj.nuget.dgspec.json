@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj": {}
+    "B:\\Documents\\Final\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj": {}
   },
   "projects": {
-    "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj": {
+    "B:\\Documents\\Final\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj",
+        "projectUniqueName": "B:\\Documents\\Final\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj",
         "projectName": "DocumentationTool.Shared",
-        "projectPath": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj",
+        "projectPath": "B:\\Documents\\Final\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj",
         "packagesPath": "C:\\Users\\Alpis\\.nuget\\packages\\",
-        "outputPath": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\obj\\",
+        "outputPath": "B:\\Documents\\Final\\DocumentationTool\\DocumentationTool\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -55,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300-preview-015135\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

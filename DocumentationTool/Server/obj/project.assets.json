@@ -10172,11 +10172,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Server\\DocumentationTool.Server.csproj",
+      "projectUniqueName": "B:\\Documents\\Final\\DocumentationTool\\DocumentationTool\\Server\\DocumentationTool.Server.csproj",
       "projectName": "DocumentationTool.Server",
-      "projectPath": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Server\\DocumentationTool.Server.csproj",
+      "projectPath": "B:\\Documents\\Final\\DocumentationTool\\DocumentationTool\\Server\\DocumentationTool.Server.csproj",
       "packagesPath": "C:\\Users\\Alpis\\.nuget\\packages\\",
-      "outputPath": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Server\\obj\\",
+      "outputPath": "B:\\Documents\\Final\\DocumentationTool\\DocumentationTool\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -10195,11 +10195,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Client\\DocumentationTool.Client.csproj": {
-              "projectPath": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Client\\DocumentationTool.Client.csproj"
+            "B:\\Documents\\Final\\DocumentationTool\\DocumentationTool\\Client\\DocumentationTool.Client.csproj": {
+              "projectPath": "B:\\Documents\\Final\\DocumentationTool\\DocumentationTool\\Client\\DocumentationTool.Client.csproj"
             },
-            "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj": {
-              "projectPath": "B:\\Documents\\Github\\CV\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj"
+            "B:\\Documents\\Final\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj": {
+              "projectPath": "B:\\Documents\\Final\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj"
             }
           }
         }
@@ -10268,7 +10268,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300-preview-015135\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
       }
     }
   }
