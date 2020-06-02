@@ -36,6 +36,24 @@ namespace DocumentationTool.Server.Controllers.Network
             return iplists;
         }
 
+        [HttpGet("{id}/getid")]
+        public async Task<ActionResult<IPList>> GetID(int id)
+        {
+            var iplists = await context.IpLists
+                .Include(x => x.Server)
+                .Include(x => x.Printer)
+                .Include(x => x.Switch)
+                .Include(x => x.Client)
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
+            if (iplists == null)
+            {
+                return NotFound();
+            }
+            return iplists;
+        }
+
         [HttpGet("GetAll")]
         public async Task<ActionResult<List<IPList>>> Get()
         {

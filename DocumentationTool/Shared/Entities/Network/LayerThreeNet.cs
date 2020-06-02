@@ -14,6 +14,9 @@ namespace DocumentationTool.Shared.Entities.Network
         public string Prefix { get; set; }
         public string NetMask { get; set; }
         public string DNSDomain { get; set; }
+        public string StartHost { get; set; }
+        public string EndHost { get; set; }
+        public string Broadcast { get; set; }
         public string Description { get; set; }
 
         public List<IPList> IpLists { get; set; }

@@ -1,6 +1,9 @@
 ﻿@page "/contact"
 @inject IPersonRepostiroy personRepository
 @inject IJSRuntime iJSRuntime
+@using Blazor.FileReader
+@using System.IO 
+@inject IFileReaderService fileReaderService
 
 <div class="container-fluid">
     <div class="row">
@@ -13,14 +16,24 @@
         <div class="col-12">
             <div class="card">
                 <div class="form-group row">
-                    <a class="btn btn-info" href="contact/create"><span class="ri oi oi-plus" /> New contact</a>
-                    <div >
-                        <button class="btn btn-primary" @onclick="GenerateExcel">Export</button>
+                    <div class="col">
+                        <a class="btn btn-info" href="contact/create"><span class="ri oi oi-plus" /> New contact</a>
                     </div>
-                    <div >
-                        <button class="btn btn-primary" @onclick="GenerateExcel">Import</button>
+                    <div class="col-8">
+
+                    </div>
+                    <div class="col align-self-lg-end">
+                        <button class="btn btn-primary" @onclick="GenerateExcel">Export</button>
+                        <button class="btn btn-primary" @onclick="Show">Import</button>
                     </div>
                 </div>
+
+                @if (showImport)
+                {
+                    <div class="btn btn-success text-left">
+                        <input type="file" @ref="inputReference" @onchange="async () => await OpenFileAsync()" />
+                    </div>
+                }
 
                 <div class="form-row p-1">
                     <div class="form-group m-1">
@@ -45,6 +58,7 @@
                                     <th>Last name</th>
                                     <th>Telephone number</th>
                                     <th>E-mail address</th>
+                                    <th>City</th>
                                     <th>Function</th>
                                     <th>Action</th>
                                 </tr>
@@ -57,6 +71,7 @@
                                         <td>@item.LastName</td>
                                         <td>@item.TelephoneCompany</td>
                                         <td>@item.EMailAdress</td>
+                                        <td>@item.City</td>
                                         <td>@item.Function</td>
                                         <td>
                                             <a href="/contact/detail/@item.Id"><span class="oi oi-eye" /></a>
@@ -91,6 +106,12 @@
     private int totalAmountPages;
     private int recordsPerPage = 5;
 
+    //IFileListEntry file;
+    int numLines;
+    bool showImport = false;
+    ElementReference inputReference;
+    MemoryStream fileStream = null;
+
     protected override async Task OnInitializedAsync()
     {
         try
@@ -99,7 +120,48 @@
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex);
+        }
+    }
 
+    async Task Show()
+    {
+        showImport = !showImport;
+    }
+
+    public async Task OpenFileAsync()
+    {
+        var file = (await fileReaderService.CreateReference(inputReference).EnumerateFilesAsync()).FirstOrDefault();
+
+        if (file != null)
+        {
+            var fileinfo = await file.ReadFileInfoAsync();
+
+            //using(var ms = await file.CreateMemoryStreamAsync((int)fileinfo.Size))
+            //{
+            //    fileStream = ms;
+            //}
+
+            OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+
+            using (var ms = await file.CreateMemoryStreamAsync((int)fileinfo.Size))
+            using (OfficeOpenXml.ExcelPackage package = new OfficeOpenXml.ExcelPackage(ms))
+            {
+                OfficeOpenXml.ExcelWorksheet worksheet = package.Workbook.Worksheets.FirstOrDefault();
+                int colCount = worksheet.Dimension.End.Column;
+                int rowCount = worksheet.Dimension.End.Row;
+                Console.WriteLine(colCount);
+                Console.WriteLine(rowCount);
+
+                for (int row = 1; row <= rowCount; row++)
+                {
+                    for (int col = 1; col <= colCount; col++)
+                    {
+                        if (col == 1) Console.WriteLine(worksheet.Cells[row, col].Value.ToString());
+                    }
+                }
+            }
+            showImport = false;
         }
     }
 

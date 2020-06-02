@@ -1,84 +1,97 @@
 ﻿@using DocumentationTool.Client.Shared.GeneralSH
 @using DocumentationTool.Client.Helpers
+@using System.Net
 
-    <EditForm Model="LayerThreeNet" OnValidSubmit="OnValidSubmit">
+<EditForm Model="LayerThreeNet" OnValidSubmit="OnValidSubmit">
 
-        <GeneralForm General="General" />
+    <GeneralForm General="General" />
 
-        <DataAnnotationsValidator />
-        <h3>Network</h3>
-        <div class="form-group row">
-            <div class="col-md-8">
-                <div class="formInputModel">
+    <DataAnnotationsValidator />
+    <h3>Network</h3>
+    <div class="form-group row">
+        <div class="col-md-8">
+            <div class="formInputModel">
 
-                    <div class="form-group row">
-                        <label class="col-md-2 col-form-label">Type</label>
-                        <div class="col-md-4 ">
-                            <InputText class="form-control form-control-sm" @bind-Value="@LayerThreeNet.Type" />
-                            <ValidationMessage For="@(() => LayerThreeNet.Type)" />
-                        </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Type</label>
+                    <div class="col-md-4 ">
+                        <input disabled class="form-control form-control-sm" @bind="@LayerThreeNet.Type" />
+                        @*<ValidationMessage For="@(() => LayerThreeNet.Type)" />*@
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Net </label>
+                    <div class="col-md-4">
+                        <InputText class="form-control form-control-sm" @bind-Value="@LayerThreeNet.Net" />
+                        <ValidationMessage For="@(() => LayerThreeNet.Net)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Netmask</label>
+                    <div class="col-md-4 ">
+                        <InputText disabled="true" class="form-control form-control-sm" @bind-Value="@LayerThreeNet.NetMask" />
+                        @*<ValidationMessage For="@(() => LayerThreeNet.NetMask)" />*@
                     </div>
 
-                    <div class="form-group row">
-                        <label class="col-md-2 col-form-label">Net </label>
-                        <div class="col-md-4">
-                            <InputText class="form-control form-control-sm" @bind-Value="@LayerThreeNet.Net" />
-                            <ValidationMessage For="@(() => LayerThreeNet.Net)" />
-                        </div>
+                    <div class="col-md-3">
+                        <InputSelect class="form-control form-control-sm" @onclick="@(() => UpdateNetmask())" @bind-Value="@Prefix">
+                            <option value="">Select prefix...</option>
+                            @for (int i = 32; i >= 0; i--)
+                            {
+                                <option>@i</option>
+                            }
+                        </InputSelect>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Address range</label>
+                    <div class="col-md-3 ">
+                        <InputText disabled="true" class="form-control form-control-sm" @bind-Value="@AddressStart" />
                     </div>
 
-                    <div class="form-group row">
-                        <label class="col-md-2 col-form-label">Netmask</label>
-                        <div class="col-md-4 ">
-                            <InputText disabled="true" class="form-control form-control-sm" @bind-Value="@LayerThreeNet.NetMask" />
-                            <ValidationMessage For="@(() => LayerThreeNet.NetMask)" />
-                        </div>
-
-                        <div class="col-md-3">
-                            <InputSelect class="form-control form-control-sm" @onclick="@(() => UpdateNetmask())" @bind-Value="@Prefix">
-                                <option value="">Select prefix...</option>
-                                @for (int i = 32; i >= 0; i--)
-                                {
-                                    <option>@i</option>
-                                }
-                            </InputSelect>
-                        </div>
+                    <div class="col-md-3 ">
+                        <InputText disabled="true" class="form-control form-control-sm" @bind-Value="@AddressEnd" />
                     </div>
+                </div>
 
-                    <div class="form-group row">
-                        <label class="col-md-2 col-form-label">Address range</label>
-                        <div class="col-md-3 ">
-                            <InputText disabled="true" class="form-control form-control-sm" @bind-Value="@AddressStart" />
-                        </div>
-
-                        <div class="col-md-3 ">
-                            <InputText disabled="true" class="form-control form-control-sm" @bind-Value="@AddressEnd" />
-                        </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Total hosts</label>
+                    <div class="col-md-4 ">
+                        <input class="form-control form-control-sm" disabled @bind="TotalHosts" />
                     </div>
+                </div>
 
-                    <div class="form-group row">
-                        <label class="col-md-2 col-form-label">DNS domain</label>
-                        <div class="col-md-4 ">
-                            <InputText class="form-control form-control-sm" @bind-Value="@LayerThreeNet.DNSDomain" />
-                            <ValidationMessage For="@(() => LayerThreeNet.DNSDomain)" />
-                        </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Broadcast</label>
+                    <div class="col-md-4 ">
+                        <input class="form-control form-control-sm" disabled @bind="Broadcast" />
                     </div>
+                </div>
 
-                    <div class="form-group row">
-                        <label class="col-md-2 col-form-label">Description</label>
-                        <div class="col-md-7 ">
-                            <InputTextArea class="form-control" @bind-Value="@LayerThreeNet.Description" />
-                            <ValidationMessage For="@(() => LayerThreeNet.Description)" />
-                        </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">DNS domain</label>
+                    <div class="col-md-4 ">
+                        <InputText class="form-control form-control-sm" @bind-Value="@LayerThreeNet.DNSDomain" />
+                        <ValidationMessage For="@(() => LayerThreeNet.DNSDomain)" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Description</label>
+                    <div class="col-md-7 ">
+                        <InputTextArea class="form-control" @bind-Value="@LayerThreeNet.Description" />
+                        <ValidationMessage For="@(() => LayerThreeNet.Description)" />
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-
-
-        <button class="btn btn-primary" type="submit">Save Changes</button>
-    </EditForm>
+    <button class="btn btn-primary pb-8 mb-8" type="submit">Save Changes</button>
+</EditForm>
 
 @code {
 
@@ -90,15 +103,36 @@
     private string AddressStart { get; set; }
     private string AddressEnd { get; set; }
     private string Prefix { get; set; } = "32";
+    private string TotalHosts { get; set; }
+    private string Broadcast { get; set; }
 
 
-    //Getmask
+    //Getmask kkkk kkkkklll
+    private string thishist;
+    private string maybe;
+    private string sddd;
+    private string sddsssd;
+    private string sddssssd;
+
+
     private int SlashPrefix { get; set; } = 32;
     private string DefaultNetmask { get; set; } = "255.255.255.255";
 
     private async Task CalculateRange()
     {
 
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            LayerThreeNet.Type = "IPv4";
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
 
     private async Task UpdateNetmask()
@@ -115,27 +149,57 @@
 
     private async Task PrefixUpdate()
     {
-        var prefix = int.Parse(Prefix);
-        double[] values = new double[4];
-        int byteNumber = 1;
-        int NetmaskNth = 3;
-        if (prefix != SlashPrefix)
-        {
-            for (int x = SlashPrefix-1; x >= prefix; x--)
-            {
-                if(values[NetmaskNth] == 255)
-                {
-                    NetmaskNth--;
-                    byteNumber = 1;
-                    values[NetmaskNth] = 0;
-                }
+        LayerThreeNet.Prefix = Prefix;
 
-                values[NetmaskNth] = (Math.Pow(2, byteNumber) - 1);
-                byteNumber++;
-            }
+
+        //var prefix = int.Parse(Prefix);
+        //double[] values = new double[4];
+        //int byteNumber = 1;
+        //int NetmaskNth = 3;
+        //if (prefix != SlashPrefix)
+        //{
+        //    for (int x = SlashPrefix-1; x >= prefix; x--)
+        //    {
+        //        if(values[NetmaskNth] == 255)
+        //        {
+        //            NetmaskNth--;
+        //            byteNumber = 1;
+        //            values[NetmaskNth] = 0;
+        //        }
+        //        values[NetmaskNth] = (Math.Pow(2, byteNumber) - 1);
+        //        byteNumber++;
+        //    }
+        //}
+        //LayerThreeNet.Prefix = Prefix;
+        //LayerThreeNet.NetMask = $"{(255-values[0])}.{(255-values[1])}.{(255-values[2])}.{(255-values[3])}";
+        //IPNetwork ipnetwork = IPNetwork.Parse("192.168.168.100/16");
+
+
+        if (LayerThreeNet.Net != null && Prefix != null)
+        {
+
+            IPNetwork ipnetwork = IPNetwork.Parse("192.168.168.100/16");
+
+            //Console.WriteLine("Network : {0}", ipnetwork.Network);
+            //Console.WriteLine("Netmask : {0}", ipnetwork.Netmask);
+            //Console.WriteLine("Broadcast : {0}", ipnetwork.Broadcast);
+            //Console.WriteLine("FirstUsable : {0}", ipnetwork.FirstUsable);
+            //Console.WriteLine("LastUsable : {0}", ipnetwork.LastUsable);
+            //Console.WriteLine("Usable : {0}", ipnetwork.Usable);
+            //Console.WriteLine("Cidr : {0}", ipnetwork.Cidr);
+
+            var addres = $"{LayerThreeNet.Net}/{LayerThreeNet.Prefix}";
+            Console.WriteLine(addres);
+            ipnetwork = IPNetwork.Parse(addres);
+
+            AddressStart = ipnetwork.FirstUsable.ToString();
+            AddressEnd = ipnetwork.LastUsable.ToString();
+            LayerThreeNet.NetMask = ipnetwork.Netmask.ToString();
+            LayerThreeNet.Net = ipnetwork.Network.ToString();
+            TotalHosts = ipnetwork.Usable.ToString();
+            Broadcast = ipnetwork.Broadcast.ToString();
+
         }
 
-        LayerThreeNet.Prefix = Prefix;
-        LayerThreeNet.NetMask = $"{(255-values[0])}.{(255-values[1])}.{(255-values[2])}.{(255-values[3])}";  
     }
 }

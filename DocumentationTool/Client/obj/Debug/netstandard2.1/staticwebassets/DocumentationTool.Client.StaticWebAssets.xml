@@ -1,0 +1,4 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="_content/Syncfusion.Blazor" Path="C:\Users\Alpis\.nuget\packages\syncfusion.blazor\18.1.0.48\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Tewr.Blazor.FileReader" Path="C:\Users\Alpis\.nuget\packages\tewr.blazor.filereader\1.5.0.20109\build\..\staticwebassets\" />
+</StaticWebAssets>

@@ -25,5 +25,10 @@ namespace DocumentationTool.Client.Repository.Network
         {
             return await httpService.GetHelper<List<IPList>>(url);
         }
+
+        public async Task<IPList> GetIpListById(int id)
+        {
+            return await httpService.GetHelper<IPList>($"{url}/{id}/GetID");
+        }
     }
 }

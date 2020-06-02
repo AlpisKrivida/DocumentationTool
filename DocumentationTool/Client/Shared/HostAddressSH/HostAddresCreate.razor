@@ -1,20 +1,42 @@
-﻿@page "/hostaddress/create/{Device}/{DeviceId:int}"
-
-@inject NavigationManager navigationManager
+﻿@inject NavigationManager navigationManager
 @inject IServerRepository serverRepository
 @inject IRouterRepository routerRepository
 @inject ISwitchRepository switchRepository
 @inject IClientRepository clientRepository  
 
 
-<HostAddressForm HostAddress="HostAddress" />
+<HostAddressForm HostAddress="HostAddress"
+                 Device="@Device"
+                 />
+                 
 
 @code {
     [Parameter] public string Device { get; set; }
     [Parameter] public int DeviceId { get; set; }
 
+    public List<LayerThreeNet> LayerThreeNets { get; set; }
+    public List<IPList> iPLists { get; set; }
+
     public HostAddress HostAddress = new HostAddress();
     private ServerDevice ServerDevice;
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    try
+    //    {
+    //        await LoadData();
+    //    }
+    //    catch (Exception ex)
+    //    {
+
+    //    }
+    //}
+
+    //private async Task LoadData()
+    //{
+    //    LayerThreeNets = await networkRepository.GetAllLayerThreeNet();
+    //    iPLists = await iplistRepository.GetAllIPlists();
+    //}
 
     private async Task SaveData()
     {
@@ -37,6 +59,9 @@
                     break;
 
                 case "printer":
+                    break;
+
+                case "client":
                     break;
 
                 default:

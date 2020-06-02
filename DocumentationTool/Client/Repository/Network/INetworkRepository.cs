@@ -14,6 +14,6 @@ namespace DocumentationTool.Client.Repository.Network
         Task<int> CreateLayerThreeNet(LayerThreeNet layerThreeNet);
         Task DeleteLayerThreeNet(int id);
         Task UpdateLayerThreeNet(LayerThreeNet layerThreeNet);
-        //Task<List<LayerThreeNet>> GetAllLayerThreeNet();
+        Task<List<LayerThreeNet>> GetAllLayerThreeNet();
     }
 }

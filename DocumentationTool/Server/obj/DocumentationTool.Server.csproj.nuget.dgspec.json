@@ -49,6 +49,10 @@
               "target": "Package",
               "version": "[5.1.1, )"
             },
+            "IPNetwork2": {
+              "target": "Package",
+              "version": "[2.5.206, )"
+            },
             "Markdig": {
               "target": "Package",
               "version": "[0.18.3, )"
@@ -80,6 +84,10 @@
             "Syncfusion.Blazor": {
               "target": "Package",
               "version": "[18.1.0.48, )"
+            },
+            "Tewr.Blazor.FileReader": {
+              "target": "Package",
+              "version": "[1.5.0.20109, )"
             }
           },
           "imports": [

@@ -1,5 +1,5 @@
 ﻿@inject IPortRepository portRepository
-@inject HostAddressRepository hostAdressRepository 
+@inject IHostAddress hostAdressRepository 
 
 
     <div class="container-fluid">
@@ -12,38 +12,43 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    @if (HostAddress == null)
+                    @if (DeviceHostAddress == null)
                     {
-                        <div class="form-group">
+                        @*<div class="form-group">
                             <a class="btn btn-info" href="hostaddress/create/@Device/@DeviceId"><span class="ri oi oi-plus" /> New Port</a>
-                        </div>
-                    }
-                    @if (HostAddress != null)
-                    {
-                    <table class="table">
-                        <thead class="thead-light">
-                            <tr>
-                                <th>Address</th>
-                                <th>Host name</th>
-                                <th>Connected with</th>
-                                <th>Cable</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                        </div>*@
+
+                        <HostAddresCreate 
+                                          Device="Device" 
+                                          DeviceId="DeviceId"/>
+
+                    } 
+                    @if(DeviceHostAddress != null) {
+
+                        <table class="table">
+                            <thead class="thead-light">
                                 <tr>
-                                    <td>@HostAddress.Address</td>
-                                    <td>@HostAddress.HostName</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        @*<a href="/server/detail/@item.Id"><span class="oi oi-eye" /></a>*@
-                                        @*<a href="/port/edit/@Device/@HostAddress.Id"><span class="oi oi-pencil" /></a>
-                                        <a href="/@Device" @onclick="@(() => DeleteDevicePort(item.Id))"><span class="oi oi-trash" /></a>*@
-                                    </td>
+                                    <th>Address</th>
+                                    <th>Host name</th>
+                                    <th>Connected with</th>
+                                    <th>Cable</th>
+                                    <th>Action</th>
                                 </tr>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td>@DeviceHostAddress.Address</td>
+                                        <td>@DeviceHostAddress.HostName</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            @*<a href="/server/detail/@item.Id"><span class="oi oi-eye" /></a>*@
+                                            @*<a href="/port/edit/@Device/@HostAddress.Id"><span class="oi oi-pencil" /></a>
+                                            <a href="/@Device" @onclick="@(() => DeleteDevicePort(item.Id))"><span class="oi oi-trash" /></a>*@
+                                        </td>
+                                    </tr>
+                            </tbody>
+                        </table>
                     }
                 </div>
             </div>
@@ -56,49 +61,6 @@
 
     [Parameter] public string Device { get; set; }
     [Parameter] public int DeviceId { get; set; }
-    [Parameter] public HostAddress HostAddress { get; set; }
+    [Parameter] public HostAddress DeviceHostAddress { get; set; }
 
-    protected override async Task OnInitializedAsync()
-    {
-        try
-        {
-            //await LoadDevicePort();
-        }
-        catch (Exception ex)
-        {
-
-        }
-    }
-
-    //private async Task LoadPage()
-    //{
-    //    paginationDTO = new PaginationDTO();
-    //    await LoadDevicePort();
-    //}
-
-    //private async Task LoadDevicePort()
-    //{
-    //    paginationDTO.RecordsPerPage = recordsPerPage;
-    //    var paginatedResponse = await portRepository.GetDevicePort(paginationDTO);
-    //    switch (Device)
-    //    {
-    //        case "server":
-    //            DevicePort = paginatedResponse.Response.Where(x => x.ServerId == DeviceId).ToList();
-    //            break;
-    //    }
-    //    //DevicePort = paginatedResponse.Response.Where(x => x.Id == DeviceId).ToList();
-    //    totalAmountPages = paginatedResponse.TotalAmountPages;
-    //}
-
-    //private async Task SelectedPage(int page)
-    //{
-    //    paginationDTO.Page = page;
-    //    await LoadDevicePort();
-    //}
-
-    //private async Task DeleteDevicePort(int id)
-    //{
-    //    await portRepository.DeleteDevicePort(id);
-    //    await LoadDevicePort();
-    //}
 }

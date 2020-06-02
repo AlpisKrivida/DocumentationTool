@@ -1,14 +1,17 @@
-﻿<h3>Host address</h3>
+﻿@inject IIPListRepository iplistRepository
+@inject INetworkRepository networkRepository
+
+<h3>Create</h3>
 <EditForm Model="HostAddress">
     <DataAnnotationsValidator />
 
-    <div class="form-group row">
+    <div class="form-group row pt-4">
         <div class="col-md-8">
             <div class="formInputModel">
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Type</label>
                     <div class="col-sm-4">
-                        <InputText class="form-control" @bind-Value="@HostAddress.Type" />
+                        <InputText class="form-control form-control-sm" @bind-Value="@HostAddress.Type" />
                         <ValidationMessage For="@(() => HostAddress.Type)" />
                     </div>
                 </div>
@@ -29,26 +32,47 @@
                     </div>
                 </div>
 
-                @if (LayerThreeNet.General != null)
+                @if (LayerThreeNets != null)
                 {
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Net Assignment</label>
                         <div class="col-sm-4">
-                            <input disabled class="form-control form-control-sm" @bind="@LayerThreeNet.General.Title" />
+                            <select @onclick="@(() => LoadIps())" class="form-control form-control-sm" @bind="@LayerThreeNet">
+                                @foreach (var item in LayerThreeNets)
+                                {
+                                    <option value="@item.Id">@item.General.Title</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                }
+                @if (iPLists != null)
+                {
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Address</label>
+                        <div class="col-sm-4">
+                            <select @onclick="@(() => LoadIP())" class="form-control form-control-sm" @bind="@IpId">
+                                @foreach (var item in iPLists)
+                                {
+                                    @if (HostAddress.NetAssignment != null &&
+                                        HostAddress.NetAssignment.Id == item.LayerThreeNetId)
+                                    {
+                                        <option value="@item.Id">@item.IpAddress</option>
+                                    }
+                                }
+                            </select>
                         </div>
                     </div>
                 }
                 else
                 {
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Net Assignment</label>
+                        <label class="col-sm-2 col-form-label">Address</label>
                         <div class="col-sm-4">
-                            <input disabled class="form-control form-control-sm" />
+                            <input disabled class="form-control form-control-sm" @bind="@Broadcast" />
                         </div>
                     </div>
                 }
-
-
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Description</label>
                     <div class="col-sm-7">
@@ -63,6 +87,51 @@
 
 @code {
     [Parameter] public HostAddress HostAddress { get; set; }
-    [Parameter] public LayerThreeNet LayerThreeNet { get; set; }
-    [Parameter] public IPList IPList { get; set; }
+    [Parameter] public string Device { get; set; }
+
+    public List<LayerThreeNet> LayerThreeNets { get; set; }
+    public List<IPList> iPLists { get; set; }
+
+    public int LayerThreeNet { get; set; }
+    public int IpId { get; set; }
+    public string Broadcast { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await LoadData();
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    private async Task LoadIP()
+    {
+        if(IpId != 0)
+        {
+            HostAddress.Address = await iplistRepository.GetIpListById(IpId);
+        }
+    }
+
+    private async Task LoadIps()
+    {
+        if (LayerThreeNet != 0)
+        {
+            HostAddress.NetAssignment = await networkRepository.GetLayerThreeNet(LayerThreeNet);
+            iPLists = await iplistRepository.GetIPlists(LayerThreeNet);
+            if (Device == "switch" || Device == "router")
+            {
+                Broadcast = HostAddress.NetAssignment.Broadcast;
+                iPLists = null;
+            }
+        }
+    }
+
+    private async Task LoadData()
+    {
+        LayerThreeNets = await networkRepository.GetAllLayerThreeNet();
+    }
 }

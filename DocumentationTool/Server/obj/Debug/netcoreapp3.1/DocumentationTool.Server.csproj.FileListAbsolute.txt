@@ -515,3 +515,5 @@ B:\Documents\Final\DocumentationTool\DocumentationTool\Server\obj\Debug\netcorea
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\obj\Debug\netcoreapp3.1\DocumentationTool.Server.dll
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\obj\Debug\netcoreapp3.1\DocumentationTool.Server.pdb
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\obj\Debug\netcoreapp3.1\DocumentationTool.Server.genruntimeconfig.cache
+B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\System.Net.IPNetwork.dll
+B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\Blazor.FileReader.dll

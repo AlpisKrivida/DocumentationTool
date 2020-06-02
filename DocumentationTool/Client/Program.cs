@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Http;
 using DocumentationTool.Client.Repository.Sowftware;
 using DocumentationTool.Client.Repository.Shared;
 using DocumentationTool.Client.Repository.Network;
+using Blazor.FileReader;
 
 namespace DocumentationTool.Client
 {
@@ -61,6 +62,11 @@ namespace DocumentationTool.Client
             services.AddScoped<INetworkRepository, NetworkRepository>();
             services.AddScoped<IIPListRepository, IPListRepository>();
             services.AddScoped<IHostAddress, HostAddressRepository>();
+
+            //Imports
+            //services.AddScoped<IFileUpload, FileUpload>();
+
+            services.AddFileReaderService(options => options.UseWasmSharedBuffer = true);
         }
     }
 }

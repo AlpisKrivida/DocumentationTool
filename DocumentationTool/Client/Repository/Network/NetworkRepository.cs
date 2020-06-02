@@ -57,5 +57,10 @@ namespace DocumentationTool.Client.Repository.Network
                 throw new ApplicationException(await response.GetBody());
             }
         }
+
+        public async Task<List<LayerThreeNet>> GetAllLayerThreeNet()
+        {
+            return await httpService.GetHelper<List<LayerThreeNet>>(url);
+        }
     }
 }

@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "2oA5frhUROOIMHCAv03FjgkW1S/n8xQwXbznqLvOQ6s06MbCDXmPBTTHYqZ/HU60V3d/2Gc9xrkShV+uYLmnSg==",
+  "dgSpecHash": "nTMWuA9b0hbLLXWm4LF7cX0fuEMCeZCe+vZbiUNfdv7awbrmS6Qe+E+b/k5xkJ5RAMg784kel2++S0/OmswATg==",
   "success": true,
   "projectFilePath": "B:\\Documents\\Final\\DocumentationTool\\DocumentationTool\\Server\\DocumentationTool.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Alpis\\.nuget\\packages\\automapper\\9.0.0\\automapper.9.0.0.nupkg.sha512",
     "C:\\Users\\Alpis\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",
     "C:\\Users\\Alpis\\.nuget\\packages\\epplus\\5.1.1\\epplus.5.1.1.nupkg.sha512",
+    "C:\\Users\\Alpis\\.nuget\\packages\\ipnetwork2\\2.5.206\\ipnetwork2.2.5.206.nupkg.sha512",
     "C:\\Users\\Alpis\\.nuget\\packages\\markdig\\0.18.3\\markdig.0.18.3.nupkg.sha512",
     "C:\\Users\\Alpis\\.nuget\\packages\\microsoft.aspnetcore.authorization\\3.1.3\\microsoft.aspnetcore.authorization.3.1.3.nupkg.sha512",
     "C:\\Users\\Alpis\\.nuget\\packages\\microsoft.aspnetcore.blazor\\3.2.0-preview1.20073.1\\microsoft.aspnetcore.blazor.3.2.0-preview1.20073.1.nupkg.sha512",
@@ -209,7 +210,8 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
-    "C:\\Users\\Alpis\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\Alpis\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\Alpis\\.nuget\\packages\\tewr.blazor.filereader\\1.5.0.20109\\tewr.blazor.filereader.1.5.0.20109.nupkg.sha512"
   ],
   "logs": []
 }
