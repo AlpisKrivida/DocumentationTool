@@ -2,8 +2,6 @@
 @inject IServerRepository serverRepository
 @inject NavigationManager navigationManager
 
-<h3>Server edit</h3>
-
 @if (Server != null)
 {
     <ServerForm OnValidSubmit="Edit"

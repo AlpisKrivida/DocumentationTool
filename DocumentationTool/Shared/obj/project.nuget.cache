@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "CnZi3+o4UUqoj+E7TVw4ReXQbP3ZcdU+j7Xcp0mM7hYcBii2u38S6+uP7O3ViqdBWkg7EhCdMLTtnIdXAN2iYg==",
+  "dgSpecHash": "hwqDAtjKcyQ7ytxC/pGcFcaQCsJVjS3zV1wrcTfdZWb0p1Aenvo6xPWRf9+rjnVLdKstqyTa4i6LxgSHyJ1nfg==",
   "success": true,
   "projectFilePath": "B:\\Documents\\Final\\DocumentationTool\\DocumentationTool\\Shared\\DocumentationTool.Shared.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Alpis\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512"
+  ],
   "logs": []
 }

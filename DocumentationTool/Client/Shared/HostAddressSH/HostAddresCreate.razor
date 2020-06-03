@@ -3,13 +3,14 @@
 @inject IRouterRepository routerRepository
 @inject ISwitchRepository switchRepository
 @inject IClientRepository clientRepository  
+@inject IPrinterRepository printerRepository  
 
 
 <HostAddressForm HostAddress="HostAddress"
                  Device="@Device"
+                 OnValidSubmit="SaveData"
                  />
                  
-
 @code {
     [Parameter] public string Device { get; set; }
     [Parameter] public int DeviceId { get; set; }
@@ -18,57 +19,49 @@
     public List<IPList> iPLists { get; set; }
 
     public HostAddress HostAddress = new HostAddress();
-    private ServerDevice ServerDevice;
-
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    try
-    //    {
-    //        await LoadData();
-    //    }
-    //    catch (Exception ex)
-    //    {
-
-    //    }
-    //}
-
-    //private async Task LoadData()
-    //{
-    //    LayerThreeNets = await networkRepository.GetAllLayerThreeNet();
-    //    iPLists = await iplistRepository.GetAllIPlists();
-    //}
 
     private async Task SaveData()
     {
+        Console.WriteLine($"{Device} tarpas {DeviceId}");
         try
         {
             switch (Device)
             {
                 case "server":
-                    ServerDevice = await serverRepository.GetServerDevice(DeviceId);
-                    ServerDevice.HostAddress = HostAddress;
-                    await serverRepository.UpdateServerDevice(ServerDevice);
+                    var DeviceForHost = await serverRepository.GetServerDevice(DeviceId);
+                    DeviceForHost.HostAddress = HostAddress;
+                    await serverRepository.UpdateServerDevice(DeviceForHost);
                     break;
 
                 case "switch":
-
+                    var DeviceForHost1 = await switchRepository.GetSwitch(DeviceId);
+                    DeviceForHost1.HostAddress = HostAddress;
+                    await switchRepository.UpdateSwitch(DeviceForHost1);
                     break;
 
                 case "router":
-
+                    var DeviceForHost2 = await routerRepository.GetRouter(DeviceId);
+                    DeviceForHost2.HostAddress = HostAddress;
+                    await routerRepository.UpdateRouter(DeviceForHost2);
                     break;
 
                 case "printer":
+                    var DeviceForHost3 = await printerRepository.GetPrinter(DeviceId);
+                    DeviceForHost3.HostAddress = HostAddress;
+                    await printerRepository.UpdatePrinter(DeviceForHost3);
                     break;
 
                 case "client":
+                    var DeviceForHost4 = await clientRepository.GetClientPC(DeviceId);
+                    DeviceForHost4.HostAddress = HostAddress;
+                    await clientRepository.UpdateClientPC(DeviceForHost4);
                     break;
 
                 default:
                     throw new ArgumentException(message: "invalid device value", paramName: nameof(Device));
             };
 
-            var url = $"{Device}/detail/{DeviceId}";
+            var url = $"/{Device}/detail/{DeviceId}";
             navigationManager.NavigateTo(url);
         }
         catch (Exception ex)

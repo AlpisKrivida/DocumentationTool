@@ -25,6 +25,7 @@ namespace DocumentationTool.Server.Controllers.Hardware
             var queryable = context.ServerDevices
                 .Include(x => x.Model)
                 .Include(x => x.General)
+                .Include(x => x.FormFactor)
                 .AsQueryable();
             await HttpContext.InsertPaginationParametersInResponse(queryable, paginationDTO.RecordsPerPage);
             return await queryable.Paginate(paginationDTO).ToListAsync();
@@ -41,10 +42,9 @@ namespace DocumentationTool.Server.Controllers.Hardware
                 .Include(x => x.Memory)
                 .Include(x => x.PowerConsumer)
                 .Include(x => x.HostAddress)
+                    .ThenInclude(x => x.Address)
                 .Include(x => x.DevicePorts)
-                .Include(x => x.LicenseKey)
                 .Include(x => x.People)
-                .Include(x => x.Application)
                 .FirstOrDefaultAsync();
 
             if (server == null)

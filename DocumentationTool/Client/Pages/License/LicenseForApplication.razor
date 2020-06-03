@@ -45,7 +45,7 @@
                                     <tr>
                                         <td>@item.Key</td>
                                         <td>@item.ExpireDate</td>
-                                        <td>(@item.Amount + @item.PricePerUnit)</td>
+                                        <td>@CountPrice(@item.Amount, @item.PricePerUnit)</td>
                                         <td>
                                             <a href="/license/detail/@item.Id"><span class="oi oi-eye" /></a>
                                             <a href="/license/edit/@item.Id"><span class="oi oi-pencil" /></a>
@@ -93,6 +93,8 @@
 
         }
     }
+
+    private double CountPrice(int amount, double price) => price * amount;
 
     private async Task LoadPage()
     {

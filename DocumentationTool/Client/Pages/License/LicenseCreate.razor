@@ -10,6 +10,11 @@
     [Parameter]
     public int ApplicationId { get; set; }
 
+    protected async override Task OnInitializedAsync()
+    {
+        License.ExpireDate = DateTime.Today;
+    }
+
     private async Task SaveLicense()
     {
         try

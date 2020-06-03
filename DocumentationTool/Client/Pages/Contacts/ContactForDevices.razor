@@ -70,26 +70,24 @@
 
     protected override async Task OnInitializedAsync()
     {
+        await LoadData();
+    }
 
+    public async Task LoadData()
+    {
+        var response = await personRepository.GetAllPeople();
+        ServerDevice.People = response.Where(x => x.ServerId == ServerDevice.Id).ToList();
     }
 
     public async Task GetPeople(List<Person> people)
     {
         foreach (var person in people)
             ServerDevice.People.Add(person);
-
-        await UpdateServerData();
-    }
-
-    private async Task UpdateServerData()
-    {
-        await serverRepository.UpdateServerDevice(ServerDevice);
     }
 
     private async Task RemovePerson(Person person)
     {
-
-        ServerDevice.People.Remove(person);
-        await UpdateServerData();
+        person.ServerId = null;
+        await personRepository.UpdatePerson(person);
     }
 }

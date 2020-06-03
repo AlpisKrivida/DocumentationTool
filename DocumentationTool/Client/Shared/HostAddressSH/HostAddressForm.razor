@@ -1,8 +1,7 @@
 ﻿@inject IIPListRepository iplistRepository
 @inject INetworkRepository networkRepository
 
-<h3>Create</h3>
-<EditForm Model="HostAddress">
+<EditForm Model="HostAddress" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
 
     <div class="form-group row pt-4">
@@ -55,7 +54,7 @@
                                 @foreach (var item in iPLists)
                                 {
                                     @if (HostAddress.NetAssignment != null &&
-                                        HostAddress.NetAssignment.Id == item.LayerThreeNetId)
+                                       HostAddress.NetAssignment.Id == item.LayerThreeNetId)
                                     {
                                         <option value="@item.Id">@item.IpAddress</option>
                                     }
@@ -83,11 +82,13 @@
             </div>
         </div>
     </div>
+    <button class="btn btn-primary" type="submit">Save Changes</button>
 </EditForm>
 
 @code {
     [Parameter] public HostAddress HostAddress { get; set; }
     [Parameter] public string Device { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
 
     public List<LayerThreeNet> LayerThreeNets { get; set; }
     public List<IPList> iPLists { get; set; }

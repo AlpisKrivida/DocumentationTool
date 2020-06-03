@@ -11,9 +11,6 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="form-group">
-                    @*<a class="btn btn-info" href="license/create"><span class="ri oi oi-plus" /> New License</a>*@
-                </div>
 
                 <div class="form-row p-1">
                     <div class="form-group m-1">
@@ -27,7 +24,6 @@
                         <label> licenses</label>
                     </div>
                 </div>
-
 
                 <GenericList List="License">
                     <WholeListTemplate>
@@ -46,7 +42,7 @@
                                     <tr>
                                         <td>@item.Key</td>
                                         <td>@item.ExpireDate</td>
-                                        <td>(@item.Amount + @item.PricePerUnit)</td>
+                                        <td>@CountPrice(@item.Amount, @item.PricePerUnit)</td>
                                         <td>
                                             <a href="/license/detail/@item.Id"><span class="oi oi-eye" /></a>
                                             <a href="/license/edit/@item.Id"><span class="oi oi-pencil" /></a>
@@ -91,6 +87,8 @@
 
         }
     }
+
+    private double CountPrice(int amount, double price) => price * amount;
 
     private async Task LoadPage()
     {

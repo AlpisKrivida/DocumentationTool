@@ -2,11 +2,13 @@
     <h3>General</h3>
 </div>
 
-<EditForm Model="General">
+@*<EditForm Model="General">
     <DataAnnotationsValidator />
+    <ValidationSummary />*@
+
     <div class="form-group row">
         <div class="col-md-8">
-            <div class="formInputModel" >
+            <div class="formInputModel">
                 <div class="form-group row">
                     <label class="col-md-2 col-form-label">Title</label>
                     <div class="col-md-4">
@@ -43,13 +45,13 @@
                     <div class="col-md-4">
 
                         @*@if (General.Tag != null)
-                        {
-                            <TagComponent Tags="General.Tag" />
-                        }
-                        else
-                        {
+                            {
+                                <TagComponent Tags="General.Tag" />
+                            }
+                            else
+                            {
 
-                        }*@
+                            }*@
                         <TagComponent General="General" />
                     </div>
                 </div>
@@ -65,7 +67,7 @@
         </div>
     </div>
 
-</EditForm>
+@*</EditForm>*@
 
 @code {
     [Parameter] public General General { get; set; }

@@ -15,13 +15,5 @@ namespace DocumentationTool.Shared.Entities.Shared
         public string HostName { get; set; }
         public string Domain { get; set; }
         public string Description { get; set; }
-
-
-
-        //aliases
-        //DNS server
-        //public bool Primary { get; set; }
-        //public string SearchDomain { get; set; }
-        //public string AssignedPort { get; set; }
     }
 }

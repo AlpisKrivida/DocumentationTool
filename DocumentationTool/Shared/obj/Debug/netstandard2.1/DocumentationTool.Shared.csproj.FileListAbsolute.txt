@@ -20,6 +20,6 @@ B:\Documents\Final\DocumentationTool\DocumentationTool\Shared\bin\Debug\netstand
 B:\Documents\Final\DocumentationTool\DocumentationTool\Shared\bin\Debug\netstandard2.1\DocumentationTool.Shared.pdb
 B:\Documents\Final\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.AssemblyInfoInputs.cache
 B:\Documents\Final\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.AssemblyInfo.cs
-B:\Documents\Final\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.csproj.CoreCompileInputs.cache
 B:\Documents\Final\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.dll
 B:\Documents\Final\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.pdb
+B:\Documents\Final\DocumentationTool\DocumentationTool\Shared\obj\Debug\netstandard2.1\DocumentationTool.Shared.csproj.CoreCompileInputs.cache

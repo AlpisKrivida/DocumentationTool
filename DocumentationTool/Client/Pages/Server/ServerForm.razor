@@ -5,12 +5,11 @@
 @using DocumentationTool.Client.Shared.MemorySH
 @using DocumentationTool.Client.Shared.CPUSH
 
-<h3>Server</h3>
 <EditForm Model="Server" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
 
-    <ModelForm Model="Model" />
     <GeneralForm General="General" />
+    <ModelForm Model="Model" /> 
     <FormFactorForm FormFactor="FormFactor" />
     <PowerConsumerForm PowerConsumer="PowerConsumer" />
     <MemoryForm Memory="Memory" />

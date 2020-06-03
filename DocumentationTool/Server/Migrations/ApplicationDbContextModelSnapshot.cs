@@ -279,6 +279,7 @@ namespace DocumentationTool.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -750,10 +751,16 @@ namespace DocumentationTool.Server.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Broadcast")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DNSDomain")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EndHost")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("GeneralId")
@@ -766,6 +773,9 @@ namespace DocumentationTool.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Prefix")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StartHost")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")

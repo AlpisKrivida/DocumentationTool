@@ -3,9 +3,9 @@
 @using DocumentationTool.Client.Shared.ModelSH
 @using DocumentationTool.Client.Shared.FormFactorSH
 
-<h3>Monitor</h3>
 <EditForm Model="LicenseKey" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
+    <ValidationSummary />
 
     <div class="form-group row">
         <div class="col-md-8">
@@ -37,7 +37,7 @@
                 <div class="form-group row">
                     <label class="col-md-2 col-form-label">Expire date</label>
                     <div class="col-md-4 ">
-                        <InputDate class="form-control form-control-sm" @bind-Value="@LicenseKey.ExpireDate" />
+                        <InputDate @onclick="ChangeDate" class="form-control form-control-sm" @bind-Value="@LicenseKey.ExpireDate" />
                         <ValidationMessage For="@(() => LicenseKey.ExpireDate)" />
                     </div>
                 </div>
@@ -67,4 +67,10 @@
 @code {
     [Parameter] public LicenseKey LicenseKey { get; set; }
     [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    private void ChangeDate()
+    {
+        if (LicenseKey.ExpireDate < DateTime.Today)
+            LicenseKey.ExpireDate = DateTime.Today;
+    }
 }

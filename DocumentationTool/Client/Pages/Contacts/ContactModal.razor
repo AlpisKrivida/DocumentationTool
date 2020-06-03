@@ -31,11 +31,10 @@
                                             <table class="table">
                                                 <thead class="thead-light">
                                                     <tr>
-                                                        <th>
-                                                        </th>
-                                                        <th>Title</th>
-                                                        <th>Type</th>
-                                                        <th>Cable lenght</th>
+                                                        <th></th>
+                                                        <th>Name</th>
+                                                        <th>Last name</th>
+                                                        <th></th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -48,9 +47,8 @@
                                                                 <th>
                                                                     <input type="checkbox" @onchange="(e) => { CheckBox(item.Person, e.Value); }" />
                                                                 </th>
-                                                                <td>@item.Person.General.Title</td>
-                                                                <td> </td>
-                                                                <td> </td>
+                                                                <td>@item.Person.FirstName</td>
+                                                                <td>@item.Person.LastName</td>
                                                                 <td>
                                                                     <a href="/router/detail/@item.Person.Id"><span class="oi oi-eye" /></a>
                                                                 </td>
@@ -104,7 +102,7 @@
     private int recordsPerPage = 5;
 
 
-    public List<Person> People;
+    public List<Person> People = new List<Person>();
     public List<Person> temp;
 
     [Parameter] public ServerDevice serverDevice { get; set; }
@@ -112,7 +110,6 @@
 
     public async Task Open()
     {
-
         ModalDisplay = "block;";
         ModalClass = "Show";
         ShowBackdrop = true;
@@ -178,10 +175,9 @@
     {
         Checklist = new List<PersonModal>();
 
-
         paginationDTO.RecordsPerPage = recordsPerPage;
         var paginatedResponse = await personRepository.GetPeople(paginationDTO);
-        temp = paginatedResponse.Response.Where(x => x.ServerId != serverDevice.Id).ToList();
+        temp = paginatedResponse.Response.Where(x => x.ServerId == null).ToList();
         totalAmountPages = paginatedResponse.TotalAmountPages;
 
         foreach (var item in temp)

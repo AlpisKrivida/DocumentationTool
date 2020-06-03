@@ -1,8 +1,8 @@
 ﻿@inject IPortRepository portRepository
 @inject IHostAddress hostAdressRepository 
+@inject INetworkRepository networkRepository
 
-
-    <div class="container-fluid">
+    <div class="container-fluid pt-4">
         <div class="row">
             <div class="col-12">
                 <h3>Host address</h3>
@@ -18,35 +18,37 @@
                             <a class="btn btn-info" href="hostaddress/create/@Device/@DeviceId"><span class="ri oi oi-plus" /> New Port</a>
                         </div>*@
 
-                        <HostAddresCreate 
-                                          Device="Device" 
-                                          DeviceId="DeviceId"/>
-
-                    } 
-                    @if(DeviceHostAddress != null) {
+                        <HostAddresCreate Device="@Device"
+                                          DeviceId="DeviceId" />
+                    }
+                    @if (DeviceHostAddress != null && LayerThreeNet != null)
+                    {
 
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>
                                     <th>Address</th>
-                                    <th>Host name</th>
-                                    <th>Connected with</th>
-                                    <th>Cable</th>
+                                    <th>Netmask</th>
+                                    <th>Prefix</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                    <tr>
-                                        <td>@DeviceHostAddress.Address</td>
-                                        <td>@DeviceHostAddress.HostName</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            @*<a href="/server/detail/@item.Id"><span class="oi oi-eye" /></a>*@
-                                            @*<a href="/port/edit/@Device/@HostAddress.Id"><span class="oi oi-pencil" /></a>
-                                            <a href="/@Device" @onclick="@(() => DeleteDevicePort(item.Id))"><span class="oi oi-trash" /></a>*@
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    @*@if(Device == "switch" || Device == "router")
+                                    {
+                                        <td>@DeviceHostAddress.Address.IpAddress</td>
+                                    }*@
+                                    <td>@DeviceHostAddress.Address.IpAddress</td>
+                                    <td>@LayerThreeNet.NetMask</td>
+                                    <td>@LayerThreeNet.Prefix</td>
+
+                                    <td>
+                                        @*<a href="/server/detail/@item.Id"><span class="oi oi-eye" /></a>*@
+                                        @*<a href="/port/edit/@Device/@HostAddress.Id"><span class="oi oi-pencil" /></a>
+                                        <a href="/@Device" @onclick="@(() => DeleteDevicePort(item.Id))"><span class="oi oi-trash" /></a>*@
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     }
@@ -63,4 +65,33 @@
     [Parameter] public int DeviceId { get; set; }
     [Parameter] public HostAddress DeviceHostAddress { get; set; }
 
+    private LayerThreeNet LayerThreeNet { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await LoadNet();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+
+    public async Task LoadNet()
+    {
+        if (DeviceHostAddress != null &&
+            DeviceHostAddress.Address != null)
+        {
+            Console.WriteLine("test");
+            int netId = DeviceHostAddress.Address.LayerThreeNetId.GetValueOrDefault(-1);
+            Console.WriteLine("test2");
+            if (netId != -1)
+            {
+                Console.WriteLine(netId);
+                LayerThreeNet = await networkRepository.GetLayerThreeNet(netId);
+            }
+        }
+    }
 }

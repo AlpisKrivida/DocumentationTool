@@ -42,20 +42,20 @@ namespace DocumentationTool.Server
                 .HasForeignKey(s => s.LayerThreeNetId);
 
             //Server
-            modelBuilder.Entity<ServerDevice>()
-                .HasMany(x => x.Application)
-                .WithOne(s => s.ServerDevice)
-                .HasForeignKey(s => s.ServerId);
+            //modelBuilder.Entity<ServerDevice>()
+            //    .HasMany(x => x.Application)
+            //    .WithOne(s => s.ServerDevice)
+            //    .HasForeignKey(s => s.ServerId);
 
             modelBuilder.Entity<ServerDevice>()
                 .HasMany(x => x.People)
                 .WithOne(s => s.ServerDevice)
                 .HasForeignKey(s => s.ServerId);
 
-            modelBuilder.Entity<ServerDevice>()
-                .HasMany(x => x.LicenseKey)
-                .WithOne(s => s.ServerDevice)
-                .HasForeignKey(s => s.ServerId);
+            //modelBuilder.Entity<ServerDevice>()
+            //    .HasMany(x => x.LicenseKey)
+            //    .WithOne(s => s.ServerDevice)
+            //    .HasForeignKey(s => s.ServerId);
 
 
             //Cables
@@ -96,7 +96,6 @@ namespace DocumentationTool.Server
         //Hardware
         public DbSet<Monitor> Monitors { get; set; }
         public DbSet<Model> Models { get; set; }
-        public DbSet<BladeChasis> BladeChases { get; set; }
         public DbSet<General> General { get; set; }
         public DbSet<PowerConsumer> PowerConsumers { get; set; }
         public DbSet<FormFactor> FormFactors { get; set; }
@@ -122,8 +121,5 @@ namespace DocumentationTool.Server
         public DbSet<ManufacturerNames> ManufacturerNames {get;set;}
         public DbSet<RecentlyAdded> RecentlyAddeds {get;set;}
         public DbSet<RecentlyUpdated> RecentlyUpdateds {get;set;}
-
-        //Shared
-        //public DbSet<PortCable> PortCables { get; set; }
     }
 }

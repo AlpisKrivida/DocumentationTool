@@ -25,7 +25,7 @@
                             <option>15</option>
                             <option>20</option>
                         </select>
-                        <label> monitors</label>
+                        <label> servers</label>
                     </div>
                 </div>
 
@@ -36,7 +36,10 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>Title</th>
+                                    <th>Status</th>
                                     <th>Purpose</th>
+                                    <th>Height</th>
+                                    <th>Weight</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -45,11 +48,14 @@
                                 {
                                     <tr>
                                         <td>@item.General.Title</td>
+                                        <td>@item.General.Status</td>
                                         <td>@item.General.Purpose</td>
+                                        <td>@item.FormFactor.Height</td>
+                                        <td>@item.FormFactor.Weight</td>
                                         <td>
                                             <a href="/server/detail/@item.Id"><span class="oi oi-eye" /></a>
                                             <a href="/server/edit/@item.Id"><span class="oi oi-pencil" /></a>
-                                            <a href="/server" @onclick="@(() => DeleteMonitor(item.Id))"><span class="oi oi-trash" /></a>
+                                            <a href="/server" @onclick="@(() => DeleteServer(item.Id))"><span class="oi oi-trash" /></a>
                                         </td>
                                     </tr>
                                 }
@@ -111,7 +117,7 @@
         await LoadServers();
     }
 
-    private async Task DeleteMonitor(int id)
+    private async Task DeleteServer(int id)
     {
         await serverRepository.DeleteServerDevice(id);
         await LoadServers();
