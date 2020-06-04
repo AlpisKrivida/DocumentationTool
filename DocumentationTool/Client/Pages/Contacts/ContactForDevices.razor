@@ -79,7 +79,7 @@
         ServerDevice.People = response.Where(x => x.ServerId == ServerDevice.Id).ToList();
     }
 
-    public async Task GetPeople(List<Person> people)
+    public void GetPeople(List<Person> people)
     {
         foreach (var person in people)
             ServerDevice.People.Add(person);

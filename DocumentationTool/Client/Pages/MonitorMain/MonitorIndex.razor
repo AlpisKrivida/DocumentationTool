@@ -35,11 +35,11 @@
                             <table class="table">
                                 <thead class="thead-light">
                                     <tr>
+                                        <th>Title</th>
                                         <th>Display</th>
                                         <th>Display Measure</th>
                                         <th>Resolution</th>
                                         <th>Type</th>
-                                        <th>Pivot</th>
                                         <th>Speaker</th>
                                         <th>Action</th>
                                     </tr>
@@ -48,16 +48,16 @@
                                     @foreach (var item in Monitors)
                                     {
                                         <tr>
+                                            <td>@item.General.Title</td>
                                             <td>@item.Display</td>
                                             <td>@item.DisplayMeasure</td>
                                             <td>@item.Resolution</td>
                                             <td>@item.Type</td>
-                                            <td>@item.Pivot</td>
                                             <td>@item.Speaker</td>
                                             <td>
                                                 <a href="/monitor/detail/@item.Id"><span class="oi oi-eye" /></a>
                                                 <a href="/monitor/edit/@item.Id"><span class="oi oi-pencil" /></a>
-                                                <a href="/monitor/edit/@item.Id" @onclick="@(() => DeleteMonitor(item.Id))"><span class="oi oi-trash" /></a>
+                                                <a href="/monitor" @onclick="@(() => DeleteMonitor(item.Id))"><span class="oi oi-trash" /></a>
                                             </td>
                                         </tr>
                                     }

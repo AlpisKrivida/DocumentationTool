@@ -36,7 +36,11 @@ namespace DocumentationTool.Client.Repository.Contacts
 
         public async Task DeletePerson(int id)
         {
-            throw new NotImplementedException();
+            var response = await httpService.Delete($"{url}/{id}");
+            if (!response.Success)
+            {
+                throw new ApplicationException(await response.GetBody());
+            }
         }
 
         public async Task<PaginatedResponse<List<Person>>> GetPeople(PaginationDTO paginationDTO)

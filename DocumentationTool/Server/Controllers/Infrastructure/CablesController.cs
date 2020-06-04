@@ -89,7 +89,6 @@ namespace DocumentationTool.Server.Controllers.Infrastructure
                 return NotFound();
             }
 
-            context.Remove(cable.General);
             context.Remove(cable);
 
             await context.SaveChangesAsync();

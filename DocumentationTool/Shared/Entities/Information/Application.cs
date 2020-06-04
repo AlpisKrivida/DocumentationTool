@@ -14,7 +14,7 @@ namespace DocumentationTool.Shared.Entities.Information
         public string Manufacturer { get; set; }
         public string Description { get; set; }
         public List<LicenseKey> LicenseKeys { get; set; }
-        public int? ServerId { get; set; }
-        public ServerDevice ServerDevice { get; set; }
+        //public int? ServerId { get; set; }
+        //public ServerDevice ServerDevice { get; set; }
     }
 }

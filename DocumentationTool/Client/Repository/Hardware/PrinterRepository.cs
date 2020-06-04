@@ -31,7 +31,11 @@ namespace DocumentationTool.Client.Repository.Hardware
 
         public async Task DeletePrinter(int id)
         {
-            throw new NotImplementedException();
+            var response = await httpService.Delete($"{url}/{id}");
+            if (!response.Success)
+            {
+                throw new ApplicationException(await response.GetBody());
+            }
         }
 
         public async Task<List<Printer>> GetAllPrintersPC()

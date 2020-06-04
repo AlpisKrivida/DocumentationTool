@@ -25,7 +25,7 @@
                             <option>15</option>
                             <option>20</option>
                         </select>
-                        <label> monitors</label>
+                        <label> switches</label>
                     </div>
                 </div>
 
@@ -36,8 +36,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>Title</th>
-                                    <th>Vlan</th>
-                                    <th>Role</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -46,8 +45,7 @@
                                 {
                                     <tr>
                                         <td>@item.General.Title</td>
-                                        <td>@item.Vlan</td>
-                                        <td>@item.Role</td>
+                                        <td>@item.General.Status</td>
                                         <td>
                                             <a href="/switch/detail/@item.Id"><span class="oi oi-eye" /></a>
                                             <a href="/switch/edit/@item.Id"><span class="oi oi-pencil" /></a>

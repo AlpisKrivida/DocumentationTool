@@ -88,8 +88,7 @@ namespace DocumentationTool.Server.Controllers.Network
             {
                 return NotFound();
             }
-
-            context.Remove(network.General);
+            
             context.Remove(network);
 
             await context.SaveChangesAsync();

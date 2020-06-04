@@ -84,13 +84,16 @@ namespace DocumentationTool.Server.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var license = await context.Monitors.FirstOrDefaultAsync(x => x.Id == id);
-            if (license == null)
+            var monitor = await context.Monitors
+                .Include(x => x.General)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (monitor == null)
             {
                 return NotFound();
             }
-
-            context.Remove(license);
+            
+            context.Remove(monitor);
             await context.SaveChangesAsync();
             return NoContent();
         }

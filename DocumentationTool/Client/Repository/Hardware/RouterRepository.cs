@@ -29,7 +29,11 @@ namespace DocumentationTool.Client.Repository.Hardware
 
         public async Task DeleteRouter(int id)
         {
-            throw new NotImplementedException();
+            var response = await httpService.Delete($"{url}/{id}");
+            if (!response.Success)
+            {
+                throw new ApplicationException(await response.GetBody());
+            }
         }
 
         public async Task<List<RouterDevice>> GetAllRouters()

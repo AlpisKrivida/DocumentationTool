@@ -18,7 +18,7 @@ namespace DocumentationTool.Shared.Entities.Information
 
         public int? ApplicationId { get; set; }
         public Application Application { get; set; }
-        public int? ServerId { get; set; }
-        public ServerDevice ServerDevice { get; set; }
+        //public int? ServerId { get; set; }
+        //public ServerDevice ServerDevice { get; set; }
     }
 }

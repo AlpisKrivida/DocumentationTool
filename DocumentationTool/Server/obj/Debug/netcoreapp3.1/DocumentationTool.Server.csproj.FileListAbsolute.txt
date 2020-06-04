@@ -341,8 +341,8 @@ B:\Documents\Github\CV\DocumentationTool\DocumentationTool\Server\obj\Debug\netc
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\global.json
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\DocumentationTool.Client.StaticWebAssets.xml
-B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\appsettings.json
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\DocumentationTool.Client.blazor.config
+B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\appsettings.json
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\DocumentationTool.Server.StaticWebAssets.xml
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\DocumentationTool.Server.exe
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\DocumentationTool.Server.deps.json
@@ -353,6 +353,7 @@ B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcorea
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\AutoMapper.dll
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\EPPlus.dll
+B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\System.Net.IPNetwork.dll
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\Markdig.dll
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authorization.dll
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Blazor.dll
@@ -426,6 +427,7 @@ B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcorea
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
+B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\Blazor.FileReader.dll
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.resources.dll
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.resources.dll
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.resources.dll
@@ -515,5 +517,3 @@ B:\Documents\Final\DocumentationTool\DocumentationTool\Server\obj\Debug\netcorea
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\obj\Debug\netcoreapp3.1\DocumentationTool.Server.dll
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\obj\Debug\netcoreapp3.1\DocumentationTool.Server.pdb
 B:\Documents\Final\DocumentationTool\DocumentationTool\Server\obj\Debug\netcoreapp3.1\DocumentationTool.Server.genruntimeconfig.cache
-B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\System.Net.IPNetwork.dll
-B:\Documents\Final\DocumentationTool\DocumentationTool\Server\bin\Debug\netcoreapp3.1\Blazor.FileReader.dll

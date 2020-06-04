@@ -18,8 +18,6 @@ namespace DocumentationTool.Shared.Entities.Hardware
         public PowerConsumer PowerConsumer { get; set; }
         public Memory Memory { get; set; }
         public HostAddress HostAddress { get; set; }
-        //public List<Application> Application { get; set; }
-        //public List<LicenseKey> LicenseKey { get; set; }
         public List<Person> People { get; set; }
         public List<DevicePort> DevicePorts { get; set; }
     }
